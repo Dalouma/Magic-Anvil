@@ -113,8 +113,8 @@ public class TimingScript : MonoBehaviour
         gameStart = false;
         currentSpeed = 0;
 
-        //Debug.Log("loading customer scene");
-        //SceneManager.LoadScene(0);
+        Debug.Log("loading customer scene");
+        SceneManager.LoadScene(0);
 
     }
 
