@@ -427,7 +427,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 760698a4924cc654b81bc5173949696a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorMovementSpeed: 10
+  cursorMovementSpeed:
+  - 5
+  - 10
+  - 15
   timingText: {fileID: 1634187470}
   cursorTransform: {fileID: 1893571490}
   greatLeft: {fileID: 1460174519}
