@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SharpeningScript : MonoBehaviour
 {
@@ -14,24 +17,37 @@ public class SharpeningScript : MonoBehaviour
 
     [SerializeField] private float arrowSpeed;
     [SerializeField] private float maxSharpeningTime;
-
+    private string shopLevel = "ResultsScene";
+    
+    [SerializeField] private TextMeshProUGUI wordCorrectText;
+    [SerializeField] private TextMeshProUGUI sharpeningTimerText;
     private bool spinning;
     private float spinTime;
 
     private int currentKeyIndex; 
+
+    static public int correctWordInputs;
+    private float sharpeningTimer;
+   // private float sharpeningMaxTime;  
+    
 
     // Start is called before the first frame update
     void Start()
     {
         spinning = false;
         spinTime = 0f;
-
         currentKeyIndex = 0;
+        correctWordInputs = 0;
+        sharpeningTimer = 20;
+        SetCorrectWordInputsText();
+        //sharpeningMaxTime = 20;
     }
 
     // Update is called once per frame
     void Update()
     {
+        sharpeningTimer -= Time.deltaTime;
+        SetsharpeningTimerText();
         HandleWheelSpin();
         HandleSharpening();
         if (Input.GetKeyDown(KeyCode.K))
@@ -69,6 +85,8 @@ public class SharpeningScript : MonoBehaviour
         else
         {
             spinning = false;
+            setKeyVisibility(false);
+        //    SetRandomKeyOrder();
         }
     }
 
@@ -80,6 +98,8 @@ public class SharpeningScript : MonoBehaviour
             GameObject currentKey = keyTransforms[currentKeyIndex].gameObject;
             if (Input.GetKeyDown(KeyCode.W))
             {
+                CheckKey(currentKey, "W");
+                /*
                 if (currentKey.name == "W")
                 {
                     currentKey.SetActive(false);
@@ -90,11 +110,13 @@ public class SharpeningScript : MonoBehaviour
                     Debug.Log("FAIL!!!");
                     SetRandomKeyOrder();
                     currentKeyIndex = 0;
-                }
+                }*/
                 
             }
             if (Input.GetKeyDown(KeyCode.A))
             {
+                CheckKey(currentKey, "A");
+                /*
                 if (currentKey.name == "A")
                 {
                     currentKey.SetActive(false);
@@ -103,12 +125,14 @@ public class SharpeningScript : MonoBehaviour
                 else
                 {
                     Debug.Log("FAIL!!!");
-                    SetRandomKeyOrder();
+                    //SetRandomKeyOrder();
                     currentKeyIndex = 0;
-                }
+                }*/
             }
             if (Input.GetKeyDown(KeyCode.S))
             {
+                CheckKey(currentKey, "S");
+                /*
                 if (currentKey.name == "S")
                 {
                     currentKey.SetActive(false);
@@ -117,13 +141,41 @@ public class SharpeningScript : MonoBehaviour
                 else
                 {
                     Debug.Log("FAIL!!!");
-                    SetRandomKeyOrder();
+                    //SetRandomKeyOrder();
                     currentKeyIndex = 0;
-                }
+                }*/
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
+                CheckKey(currentKey, "D");
+                /*
                 if (currentKey.name == "D")
+                {
+                    currentKey.SetActive(false);
+                    currentKeyIndex++;
+                }
+                else
+                {
+                    Debug.Log("FAIL!!!");
+                    //SetRandomKeyOrder();
+                    currentKeyIndex = 0;
+                }*/
+            }
+
+            // Check finish
+            if (currentKeyIndex >= keyTransforms.Count)
+            {
+                Debug.Log("SUCCESS!!!");
+                correctWordInputs++;
+                SetCorrectWordInputsText();
+                SetRandomKeyOrder();
+                currentKeyIndex = 0;
+            }
+        }
+    }
+    
+    void CheckKey(GameObject currentKey, string correctKey){
+         if (currentKey.name == correctKey)
                 {
                     currentKey.SetActive(false);
                     currentKeyIndex++;
@@ -134,26 +186,25 @@ public class SharpeningScript : MonoBehaviour
                     SetRandomKeyOrder();
                     currentKeyIndex = 0;
                 }
-            }
+    }
 
-            // Check finish
-            if (currentKeyIndex >= keyTransforms.Count)
-            {
-                Debug.Log("SUCCESS!!!");
-                SetRandomKeyOrder();
-                currentKeyIndex = 0;
-            }
+    void setKeyVisibility(bool keystate){
+        for (int i = 0; i < keyTransforms.Count; i++)
+        {
+            keyTransforms[i].position = randomTransforms[i].position;
+            keyTransforms[i].gameObject.SetActive(keystate);
         }
     }
 
     void SetRandomKeyOrder()
     {
         Shuffle(keyTransforms);
-        for (int i = 0; i < keyTransforms.Count; i++)
+        setKeyVisibility(true);
+       /* for (int i = 0; i < keyTransforms.Count; i++)
         {
             keyTransforms[i].position = randomTransforms[i].position;
             keyTransforms[i].gameObject.SetActive(true);
-        }
+        }*/
 
     }
 
@@ -166,6 +217,24 @@ public class SharpeningScript : MonoBehaviour
             inputList[i] = inputList[rand];
             inputList[rand] = temp;
         }
+    }
+
+
+    void SetCorrectWordInputsText(){
+        wordCorrectText.text = "Hits:  " + correctWordInputs;
+    }
+
+    void SetsharpeningTimerText(){
+       sharpeningTimerText.text = "Timer:  " + (int)sharpeningTimer;
+       if((int)sharpeningTimer <= 0){
+            GoToShop();
+       }
+    }
+
+    public void GoToShop()
+    {
+        Debug.Log("loading forging scene");
+        SceneManager.LoadScene(shopLevel);
     }
 
 }

@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Magic-Anvil.sln"
+    "dotnet.defaultSolution": "MagicAnvilPublic.sln"
 }

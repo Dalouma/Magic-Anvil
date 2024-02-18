@@ -17,9 +17,21 @@ public class CustomerManager : MonoBehaviour
         //Instance = this;
         //DontDestroyOnLoad(gameObject);
     }
-
-    public void GoToForging()
+    //to make chosenWeopon reset after returning to shop (doesnt work yet)
+    /*private void OnEnable(){
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+     private void OnDisable(){
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode){
+        if(scene.name == "ShopCounterScene"){
+            chosenWeapon = "";
+        }
+    }*/
+    public void GoToForging(string weapon)
     {
+        ChooseWeapon(weapon);
         Debug.Log("loading forging scene");
         SceneManager.LoadScene(1);
     }

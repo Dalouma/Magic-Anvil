@@ -4,11 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TimingScript : MonoBehaviour
+public class ForgingScript : MonoBehaviour
 {
     [SerializeField] private List<float> cursorMovementSpeed;
 
     [SerializeField] private TMP_Text timingText;
+    [SerializeField] private TMP_Text hitText;
+    [SerializeField] private TMP_Text timerText;
     [SerializeField] private Transform cursorTransform;
 
     [SerializeField] private Transform greatLeft;
@@ -30,6 +32,9 @@ public class TimingScript : MonoBehaviour
     private float currentSpeed;
     private float direction;
     private int speedLevel;
+    static public int greatTiming, goodTiming, badTiming;
+    private string weapon;
+    private string sharpeninglevel = "SharpeningScene";
 
     // Start is called before the first frame update
     void Start()
@@ -40,8 +45,12 @@ public class TimingScript : MonoBehaviour
         speedLevel= 0;
         direction = 1f;
         gameStart = false;
-
+        greatTiming = 0;
+        goodTiming = 0; 
+        badTiming = 0; 
         StartGame();
+        weapon = CustomerManager.Instance.chosenWeapon;
+        Debug.Log(weapon);
     }
 
     // Update is called once per frame
@@ -72,10 +81,13 @@ public class TimingScript : MonoBehaviour
             StartCoroutine(SlowMo());
             clangAudio.Play();
             clicks++;
+            SetTimer();
             // Check Zones
             if (cursorPos >= greatLeft.position.x && cursorPos <= greatRight.position.x)
             {
                 Debug.Log("GREAT TIMING!!");
+                greatTiming++;
+                SetHitText();
                 timingText.text = "GREAT!!";
                 // bump speed up
                 if (speedLevel < cursorMovementSpeed.Count - 1)
@@ -86,6 +98,8 @@ public class TimingScript : MonoBehaviour
             else if (cursorPos >= goodLeft.position.x && cursorPos <= goodRight.position.x)
             {
                 Debug.Log("GOOD TIMING!");
+                goodTiming++;
+                SetHitText();
                 timingText.text = "GOOD!!";
                 // bump speed down
                 if (speedLevel > 0)
@@ -96,6 +110,8 @@ public class TimingScript : MonoBehaviour
             else if (cursorPos >= badLeft.position.x && cursorPos <= badRight.position.x)
             {
                 Debug.Log("BAD TIMING");
+                badTiming++;
+                SetHitText();
                 timingText.text = "BAD";
                 // bump speed down
                 if (speedLevel > 0)
@@ -141,10 +157,23 @@ public class TimingScript : MonoBehaviour
     {
         gameStart = false;
         currentSpeed = 0;
-
-        Debug.Log("loading customer scene");
-        SceneManager.LoadScene(0);
+        if(weapon == "Shield" || weapon == "Hammer"){
+            Debug.Log("loading customer scene");
+            SceneManager.LoadScene("ResultsScene");
+        }
+        if(weapon == "Dagger" || weapon == "Sword" || weapon == "Axe"){
+            Debug.Log("loading sharpening scene");
+            SceneManager.LoadScene(sharpeninglevel);
+        }
 
     }
 
+    public void SetHitText(){
+        hitText.text = "Great Timing: " + greatTiming + "\nGood Timing: "
+         + goodTiming + "\nBad Timing: " + badTiming;
+    }
+
+    public void SetTimer(){
+        timerText.text = "Hits on " + weapon + ": "  + clicks;
+    }
 }
