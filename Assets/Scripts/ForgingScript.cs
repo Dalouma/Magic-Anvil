@@ -12,6 +12,7 @@ public class ForgingScript : MonoBehaviour
     [SerializeField] private TMP_Text hitText;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private Transform cursorTransform;
+    [SerializeField] private Animator hammerAnimator;
 
     [SerializeField] private Transform greatLeft;
     [SerializeField] private Transform greatRight;
@@ -80,8 +81,11 @@ public class ForgingScript : MonoBehaviour
         {
             StartCoroutine(SlowMo());
             clangAudio.Play();
+            hammerAnimator.Play("HammerSwing");
             clicks++;
             SetTimer();
+
+
             // Check Zones
             if (cursorPos >= greatLeft.position.x && cursorPos <= greatRight.position.x)
             {
