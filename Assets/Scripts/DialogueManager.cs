@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public CustomerManager customerManager;
     public TextMeshProUGUI nametext;
     public TextMeshProUGUI dialoguetext;
     public Queue<string> sentences;
@@ -39,7 +41,16 @@ public class DialogueManager : MonoBehaviour
     }
     public void EndDialogue()
     {
+        
         animator.SetBool("Isopen", false);
+        if(customerManager.getState()==CustomerManager.CustomerState.NeutralDeal|| customerManager.getState() == CustomerManager.CustomerState.BadDeal|| customerManager.getState() == CustomerManager.CustomerState.GoodDeal)
+        {
+            customerManager.nextCustomer();
+        }
+        if (customerManager.data.hatedWeapons.Contains(customerManager.chosenWeapon))
+        {
+            customerManager.nextCustomer();
+        }
         Debug.Log("end");
     }
 }
