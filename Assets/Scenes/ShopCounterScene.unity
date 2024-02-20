@@ -276,13 +276,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Shield
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &80828924
@@ -668,13 +668,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Dagger
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &592388854
@@ -1127,13 +1127,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Axe
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1135235174
@@ -1590,13 +1590,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Sword
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1889281406
@@ -2084,13 +2084,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Hammer
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2123146693

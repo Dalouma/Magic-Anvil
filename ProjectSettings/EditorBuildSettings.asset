@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForgingScene.unity
     guid: 016236bfbce483540aedfbc6c7145095
+  - enabled: 1
+    path: Assets/Scenes/SharpeningScene.unity
+    guid: b7097bb5367c3bd4a93c2bacca6a6259
+  - enabled: 1
+    path: Assets/Scenes/SplashScene.unity
+    guid: 94fa9cceccb5fbb478d9e163bccb30dd
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 3c3368461fe71eb46b6bfd71dfd85188
+  - enabled: 1
+    path: Assets/Scenes/ResultsScene.unity
+    guid: eb7af6018ffb309f1b0947ddd927f0e5
   m_configObjects: {}
