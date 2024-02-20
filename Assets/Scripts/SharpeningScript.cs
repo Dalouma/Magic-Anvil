@@ -11,11 +11,12 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private Transform startTransform;
     [SerializeField] private Transform zoneBoundTop;
     [SerializeField] private Transform zoneBoundBottom;
+    [SerializeField] private Animator grindstoneAnimator;
 
     [SerializeField] private List<Transform> keyTransforms;
     [SerializeField] private List<Transform> randomTransforms;
 
-    [SerializeField] private float arrowSpeed;
+    [SerializeField] private float cursorSpeed;
     [SerializeField] private float maxSharpeningTime;
     private string shopLevel = "ResultsScene";
     
@@ -62,7 +63,7 @@ public class SharpeningScript : MonoBehaviour
         // Get Player Input
         if (Input.GetKey(KeyCode.Space))
         {
-            cursorTransform.position += Vector3.up * arrowSpeed * Time.deltaTime;
+            cursorTransform.position += Vector3.up * cursorSpeed * Time.deltaTime;
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
@@ -71,6 +72,7 @@ public class SharpeningScript : MonoBehaviour
             {
                 spinning = true;
                 spinTime = maxSharpeningTime;
+                grindstoneAnimator.Play("spin");
                 SetRandomKeyOrder();
             }
             cursorTransform.position = startTransform.position;
@@ -86,7 +88,8 @@ public class SharpeningScript : MonoBehaviour
         {
             spinning = false;
             setKeyVisibility(false);
-        //    SetRandomKeyOrder();
+            grindstoneAnimator.Play("idle");
+            //    SetRandomKeyOrder();
         }
     }
 
