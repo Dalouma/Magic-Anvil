@@ -68,6 +68,12 @@ public class SharpeningScript : MonoBehaviour
         {
             sharpeningTimer += 10;
         }
+        // PRESS P TO INCREASE SCORE BY 100
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            score += 100;
+            SetCorrectWordInputsText();
+        }
     }
 
     void HandleBarTrace()
@@ -89,10 +95,6 @@ public class SharpeningScript : MonoBehaviour
         // check in zone
         if (cursorTransform.position.y < zoneBoundTop.position.y && cursorTransform.position.y > zoneBoundBottom.position.y)
         {
-            //spinning = true;
-            //spinTime = maxSharpeningTime;
-            //grindstoneAnimator.Play("spin");
-            //SetRandomKeyOrder();
             score += zoneMultipliers[0] * Time.deltaTime;
             SetCorrectWordInputsText();
         }
@@ -130,13 +132,6 @@ public class SharpeningScript : MonoBehaviour
             // Check finish correct input
             if (currentKeyIndex >= keyTransforms.Count)
             {
-                //Debug.Log("SUCCESS!!!");
-                //correctWordInputs++;
-                //SetCorrectWordInputsText();
-                //SetRandomKeyOrder();
-                //currentKeyIndex = 0;
-                
-
                 currentKeyIndex = 0;
                 spinning = true;
                 spinTime = maxSharpeningTime;
@@ -153,7 +148,6 @@ public class SharpeningScript : MonoBehaviour
             if (spinTime < 0f)
             {
                 spinning = false;
-                //setKeyVisibility(false);
                 grindstoneAnimator.Play("idle");
                 spacebar.SetActive(false);
                 SetRandomKeyOrder();
