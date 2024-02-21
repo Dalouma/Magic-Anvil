@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class SharpeningScript : MonoBehaviour
 {
+    [SerializeField] private GameObject spacebar;
     [SerializeField] private Transform cursorTransform;
     [SerializeField] private Transform startTransform;
     [SerializeField] private Transform zoneBoundTop;
@@ -18,14 +19,17 @@ public class SharpeningScript : MonoBehaviour
 
     [SerializeField] private float cursorSpeed;
     [SerializeField] private float maxSharpeningTime;
+    [SerializeField] private List<float> zoneMultipliers;
     private string shopLevel = "ResultsScene";
     
     [SerializeField] private TextMeshProUGUI wordCorrectText;
     [SerializeField] private TextMeshProUGUI sharpeningTimerText;
+
+
     private bool spinning;
     private float spinTime;
-
-    private int currentKeyIndex; 
+    private int currentKeyIndex;
+    private float score;
 
     static public int correctWordInputs;
     private float sharpeningTimer;
@@ -69,25 +73,35 @@ public class SharpeningScript : MonoBehaviour
     void HandleBarTrace()
     {
         // Get Player Input
-        if (Input.GetKey(KeyCode.Space))
+        if (spinning)
         {
-            cursorTransform.position += Vector3.up * cursorSpeed * Time.deltaTime;
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            // check in zone
-            if (cursorTransform.position.y < zoneBoundTop.position.y && cursorTransform.position.y > zoneBoundBottom.position.y)
+            if (Input.GetKey(KeyCode.Space))
             {
-                spinning = true;
-                spinTime = maxSharpeningTime;
-                grindstoneAnimator.Play("spin");
-                SetRandomKeyOrder();
+                cursorTransform.position += Vector3.up * cursorSpeed * Time.deltaTime;
             }
+            else if (cursorTransform.position.y > startTransform.position.y)
+            {
+                cursorTransform.position += Vector3.down * cursorSpeed * Time.deltaTime;
+            }
+            
+        }
+
+        // check in zone
+        if (cursorTransform.position.y < zoneBoundTop.position.y && cursorTransform.position.y > zoneBoundBottom.position.y)
+        {
+            //spinning = true;
+            //spinTime = maxSharpeningTime;
+            //grindstoneAnimator.Play("spin");
+            //SetRandomKeyOrder();
+            score += zoneMultipliers[0] * Time.deltaTime;
+            SetCorrectWordInputsText();
+        }
+
+        if (!spinning)
+        {
             cursorTransform.position = startTransform.position;
         }
-        //Debug.Log(spinning);
 
-        
     }
 
     void HandleWheelSpin()
@@ -127,6 +141,7 @@ public class SharpeningScript : MonoBehaviour
                 spinning = true;
                 spinTime = maxSharpeningTime;
                 grindstoneAnimator.Play("spin");
+                spacebar.SetActive(true);
             }
         }
 
@@ -140,6 +155,7 @@ public class SharpeningScript : MonoBehaviour
                 spinning = false;
                 //setKeyVisibility(false);
                 grindstoneAnimator.Play("idle");
+                spacebar.SetActive(false);
                 SetRandomKeyOrder();
             }
         }
@@ -185,7 +201,8 @@ public class SharpeningScript : MonoBehaviour
     }
 
     void SetCorrectWordInputsText(){
-        wordCorrectText.text = "Hits:  " + correctWordInputs;
+        //wordCorrectText.text = "Hits:  " + correctWordInputs;
+        wordCorrectText.text = "Score: " + (int)score;
     }
 
     void SetsharpeningTimerText(){
