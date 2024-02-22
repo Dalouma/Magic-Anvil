@@ -7,28 +7,35 @@ using UnityEngine.UI;
 
 public class SharpeningScript : MonoBehaviour
 {
+    [SerializeField] private GameObject spacebar;
     [SerializeField] private Transform cursorTransform;
     [SerializeField] private Transform startTransform;
     [SerializeField] private Transform zoneBoundTop;
     [SerializeField] private Transform zoneBoundBottom;
     [SerializeField] private Animator grindstoneAnimator;
+    [SerializeField] private Animator itemAnimator;
+    [SerializeField] private ParticleSystem sparks;
 
     [SerializeField] private List<Transform> keyTransforms;
     [SerializeField] private List<Transform> randomTransforms;
 
     [SerializeField] private float cursorSpeed;
     [SerializeField] private float maxSharpeningTime;
+    [SerializeField] private List<float> zoneMultipliers;
     private string shopLevel = "ResultsScene";
     
     [SerializeField] private TextMeshProUGUI wordCorrectText;
     [SerializeField] private TextMeshProUGUI sharpeningTimerText;
-    private bool spinning;
-    private float spinTime;
 
-    private int currentKeyIndex; 
+
+    private bool spinning, sharpening;
+    private float spinTime;
+    private int currentKeyIndex;
+    private float score;
 
     static public int correctWordInputs;
     private float sharpeningTimer;
+    
    // private float sharpeningMaxTime;  
     
 
@@ -36,12 +43,15 @@ public class SharpeningScript : MonoBehaviour
     void Start()
     {
         spinning = false;
+        sharpening = false;
         spinTime = 0f;
         currentKeyIndex = 0;
         correctWordInputs = 0;
-        sharpeningTimer = 20;
+        sharpeningTimer = 30;
         SetCorrectWordInputsText();
         //sharpeningMaxTime = 20;
+
+        SetRandomKeyOrder();
     }
 
     // Update is called once per frame
@@ -50,129 +60,113 @@ public class SharpeningScript : MonoBehaviour
         sharpeningTimer -= Time.deltaTime;
         SetsharpeningTimerText();
         HandleWheelSpin();
-        HandleSharpening();
-        if (Input.GetKeyDown(KeyCode.K))
+        HandleBarTrace();
+        
+        CheatKeys();
+    }
+
+    void CheatKeys()
+    {
+        // PRESS T TO INCREASE TIME BY 10 SECONDS
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            SetRandomKeyOrder();
-            currentKeyIndex = 0;
+            sharpeningTimer += 10;
         }
+        // PRESS P TO INCREASE SCORE BY 100
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            score += 100;
+            SetCorrectWordInputsText();
+        }
+    }
+
+    void HandleBarTrace()
+    {
+        // Get Player Input
+        if (spinning)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                cursorTransform.position += Vector3.up * cursorSpeed * Time.deltaTime;
+            }
+            else if (cursorTransform.position.y > startTransform.position.y)
+            {
+                cursorTransform.position += Vector3.down * cursorSpeed * Time.deltaTime;
+            }
+            
+        }
+
+        // check in zone
+        if (cursorTransform.position.y < zoneBoundTop.position.y && cursorTransform.position.y > zoneBoundBottom.position.y)
+        {
+            score += zoneMultipliers[0] * Time.deltaTime;
+            SetCorrectWordInputsText();
+            if (!sharpening)
+            {
+                sharpening= true;
+                itemAnimator.Play("move");
+                sparks.Play();
+            }
+        }
+        else if (sharpening)
+        {
+            sharpening = false;
+            itemAnimator.Play("idle");
+            sparks.Stop();
+        }
+
+        if (!spinning)
+        {
+            cursorTransform.position = startTransform.position;
+        }
+
     }
 
     void HandleWheelSpin()
     {
-        // Get Player Input
-        if (Input.GetKey(KeyCode.Space))
+        // Check input
+        if (Input.anyKeyDown)
         {
-            cursorTransform.position += Vector3.up * cursorSpeed * Time.deltaTime;
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            // check in zone
-            if (cursorTransform.position.y < zoneBoundTop.position.y && cursorTransform.position.y > zoneBoundBottom.position.y)
-            {
-                spinning = true;
-                spinTime = maxSharpeningTime;
-                grindstoneAnimator.Play("spin");
-                SetRandomKeyOrder();
-            }
-            cursorTransform.position = startTransform.position;
-        }
-        //Debug.Log(spinning);
-
-        // Handle Spin Time
-        if (spinning && spinTime > 0f)
-        {
-            spinTime -= Time.deltaTime;
-        }
-        else
-        {
-            spinning = false;
-            setKeyVisibility(false);
-            grindstoneAnimator.Play("idle");
-            //    SetRandomKeyOrder();
-        }
-    }
-
-    void HandleSharpening()
-    {
-        if (spinning && Input.anyKeyDown)
-        {
-            // Check input
             GameObject currentKey = keyTransforms[currentKeyIndex].gameObject;
             if (Input.GetKeyDown(KeyCode.W))
             {
                 CheckKey(currentKey, "W");
-                /*
-                if (currentKey.name == "W")
-                {
-                    currentKey.SetActive(false);
-                    currentKeyIndex++;
-                }
-                else
-                {
-                    Debug.Log("FAIL!!!");
-                    SetRandomKeyOrder();
-                    currentKeyIndex = 0;
-                }*/
-                
             }
             if (Input.GetKeyDown(KeyCode.A))
             {
                 CheckKey(currentKey, "A");
-                /*
-                if (currentKey.name == "A")
-                {
-                    currentKey.SetActive(false);
-                    currentKeyIndex++;
-                }
-                else
-                {
-                    Debug.Log("FAIL!!!");
-                    //SetRandomKeyOrder();
-                    currentKeyIndex = 0;
-                }*/
             }
             if (Input.GetKeyDown(KeyCode.S))
             {
                 CheckKey(currentKey, "S");
-                /*
-                if (currentKey.name == "S")
-                {
-                    currentKey.SetActive(false);
-                    currentKeyIndex++;
-                }
-                else
-                {
-                    Debug.Log("FAIL!!!");
-                    //SetRandomKeyOrder();
-                    currentKeyIndex = 0;
-                }*/
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
                 CheckKey(currentKey, "D");
-                /*
-                if (currentKey.name == "D")
-                {
-                    currentKey.SetActive(false);
-                    currentKeyIndex++;
-                }
-                else
-                {
-                    Debug.Log("FAIL!!!");
-                    //SetRandomKeyOrder();
-                    currentKeyIndex = 0;
-                }*/
             }
 
-            // Check finish
+            // Check finish correct input
             if (currentKeyIndex >= keyTransforms.Count)
             {
-                Debug.Log("SUCCESS!!!");
-                correctWordInputs++;
-                SetCorrectWordInputsText();
-                SetRandomKeyOrder();
                 currentKeyIndex = 0;
+                spinning = true;
+                spinTime = maxSharpeningTime;
+                grindstoneAnimator.Play("spin");
+                spacebar.SetActive(true);
+            }
+        }
+
+        // Handle Spin Time
+        if (spinning)
+        {
+            spinTime -= Time.deltaTime;
+
+            if (spinTime < 0f)
+            {
+                spinning = false;
+                grindstoneAnimator.Play("idle");
+                spacebar.SetActive(false);
+                SetRandomKeyOrder();
             }
         }
     }
@@ -203,12 +197,6 @@ public class SharpeningScript : MonoBehaviour
     {
         Shuffle(keyTransforms);
         setKeyVisibility(true);
-       /* for (int i = 0; i < keyTransforms.Count; i++)
-        {
-            keyTransforms[i].position = randomTransforms[i].position;
-            keyTransforms[i].gameObject.SetActive(true);
-        }*/
-
     }
 
     void Shuffle<T>(List<T> inputList)
@@ -222,9 +210,9 @@ public class SharpeningScript : MonoBehaviour
         }
     }
 
-
     void SetCorrectWordInputsText(){
-        wordCorrectText.text = "Hits:  " + correctWordInputs;
+        //wordCorrectText.text = "Hits:  " + correctWordInputs;
+        wordCorrectText.text = "Score: " + (int)score;
     }
 
     void SetsharpeningTimerText(){
