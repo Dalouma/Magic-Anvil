@@ -14,6 +14,7 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private Transform zoneBoundBottom;
     [SerializeField] private Animator grindstoneAnimator;
     [SerializeField] private Animator itemAnimator;
+    [SerializeField] private ParticleSystem sparks;
 
     [SerializeField] private List<Transform> keyTransforms;
     [SerializeField] private List<Transform> randomTransforms;
@@ -104,12 +105,14 @@ public class SharpeningScript : MonoBehaviour
             {
                 sharpening= true;
                 itemAnimator.Play("move");
+                sparks.Play();
             }
         }
         else if (sharpening)
         {
             sharpening = false;
             itemAnimator.Play("idle");
+            sparks.Stop();
         }
 
         if (!spinning)
