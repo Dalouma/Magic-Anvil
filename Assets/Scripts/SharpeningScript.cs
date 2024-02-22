@@ -13,6 +13,7 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private Transform zoneBoundTop;
     [SerializeField] private Transform zoneBoundBottom;
     [SerializeField] private Animator grindstoneAnimator;
+    [SerializeField] private Animator itemAnimator;
 
     [SerializeField] private List<Transform> keyTransforms;
     [SerializeField] private List<Transform> randomTransforms;
@@ -26,13 +27,14 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sharpeningTimerText;
 
 
-    private bool spinning;
+    private bool spinning, sharpening;
     private float spinTime;
     private int currentKeyIndex;
     private float score;
 
     static public int correctWordInputs;
     private float sharpeningTimer;
+    
    // private float sharpeningMaxTime;  
     
 
@@ -40,6 +42,7 @@ public class SharpeningScript : MonoBehaviour
     void Start()
     {
         spinning = false;
+        sharpening = false;
         spinTime = 0f;
         currentKeyIndex = 0;
         correctWordInputs = 0;
@@ -97,6 +100,16 @@ public class SharpeningScript : MonoBehaviour
         {
             score += zoneMultipliers[0] * Time.deltaTime;
             SetCorrectWordInputsText();
+            if (!sharpening)
+            {
+                sharpening= true;
+                itemAnimator.Play("move");
+            }
+        }
+        else if (sharpening)
+        {
+            sharpening = false;
+            itemAnimator.Play("idle");
         }
 
         if (!spinning)
