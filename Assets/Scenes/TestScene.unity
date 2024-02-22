@@ -276,7 +276,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -815,8 +815,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
-        m_MethodName: ChooseWeapon
-        m_Mode: 5
+        m_MethodName: GoToForging
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -827,7 +827,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
-        m_MethodName: GoToForging
+        m_MethodName: ChooseWeapon
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2137,7 +2137,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2228,7 +2228,6 @@ MonoBehaviour:
   dialogue: {fileID: 1122512073}
   customerManager: {fileID: 1866342037}
   animator: {fileID: 1059460863}
-  money: 0
   price: 0
   moneyText: {fileID: 877583826}
   moneyInputField: {fileID: 1059460864}
@@ -2937,7 +2936,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3361,11 +3360,11 @@ RectTransform:
   - {fileID: 1000776767}
   - {fileID: 1239569250}
   - {fileID: 1889281404}
+  - {fileID: 2123146691}
   - {fileID: 592388852}
   - {fileID: 1135235172}
   - {fileID: 80828922}
   - {fileID: 1403813881}
-  - {fileID: 2123146691}
   - {fileID: 2052083266}
   - {fileID: 677610560}
   - {fileID: 877583825}
@@ -4082,7 +4081,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1866342037}
         m_TargetAssemblyTypeName: CustomerManager, Assembly-CSharp
         m_MethodName: GoToForging
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

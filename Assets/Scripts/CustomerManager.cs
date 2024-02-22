@@ -90,7 +90,6 @@ public class CustomerManager : MonoBehaviour
 
     public void GoToForging()
     {
-        ChooseWeapon(weapon);
         Debug.Log("loading forging scene");
         Debug.Log("chosenWeapon: " + chosenWeapon);
         state = CustomerState.GivenItem;

@@ -50,7 +50,7 @@ public class ForgingScript : MonoBehaviour
         goodTiming = 0; 
         badTiming = 0; 
         StartGame();
-        weapon = CustomerManager.Instance.chosenWeapon;
+        weapon = Weapon.weapon;
         Debug.Log(weapon);
     }
 
