@@ -153,6 +153,7 @@ public class SharpeningScript : MonoBehaviour
                 spinTime = maxSharpeningTime;
                 grindstoneAnimator.Play("spin");
                 spacebar.SetActive(true);
+                setKeyVisibility(false);
             }
         }
 
@@ -172,17 +173,18 @@ public class SharpeningScript : MonoBehaviour
     }
     
     void CheckKey(GameObject currentKey, string correctKey){
-         if (currentKey.name == correctKey)
-                {
-                    currentKey.SetActive(false);
-                    currentKeyIndex++;
-                }
-                else
-                {
-                    Debug.Log("FAIL!!!");
-                    SetRandomKeyOrder();
-                    currentKeyIndex = 0;
-                }
+        if (currentKey.name == correctKey)
+        {
+            //currentKey.SetActive(false);
+            currentKey.transform.position += Vector3.down * 0.5f;
+            currentKeyIndex++;
+        }
+        else
+        {
+            Debug.Log("FAIL!!!");
+            SetRandomKeyOrder();
+            currentKeyIndex = 0;
+        }
     }
 
     void setKeyVisibility(bool keystate){
