@@ -115,6 +115,14 @@ public class SharpeningScript : MonoBehaviour
             sparks.Stop();
         }
 
+        // check red zone
+        if (cursorTransform.position.y > zoneBoundTop.position.y)
+        {
+            spinTime = 0.0f;
+            // NEEDS INDICATOR FOR PLAYER ERROR: GOING INTO RED ZONE
+
+        }
+
         if (!spinning)
         {
             cursorTransform.position = startTransform.position;
