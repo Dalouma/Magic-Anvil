@@ -225,7 +225,7 @@ public class SharpeningScript : MonoBehaviour
     public void GoToShop()
     {
         Debug.Log("loading forging scene");
-        SceneManager.LoadScene(shopLevel);
+        SceneManager.LoadScene("TestScene");
     }
 
 }

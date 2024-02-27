@@ -26,7 +26,7 @@ public class ShopManager : MonoBehaviour
     }
     public void Start()
     {
-        moneyText.text = "Gold: " + money.ToString();
+        moneyText.text = money.ToString();
     }
     public void ShowShop()
     {
@@ -37,10 +37,23 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
+            dialogue.triggerDialogue();
             animator.SetBool("ShopShow", true);
         }
         
     }
+   /* public void ShowForge()
+    {
+        if (forge.GetBool("forge",false)
+        {
+            forge.SetBool("forge", true);
+        }
+        else
+        {
+            forge.SetBool("forge", false);
+        }
+
+    }*/
     public void setPrice(string money)
     {
         price=int.Parse(money);
