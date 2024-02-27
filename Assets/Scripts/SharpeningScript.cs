@@ -12,6 +12,8 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private Transform startTransform;
     [SerializeField] private Transform zoneBoundTop;
     [SerializeField] private Transform zoneBoundBottom;
+    [SerializeField] private Transform greenThreshold;
+    [SerializeField] private Transform yellowThreshold;
     [SerializeField] private Animator grindstoneAnimator;
     [SerializeField] private Animator itemAnimator;
     [SerializeField] private ParticleSystem sparks;
@@ -26,6 +28,7 @@ public class SharpeningScript : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI wordCorrectText;
     [SerializeField] private TextMeshProUGUI sharpeningTimerText;
+    [SerializeField] private Animator wKey;
 
 
     private bool spinning, sharpening;
@@ -78,6 +81,11 @@ public class SharpeningScript : MonoBehaviour
             score += 100;
             SetCorrectWordInputsText();
         }
+        // TEST ANIMATION
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            wKey.Play("down");
+        }
     }
 
     void HandleBarTrace()
@@ -94,13 +102,34 @@ public class SharpeningScript : MonoBehaviour
                 cursorTransform.position += Vector3.down * cursorSpeed * Time.deltaTime;
             }
             
+            // Reset hold animation
+            if (!spacebar.activeSelf && cursorTransform.position.y <= startTransform.position.y)
+            {
+                spacebar.SetActive(true);
+            }
         }
 
         // check in zone
         if (cursorTransform.position.y < zoneBoundTop.position.y && cursorTransform.position.y > zoneBoundBottom.position.y)
         {
-            score += zoneMultipliers[0] * Time.deltaTime;
+            // Green Zone
+            if (cursorTransform.position.y > greenThreshold.position.y)
+            {
+                score += zoneMultipliers[1] * Time.deltaTime;
+            }
+            // Yellow Zone
+            else if (cursorTransform.position.y > yellowThreshold.position.y)
+            {
+                score += zoneMultipliers[0] * Time.deltaTime;
+            }
+            
             SetCorrectWordInputsText();
+
+            if (spacebar.activeSelf)
+            {
+                spacebar.SetActive(false);
+            }
+
             if (!sharpening)
             {
                 sharpening= true;
@@ -115,7 +144,7 @@ public class SharpeningScript : MonoBehaviour
             sparks.Stop();
         }
 
-        // check red zone
+        // check RED ZONE
         if (cursorTransform.position.y > zoneBoundTop.position.y)
         {
             spinTime = 0.0f;
@@ -133,7 +162,7 @@ public class SharpeningScript : MonoBehaviour
     void HandleWheelSpin()
     {
         // Check input
-        if (Input.anyKeyDown)
+        if (!spinning && Input.anyKeyDown)
         {
             GameObject currentKey = keyTransforms[currentKeyIndex].gameObject;
             if (Input.GetKeyDown(KeyCode.W))
@@ -183,8 +212,10 @@ public class SharpeningScript : MonoBehaviour
     void CheckKey(GameObject currentKey, string correctKey){
         if (currentKey.name == correctKey)
         {
-            //currentKey.SetActive(false);
-            currentKey.transform.position += Vector3.down * 0.5f;
+            //currentKey.transform.position += Vector3.down * 0.05f;
+            // CHANGE SPRITE TO DOWN POSITION
+            currentKey.GetComponent<Animator>().Play("down");
+
             currentKeyIndex++;
         }
         else
@@ -200,6 +231,9 @@ public class SharpeningScript : MonoBehaviour
         {
             keyTransforms[i].position = randomTransforms[i].position;
             keyTransforms[i].gameObject.SetActive(keystate);
+
+            // RESET SPRITE TO UP STATE
+            keyTransforms[i].gameObject.GetComponent<Animator>().Play("up");
         }
     }
 
