@@ -44,6 +44,7 @@ public class CustomerManager : MonoBehaviour
     public CustomerData data;
     public string chosenWeapon;
     public string[] customerfileList = { "Paladin", "Rogue", "Barbarian" };
+    public SpriteSwapCustomer cust;
     public enum CustomerState
     {
         Intro,
@@ -113,6 +114,7 @@ public class CustomerManager : MonoBehaviour
             chosenWeapon = null;
             state = CustomerState.Intro;
             animator.SetBool("Available", false);
+            cust.changeSprite();
             //customerImage.ChangeImage(customerfileList[customer]);
         }
     }

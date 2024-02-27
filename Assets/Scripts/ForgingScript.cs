@@ -163,7 +163,7 @@ public class ForgingScript : MonoBehaviour
         currentSpeed = 0;
         if(weapon == "Shield" || weapon == "Hammer"){
             Debug.Log("loading customer scene");
-            SceneManager.LoadScene("ResultsScene");
+            SceneManager.LoadScene("TestScene");
         }
         if(weapon == "Dagger" || weapon == "Sword" || weapon == "Axe"){
             Debug.Log("loading sharpening scene");
