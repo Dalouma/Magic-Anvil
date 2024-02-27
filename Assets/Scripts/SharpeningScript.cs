@@ -26,6 +26,7 @@ public class SharpeningScript : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI wordCorrectText;
     [SerializeField] private TextMeshProUGUI sharpeningTimerText;
+    [SerializeField] private Animator wKey;
 
 
     private bool spinning, sharpening;
@@ -77,6 +78,11 @@ public class SharpeningScript : MonoBehaviour
         {
             score += 100;
             SetCorrectWordInputsText();
+        }
+        // TEST ANIMATION
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            wKey.Play("down");
         }
     }
 
@@ -133,7 +139,7 @@ public class SharpeningScript : MonoBehaviour
     void HandleWheelSpin()
     {
         // Check input
-        if (Input.anyKeyDown)
+        if (!spinning && Input.anyKeyDown)
         {
             GameObject currentKey = keyTransforms[currentKeyIndex].gameObject;
             if (Input.GetKeyDown(KeyCode.W))
@@ -183,8 +189,10 @@ public class SharpeningScript : MonoBehaviour
     void CheckKey(GameObject currentKey, string correctKey){
         if (currentKey.name == correctKey)
         {
-            //currentKey.SetActive(false);
-            currentKey.transform.position += Vector3.down * 0.5f;
+            //currentKey.transform.position += Vector3.down * 0.05f;
+            // CHANGE SPRITE TO DOWN POSITION
+            currentKey.GetComponent<Animator>().Play("down");
+
             currentKeyIndex++;
         }
         else
@@ -200,6 +208,9 @@ public class SharpeningScript : MonoBehaviour
         {
             keyTransforms[i].position = randomTransforms[i].position;
             keyTransforms[i].gameObject.SetActive(keystate);
+
+            // RESET SPRITE TO UP STATE
+            keyTransforms[i].gameObject.GetComponent<Animator>().Play("up");
         }
     }
 
