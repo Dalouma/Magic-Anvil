@@ -12,6 +12,8 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private Transform startTransform;
     [SerializeField] private Transform zoneBoundTop;
     [SerializeField] private Transform zoneBoundBottom;
+    [SerializeField] private Transform greenThreshold;
+    [SerializeField] private Transform yellowThreshold;
     [SerializeField] private Animator grindstoneAnimator;
     [SerializeField] private Animator itemAnimator;
     [SerializeField] private ParticleSystem sparks;
@@ -100,13 +102,34 @@ public class SharpeningScript : MonoBehaviour
                 cursorTransform.position += Vector3.down * cursorSpeed * Time.deltaTime;
             }
             
+            // Reset hold animation
+            if (!spacebar.activeSelf && cursorTransform.position.y <= startTransform.position.y)
+            {
+                spacebar.SetActive(true);
+            }
         }
 
         // check in zone
         if (cursorTransform.position.y < zoneBoundTop.position.y && cursorTransform.position.y > zoneBoundBottom.position.y)
         {
-            score += zoneMultipliers[0] * Time.deltaTime;
+            // Green Zone
+            if (cursorTransform.position.y > greenThreshold.position.y)
+            {
+                score += zoneMultipliers[1] * Time.deltaTime;
+            }
+            // Yellow Zone
+            else if (cursorTransform.position.y > yellowThreshold.position.y)
+            {
+                score += zoneMultipliers[0] * Time.deltaTime;
+            }
+            
             SetCorrectWordInputsText();
+
+            if (spacebar.activeSelf)
+            {
+                spacebar.SetActive(false);
+            }
+
             if (!sharpening)
             {
                 sharpening= true;
@@ -121,7 +144,7 @@ public class SharpeningScript : MonoBehaviour
             sparks.Stop();
         }
 
-        // check red zone
+        // check RED ZONE
         if (cursorTransform.position.y > zoneBoundTop.position.y)
         {
             spinTime = 0.0f;
