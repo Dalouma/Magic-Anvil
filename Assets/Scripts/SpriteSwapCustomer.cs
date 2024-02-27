@@ -6,7 +6,7 @@ public class SpriteSwapCustomer : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     public Sprite[] spriteArray;
-    public static int customer = 1;
+    public static int customer = 0;
     void Start()
     {
         //spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -16,6 +16,10 @@ public class SpriteSwapCustomer : MonoBehaviour
     {
         customer++;
         spriteRenderer.sprite = spriteArray[customer];
+        if (customer >= spriteArray.Length)
+        {
+            customer = 0;
+        }
     }
 
 

@@ -65,7 +65,7 @@ public class ShopManager : MonoBehaviour
     public void UPdateMoney()
     {
         money += price;
-        moneyText.text ="Gold: "+ money.ToString();
+        moneyText.text =money.ToString();
         animator.SetBool("ShopShow", false);
 
     }
