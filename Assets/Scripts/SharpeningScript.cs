@@ -28,6 +28,7 @@ public class SharpeningScript : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI wordCorrectText;
     [SerializeField] private TextMeshProUGUI sharpeningTimerText;
+    [SerializeField] private TextMeshProUGUI spinTimeText;
     [SerializeField] private Animator wKey;
 
 
@@ -148,6 +149,7 @@ public class SharpeningScript : MonoBehaviour
         if (cursorTransform.position.y > zoneBoundTop.position.y)
         {
             spinTime = 0.0f;
+            spinTimeText.text = "Spin Time: " + (int)spinTime;
             // NEEDS INDICATOR FOR PLAYER ERROR: GOING INTO RED ZONE
 
         }
@@ -198,6 +200,7 @@ public class SharpeningScript : MonoBehaviour
         if (spinning)
         {
             spinTime -= Time.deltaTime;
+            spinTimeText.text = "Spin Time: " + (int)spinTime;
 
             if (spinTime < 0f)
             {
