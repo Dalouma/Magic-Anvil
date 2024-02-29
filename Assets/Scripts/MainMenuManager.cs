@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+    public AudioSource musicSource;
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayMusic();
     }
 
     // Update is called once per frame
@@ -25,5 +26,10 @@ public class MainMenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void PlayMusic()
+    {
+        musicSource.Play();
     }
 }
