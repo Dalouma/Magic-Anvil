@@ -94,7 +94,7 @@ public class CustomerManager : MonoBehaviour
         Debug.Log("loading forging scene");
         Debug.Log("chosenWeapon: " + chosenWeapon);
         state = CustomerState.GivenItem;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("ForgingScene");
     }
     public void loadCustomer()
     {
