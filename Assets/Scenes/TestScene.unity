@@ -1154,6 +1154,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 56523c7f089481e46b4b08a164d1b648, type: 3}
   - {fileID: 21300000, guid: c18c40f1e675d0d469d4b4a3e8ab9a3b, type: 3}
   - {fileID: 21300000, guid: 91b6afa4ef620b2458c1f14ad4038d89, type: 3}
+  animator: {fileID: 677610566}
 --- !u!95 &677610566
 Animator:
   serializedVersion: 5
@@ -2701,7 +2702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3372,6 +3373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currCustomer: {fileID: 0}
   spriteArray: []
+  animator: {fileID: 0}
 --- !u!1 &1928446147
 GameObject:
   m_ObjectHideFlags: 0
@@ -3751,6 +3753,7 @@ GameObject:
   - component: {fileID: 2096782327}
   - component: {fileID: 2096782329}
   - component: {fileID: 2096782328}
+  - component: {fileID: 2096782330}
   m_Layer: 5
   m_Name: desk
   m_TagString: desk
@@ -3815,6 +3818,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096782326}
   m_CullTransparentMesh: 1
+--- !u!95 &2096782330
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096782326}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ddc957f06ecf0af4e823bb65b4a47f13, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2102373874
 GameObject:
   m_ObjectHideFlags: 0
