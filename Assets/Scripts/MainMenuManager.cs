@@ -21,6 +21,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void GoToShopScene()
     {
+        musicSource.Stop();
         SceneManager.LoadScene("TestScene");
     }
 
@@ -39,14 +40,11 @@ public class MainMenuManager : MonoBehaviour
 
         if (state)
         {
-            //Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
             Screen.SetResolution(1920, 1080, state);
         }
         else
         {
-            //Screen.fullScreenMode = FullScreenMode.Windowed;
             Screen.SetResolution(1280, 720, state);
         }
-        //Screen.SetResolution(1920, 1080, state);
     }
 }
