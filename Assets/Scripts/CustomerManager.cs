@@ -47,6 +47,7 @@ public class CustomerManager : MonoBehaviour
     public string chosenWeapon;
     public string[] customerfileList = { "Paladin", "Rogue", "Barbarian" };
     public SpriteSwapCustomer cust;
+    public SpriteSwapCustomer weap;
     public enum CustomerState
     {
         Intro,
@@ -71,8 +72,29 @@ public class CustomerManager : MonoBehaviour
         loadCustomer();
         Debug.Log(getData().name);
         chosenWeapon = Weapon.weapon;
+        
         if(chosenWeapon != null)
         {
+            switch(chosenWeapon)
+            {
+                case "Shield":
+                    weap.changeSprite(0);
+                    break;
+                case "Sword":
+                    weap.changeSprite(1);
+                    break;
+                case "Dagger":
+                    weap.changeSprite(2);
+                    break;
+                case "Hammer":
+                    weap.changeSprite(3);
+                    break;
+                case "Axe":
+                    weap.changeSprite(4);
+                    break;
+                default:
+                    break;
+            }
             animator.SetBool("Available", true);
         }
         else
