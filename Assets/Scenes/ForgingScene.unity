@@ -582,6 +582,7 @@ MonoBehaviour:
   badRight: {fileID: 1737880399}
   EndLeft: {fileID: 1466486599}
   EndRight: {fileID: 546358529}
+  cooldown: 0.5
 --- !u!212 &563711598
 SpriteRenderer:
   m_ObjectHideFlags: 0

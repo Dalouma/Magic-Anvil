@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+
     public AudioSource musicSource;
     // Start is called before the first frame update
     void Start()
@@ -31,5 +32,21 @@ public class MainMenuManager : MonoBehaviour
     public void PlayMusic()
     {
         musicSource.Play();
+    }
+
+    public void FullScreen(bool state)
+    {
+
+        if (state)
+        {
+            //Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+            Screen.SetResolution(1920, 1080, state);
+        }
+        else
+        {
+            //Screen.fullScreenMode = FullScreenMode.Windowed;
+            Screen.SetResolution(1280, 720, state);
+        }
+        //Screen.SetResolution(1920, 1080, state);
     }
 }
