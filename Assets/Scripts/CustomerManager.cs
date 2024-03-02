@@ -63,6 +63,7 @@ public class CustomerManager : MonoBehaviour
     void Start()
     {
         customer = cnum;
+
         loadCustomer();
         Debug.Log(getData().name);
         chosenWeapon = Weapon.weapon;
@@ -102,6 +103,7 @@ public class CustomerManager : MonoBehaviour
         string content = File.ReadAllText(filePath);
         data = JsonUtility.FromJson<CustomerData>(content);
         cnum = customer;
+        cust.changeSprite(customer);
     }
     public void nextCustomer()
     {
@@ -114,7 +116,7 @@ public class CustomerManager : MonoBehaviour
             chosenWeapon = null;
             state = CustomerState.Intro;
             animator.SetBool("Available", false);
-            cust.changeSprite();
+            
             //customerImage.ChangeImage(customerfileList[customer]);
         }
     }
