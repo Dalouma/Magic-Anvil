@@ -170,7 +170,6 @@ public class SharpeningScript : MonoBehaviour
         {
             spinTime = 0.0f;
             spinTimeText.text = "Spin Time: " + (int)spinTime;
-            // NEEDS INDICATOR FOR PLAYER ERROR: GOING INTO RED ZONE
             GetComponent<Animator>().Play("Shake");
 
         }
