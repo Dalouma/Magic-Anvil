@@ -35,6 +35,8 @@ public class Weapon
 [System.Serializable]
 public class CustomerManager : MonoBehaviour
 {
+    public GameObject levelChanger;
+    private LevelChanger levelChangerScript;
     public Animator animator;
     //public Image customerImage;
     public ShopManager shopManager;
@@ -62,6 +64,8 @@ public class CustomerManager : MonoBehaviour
     public static CustomerState state = CustomerState.Intro;
     void Start()
     {
+        levelChangerScript = levelChanger.GetComponent<LevelChanger>();
+
         customer = cnum;
 
         loadCustomer();
@@ -95,7 +99,7 @@ public class CustomerManager : MonoBehaviour
         Debug.Log("loading forging scene");
         Debug.Log("chosenWeapon: " + chosenWeapon);
         state = CustomerState.GivenItem;
-        SceneManager.LoadScene("ForgingScene");
+        levelChangerScript.FadeToLevel("ForgingScene");
     }
     public void loadCustomer()
     {
@@ -118,6 +122,10 @@ public class CustomerManager : MonoBehaviour
             animator.SetBool("Available", false);
             
             //customerImage.ChangeImage(customerfileList[customer]);
+        }
+        else
+        {
+            SceneManager.LoadScene("NewspaperScene");
         }
     }
     public bool priceCheck(int price)
