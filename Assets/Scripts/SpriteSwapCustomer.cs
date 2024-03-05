@@ -32,6 +32,7 @@ public class SpriteSwapCustomer : MonoBehaviour
     public void changeSpriteAnim(int customer)
     {
         animator.SetBool("ChangeCustomer", true);
+        animator.SetBool("invis", true);
         StartCoroutine(Pause(3.5f, () =>
         {
             if (customer >= spriteArray.Length)
@@ -42,6 +43,7 @@ public class SpriteSwapCustomer : MonoBehaviour
             Image custimage = currCustomer.image;
             custimage.sprite = spriteArray[customer];
             animator.SetBool("ChangeCustomer", false);
+            animator.SetBool("invis", false);
         }));
 
 

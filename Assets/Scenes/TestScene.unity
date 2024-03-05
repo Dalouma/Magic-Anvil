@@ -2988,6 +2988,7 @@ GameObject:
   - component: {fileID: 1618544508}
   - component: {fileID: 1618544507}
   - component: {fileID: 1618544509}
+  - component: {fileID: 1618544510}
   m_Layer: 5
   m_Name: speechBubble
   m_TagString: Untagged
@@ -3073,6 +3074,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1618544510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618544505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378eb50219773f944bc11670b27cc640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1618544509}
 --- !u!1 &1698092214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3281,6 +3295,7 @@ MonoBehaviour:
   - Barbarian
   cust: {fileID: 677610565}
   weap: {fileID: 928904670}
+  speechbubble: {fileID: 1618544510}
 --- !u!4 &1866342038
 Transform:
   m_ObjectHideFlags: 0
