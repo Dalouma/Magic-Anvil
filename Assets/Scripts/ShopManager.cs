@@ -39,6 +39,7 @@ public class ShopManager : MonoBehaviour
         {
             dialogue.triggerDialogue();
             animator.SetBool("ShopShow", true);
+            customerManager.animator.SetBool("Available", false);
         }
         
     }

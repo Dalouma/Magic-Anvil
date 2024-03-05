@@ -9,14 +9,15 @@ public class setActive2 : MonoBehaviour
     public GameObject One;
     public GameObject Two;
     public float time = 0.0f;
+    public float totalTime;
     [SerializeField] private Image _progressBar;
 
     // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
-        _progressBar.fillAmount = time/30.0f;
-        if (time >= 30.0f)
+        _progressBar.fillAmount = time/totalTime;
+        if (time >= totalTime)
         {
             timerEnded();
         }

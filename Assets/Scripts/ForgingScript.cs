@@ -36,6 +36,8 @@ public class ForgingScript : MonoBehaviour
     static public int greatTiming, goodTiming, badTiming;
     private string weapon;
     private string sharpeninglevel = "SharpeningScene";
+    private bool onCooldown;
+    [SerializeField] private float cooldown = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,7 @@ public class ForgingScript : MonoBehaviour
         StartGame();
         weapon = Weapon.weapon;
         Debug.Log(weapon);
+        onCooldown = false;                              
     }
 
     // Update is called once per frame
@@ -77,9 +80,11 @@ public class ForgingScript : MonoBehaviour
         }
 
         // Check Click Timing
-        if (Input.anyKeyDown && gameStart)
+        if (!onCooldown && Input.anyKeyDown && gameStart)
         {
+            onCooldown = true;
             StartCoroutine(SlowMo());
+            StartCoroutine(Cooldown());
             clangAudio.Play();
             hammerAnimator.Play("HammerSwing");
             clicks++;
@@ -149,6 +154,12 @@ public class ForgingScript : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         currentSpeed *= 1 / slowRate;
         currentSpeed = cursorMovementSpeed[speedLevel];
+    }
+
+    private IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(cooldown);
+        onCooldown = false;
     }
 
     public void StartGame()

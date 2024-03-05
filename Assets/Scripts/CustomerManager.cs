@@ -35,6 +35,8 @@ public class Weapon
 [System.Serializable]
 public class CustomerManager : MonoBehaviour
 {
+    public GameObject levelChanger;
+    private LevelChanger levelChangerScript;
     public Animator animator;
     //public Image customerImage;
     public ShopManager shopManager;
@@ -45,6 +47,7 @@ public class CustomerManager : MonoBehaviour
     public string chosenWeapon;
     public string[] customerfileList = { "Paladin", "Rogue", "Barbarian" };
     public SpriteSwapCustomer cust;
+    public SpriteSwapCustomer weap;
     public enum CustomerState
     {
         Intro,
@@ -62,12 +65,36 @@ public class CustomerManager : MonoBehaviour
     public static CustomerState state = CustomerState.Intro;
     void Start()
     {
+        levelChangerScript = levelChanger.GetComponent<LevelChanger>();
+
         customer = cnum;
+        cust.changeSprite(customer);
         loadCustomer();
         Debug.Log(getData().name);
         chosenWeapon = Weapon.weapon;
+        
         if(chosenWeapon != null)
         {
+            switch(chosenWeapon)
+            {
+                case "Shield":
+                    weap.changeSprite(0);
+                    break;
+                case "Sword":
+                    weap.changeSprite(1);
+                    break;
+                case "Dagger":
+                    weap.changeSprite(2);
+                    break;
+                case "Hammer":
+                    weap.changeSprite(3);
+                    break;
+                case "Axe":
+                    weap.changeSprite(4);
+                    break;
+                default:
+                    break;
+            }
             animator.SetBool("Available", true);
         }
         else
@@ -94,7 +121,7 @@ public class CustomerManager : MonoBehaviour
         Debug.Log("loading forging scene");
         Debug.Log("chosenWeapon: " + chosenWeapon);
         state = CustomerState.GivenItem;
-        SceneManager.LoadScene("ForgingScene");
+        levelChangerScript.FadeToLevel("ForgingScene");
     }
     public void loadCustomer()
     {
@@ -102,6 +129,8 @@ public class CustomerManager : MonoBehaviour
         string content = File.ReadAllText(filePath);
         data = JsonUtility.FromJson<CustomerData>(content);
         cnum = customer;
+        
+
     }
     public void nextCustomer()
     {
@@ -110,12 +139,17 @@ public class CustomerManager : MonoBehaviour
             customer++;
             cnum = customer;
             loadCustomer();
+            cust.changeSpriteAnim(customer);
             Weapon.weapon = null;
             chosenWeapon = null;
             state = CustomerState.Intro;
             animator.SetBool("Available", false);
-            cust.changeSprite();
+            
             //customerImage.ChangeImage(customerfileList[customer]);
+        }
+        else
+        {
+            SceneManager.LoadScene("NewspaperScene");
         }
     }
     public bool priceCheck(int price)

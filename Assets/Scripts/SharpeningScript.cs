@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +18,7 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private Transform yellowThreshold;
     [SerializeField] private Animator grindstoneAnimator;
     [SerializeField] private Animator itemAnimator;
+    [SerializeField] private SpriteRenderer itemSprite;
     [SerializeField] private ParticleSystem sparks;
 
     [SerializeField] private List<Transform> keyTransforms;
@@ -24,7 +27,9 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private float cursorSpeed;
     [SerializeField] private float maxSharpeningTime;
     [SerializeField] private List<float> zoneMultipliers;
-    private string shopLevel = "ResultsScene";
+
+    [SerializeField] private Sprite[] spriteArray;
+    //private string shopLevel = "ResultsScene";
     
     [SerializeField] private TextMeshProUGUI wordCorrectText;
     [SerializeField] private TextMeshProUGUI sharpeningTimerText;
@@ -51,11 +56,12 @@ public class SharpeningScript : MonoBehaviour
         spinTime = 0f;
         currentKeyIndex = 0;
         correctWordInputs = 0;
-        sharpeningTimer = 30;
+        sharpeningTimer = 40;
         SetCorrectWordInputsText();
         //sharpeningMaxTime = 20;
 
         SetRandomKeyOrder();
+        SetSprite(Weapon.weapon);
     }
 
     // Update is called once per frame
@@ -82,10 +88,24 @@ public class SharpeningScript : MonoBehaviour
             score += 100;
             SetCorrectWordInputsText();
         }
-        // TEST ANIMATION
-        if (Input.GetKeyDown(KeyCode.M))
+    }
+
+    void SetSprite(string weaponName)
+    {
+        switch (weaponName)
         {
-            wKey.Play("down");
+            case "Sword":
+                itemSprite.sprite = spriteArray[0];
+                break;
+            case "Dagger":
+                itemSprite.sprite = spriteArray[1];
+                break;
+            case "Axe":
+                itemSprite.sprite = spriteArray[2];
+                break;
+            default:
+                itemSprite.sprite = spriteArray[0];
+                break;
         }
     }
 
@@ -150,7 +170,7 @@ public class SharpeningScript : MonoBehaviour
         {
             spinTime = 0.0f;
             spinTimeText.text = "Spin Time: " + (int)spinTime;
-            // NEEDS INDICATOR FOR PLAYER ERROR: GOING INTO RED ZONE
+            GetComponent<Animator>().Play("Shake");
 
         }
 
