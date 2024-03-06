@@ -534,6 +534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 5109663084787812377, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5478944550257880111, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2458,7 +2462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 3.1392822, y: -3.8253784}
+  m_AnchoredPosition: {x: 3.1392822, y: -3.8253937}
   m_SizeDelta: {x: 28.5787, y: 42.5078}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1205257452
@@ -2984,6 +2988,7 @@ GameObject:
   - component: {fileID: 1618544508}
   - component: {fileID: 1618544507}
   - component: {fileID: 1618544509}
+  - component: {fileID: 1618544510}
   m_Layer: 5
   m_Name: speechBubble
   m_TagString: Untagged
@@ -3069,6 +3074,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1618544510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618544505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378eb50219773f944bc11670b27cc640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1618544509}
 --- !u!1 &1698092214
 GameObject:
   m_ObjectHideFlags: 0
@@ -3277,6 +3295,7 @@ MonoBehaviour:
   - Barbarian
   cust: {fileID: 677610565}
   weap: {fileID: 928904670}
+  speechbubble: {fileID: 1618544510}
 --- !u!4 &1866342038
 Transform:
   m_ObjectHideFlags: 0

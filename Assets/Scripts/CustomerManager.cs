@@ -48,6 +48,7 @@ public class CustomerManager : MonoBehaviour
     public string[] customerfileList = { "Paladin", "Rogue", "Barbarian" };
     public SpriteSwapCustomer cust;
     public SpriteSwapCustomer weap;
+    public speechBubbleanimation speechbubble;
     public enum CustomerState
     {
         Intro,
@@ -140,6 +141,7 @@ public class CustomerManager : MonoBehaviour
             cnum = customer;
             loadCustomer();
             cust.changeSpriteAnim(customer);
+            speechbubble.speechFade();
             Weapon.weapon = null;
             chosenWeapon = null;
             state = CustomerState.Intro;

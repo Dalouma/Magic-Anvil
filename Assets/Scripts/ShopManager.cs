@@ -57,6 +57,10 @@ public class ShopManager : MonoBehaviour
     }*/
     public void setPrice(string money)
     {
+        if(money.Length>9)
+        {
+            customerManager.priceCheck(99999);
+        }
         price=int.Parse(money);
         if (customerManager.priceCheck(price))
         {
