@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class ForgingScript : MonoBehaviour
@@ -28,7 +29,7 @@ public class ForgingScript : MonoBehaviour
     [SerializeField] private Transform EndRight;
 
     [SerializeField] private Canvas ResultsCanvas;
-
+    [SerializeField] private Canvas FinishCanvas;
     [SerializeField] private TextMeshProUGUI resultText;
 
     [SerializeField] private Button nextScene;
@@ -36,6 +37,8 @@ public class ForgingScript : MonoBehaviour
     private AudioSource clangAudio;
     //private GameObject ResultCanvas;
     private int clicks;
+    private float finishtimer;
+    private int forgingscore;
     private bool gameStart;
     private float currentSpeed;
     private float direction;
@@ -51,6 +54,8 @@ public class ForgingScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       // finishScene.gameObject.SetActive(false);
+        FinishCanvas.GetComponent<Canvas>().enabled = false;
         activeScene = true;
         ResultsCanvas.GetComponent<Canvas>().enabled = false;
         clangAudio = GetComponent<AudioSource>();
@@ -66,7 +71,8 @@ public class ForgingScript : MonoBehaviour
         weapon = Weapon.weapon;
         Debug.Log(weapon);
         onCooldown = false; 
-        nextScene.onClick.AddListener(EndGame);                             
+        nextScene.onClick.AddListener(EndGame);     
+        finishtimer = 2f;                        
     }
 
     // Update is called once per frame
@@ -153,7 +159,8 @@ public class ForgingScript : MonoBehaviour
             // end check
             if (clicks == 10)
             {
-                ShowForgingResults();
+                StartCoroutine(showFinishButton());
+                //ShowForgingResults();
                // EndGame();
             }
         }
@@ -209,9 +216,22 @@ public class ForgingScript : MonoBehaviour
     }
 
     public void ShowForgingResults(){
-        activeScene = false;
-        resultText.text = hitText.text;
+        forgingscore = CalculateForgingScore(greatTiming, goodTiming, badTiming); 
+        resultText.text = $"Forging Results\nScore: {forgingscore}\n{hitText.text}";
         ResultsCanvas.GetComponent<Canvas>().enabled = true;
+    }
+
+    private int CalculateForgingScore(int great, int good, int bad)
+    {
+        return (great * 200) + (good * 100) + (bad * 50);
+    }
+
+    IEnumerator showFinishButton(){
+        activeScene = false;
+        FinishCanvas.GetComponent<Canvas>().enabled = true;
+        yield return new WaitForSeconds(finishtimer);
+        FinishCanvas.GetComponent<Canvas>().enabled = false;
+        ShowForgingResults();
     }
 
 }
