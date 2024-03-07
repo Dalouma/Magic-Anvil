@@ -23,6 +23,7 @@ public class SharpeningScript : MonoBehaviour
 
     [SerializeField] private List<Transform> keyTransforms;
     [SerializeField] private List<Transform> randomTransforms;
+    [SerializeField] private Transform arrowIndicatorTransform;
 
     [SerializeField] private float cursorSpeed;
     [SerializeField] private float maxSharpeningTime;
@@ -43,7 +44,7 @@ public class SharpeningScript : MonoBehaviour
     private float score;
 
     static public int correctWordInputs;
-    private float sharpeningTimer;
+    [SerializeField] private float sharpeningTimer;
     
    // private float sharpeningMaxTime;  
     
@@ -56,7 +57,6 @@ public class SharpeningScript : MonoBehaviour
         spinTime = 0f;
         currentKeyIndex = 0;
         correctWordInputs = 0;
-        sharpeningTimer = 40;
         SetCorrectWordInputsText();
         //sharpeningMaxTime = 20;
 
@@ -213,6 +213,7 @@ public class SharpeningScript : MonoBehaviour
                 grindstoneAnimator.Play("spin");
                 spacebar.SetActive(true);
                 setKeyVisibility(false);
+                arrowIndicatorTransform.position = currentKey.transform.position + Vector3.up * 0.5f;
             }
         }
 
@@ -240,12 +241,20 @@ public class SharpeningScript : MonoBehaviour
             currentKey.GetComponent<Animator>().Play("down");
 
             currentKeyIndex++;
+
+            // Change arrow indicator position to above next key to be pressed
+            if (currentKeyIndex < keyTransforms.Count)
+            {
+                GameObject nextKey = keyTransforms[currentKeyIndex].gameObject;
+                arrowIndicatorTransform.position = nextKey.transform.position + Vector3.up * 1.2f;
+            }
+            
         }
         else
         {
             Debug.Log("FAIL!!!");
-            SetRandomKeyOrder();
             currentKeyIndex = 0;
+            SetRandomKeyOrder();
         }
     }
 
@@ -258,12 +267,16 @@ public class SharpeningScript : MonoBehaviour
             // RESET SPRITE TO UP STATE
             keyTransforms[i].gameObject.GetComponent<Animator>().Play("up");
         }
+        arrowIndicatorTransform.gameObject.SetActive(keystate);
     }
 
     void SetRandomKeyOrder()
     {
         Shuffle(keyTransforms);
         setKeyVisibility(true);
+
+        // Reset arrow indicator position to first key
+        arrowIndicatorTransform.position = keyTransforms[currentKeyIndex].gameObject.transform.position + Vector3.up * 1.2f;
     }
 
     void Shuffle<T>(List<T> inputList)
