@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ForgingScript : MonoBehaviour
 {
@@ -26,8 +27,14 @@ public class ForgingScript : MonoBehaviour
     [SerializeField] private Transform EndLeft;
     [SerializeField] private Transform EndRight;
 
-    private AudioSource clangAudio;
+    [SerializeField] private Canvas ResultsCanvas;
 
+    [SerializeField] private TextMeshProUGUI resultText;
+
+    [SerializeField] private Button nextScene;
+
+    private AudioSource clangAudio;
+    //private GameObject ResultCanvas;
     private int clicks;
     private bool gameStart;
     private float currentSpeed;
@@ -37,11 +44,15 @@ public class ForgingScript : MonoBehaviour
     private string weapon;
     private string sharpeninglevel = "SharpeningScene";
     private bool onCooldown;
+
+    private bool activeScene;
     [SerializeField] private float cooldown = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
+        activeScene = true;
+        ResultsCanvas.GetComponent<Canvas>().enabled = false;
         clangAudio = GetComponent<AudioSource>();
         clicks = 0;
         currentSpeed = 0;
@@ -54,12 +65,14 @@ public class ForgingScript : MonoBehaviour
         StartGame();
         weapon = Weapon.weapon;
         Debug.Log(weapon);
-        onCooldown = false;                              
+        onCooldown = false; 
+        nextScene.onClick.AddListener(EndGame);                             
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(activeScene){
         // Valid Inputs
         bool LMB = Input.GetMouseButtonDown(0);
         bool RMB = Input.GetMouseButtonDown(1);
@@ -140,10 +153,11 @@ public class ForgingScript : MonoBehaviour
             // end check
             if (clicks == 10)
             {
-                EndGame();
+                ShowForgingResults();
+               // EndGame();
             }
         }
-
+        }
     }
 
     private IEnumerator SlowMo()
@@ -170,6 +184,7 @@ public class ForgingScript : MonoBehaviour
 
     public void EndGame()
     {
+        Debug.Log("button clicked for end game");
         gameStart = false;
         currentSpeed = 0;
         if(weapon == "Shield" || weapon == "Hammer"){
@@ -179,6 +194,7 @@ public class ForgingScript : MonoBehaviour
         if(weapon == "Dagger" || weapon == "Sword" || weapon == "Axe"){
             Debug.Log("loading sharpening scene");
             SceneManager.LoadScene(sharpeninglevel);
+            //levelChangerScript.FadeToLevel(sharpeninglevel);
         }
 
     }
@@ -191,4 +207,11 @@ public class ForgingScript : MonoBehaviour
     public void SetTimer(){
         timerText.text = "Hits on " + weapon + ": "  + clicks;
     }
+
+    public void ShowForgingResults(){
+        activeScene = false;
+        resultText.text = hitText.text;
+        ResultsCanvas.GetComponent<Canvas>().enabled = true;
+    }
+
 }
