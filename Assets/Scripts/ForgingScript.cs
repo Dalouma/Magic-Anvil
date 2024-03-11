@@ -72,7 +72,10 @@ public class ForgingScript : MonoBehaviour
         Debug.Log(weapon);
         onCooldown = false; 
         nextScene.onClick.AddListener(EndGame);     
-        finishtimer = 2f;                        
+        finishtimer = 2f;
+
+        // Change Music to appropriate track
+        AudioManager.instance.ChangeMusic("forge");
     }
 
     // Update is called once per frame
@@ -195,6 +198,7 @@ public class ForgingScript : MonoBehaviour
         gameStart = false;
         currentSpeed = 0;
         if(weapon == "Shield" || weapon == "Hammer"){
+            AudioManager.instance.ChangeMusic("menu");
             Debug.Log("loading customer scene");
             SceneManager.LoadScene("TestScene");
         }
