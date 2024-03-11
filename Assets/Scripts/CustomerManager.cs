@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,8 +41,9 @@ public class CustomerManager : MonoBehaviour
     public Animator animator;
     //public Image customerImage;
     public ShopManager shopManager;
-    public int customer = 0;
+    public int customer = 20;
     public static int cnum;
+    public static int currRep=20;
     public static CustomerManager Instance;
     public CustomerData data;
     public string chosenWeapon;
@@ -49,6 +51,7 @@ public class CustomerManager : MonoBehaviour
     public SpriteSwapCustomer cust;
     public SpriteSwapCustomer weap;
     public speechBubbleanimation speechbubble;
+    public UnityEngine.UI.Slider bar;
     public enum CustomerState
     {
         Intro,
@@ -84,6 +87,7 @@ public class CustomerManager : MonoBehaviour
         //customer = cnum;
         cust.changeSprite(customer);
         loadCustomer();
+        SetRep(currRep);
         Debug.Log(getData().name);
         chosenWeapon = Weapon.weapon;
         
@@ -176,17 +180,19 @@ public class CustomerManager : MonoBehaviour
     public bool priceCheck(int price)
     {
         
-        if(price>(1.4*400*data.stinginess)||price<0)
+        if(price>(1.4*400*data.stinginess+(400*(currRep/100)))||price<0)
         {
             state = CustomerState.Refusal;
             return false;
         }
-        else if(price > (1.15 * 400 * data.stinginess))
+        else if(price > (1.15 * 400 * data.stinginess + (400 * (currRep / 100))))
          {
             state = CustomerState.BadDeal;
+            currRep -= 10;
+            SetRep(currRep);
             return true;
         }
-        else if(price > (1 * 400 * data.stinginess))
+        else if(price > (1 * 400 * data.stinginess + (400 * (currRep / 100))))
             {
             state = CustomerState.NeutralDeal;
             return true;
@@ -194,6 +200,16 @@ public class CustomerManager : MonoBehaviour
         }
         else
         {
+            if(price==0)
+            {
+                currRep += 99;
+                SetRep(currRep);
+                state = CustomerState.GoodDeal;
+                return true;
+            }
+            //Debug.Log(Math.Floor((400 * data.stinginess + (400 * (currRep / 100))))/price);
+            currRep += Convert.ToInt32(Math.Floor((400 * data.stinginess + (400 * (currRep / 100)))/price));
+            SetRep(currRep);
             state = CustomerState.GoodDeal;
             return true;
 
@@ -213,5 +229,9 @@ public class CustomerManager : MonoBehaviour
     public string getWeapon()
     {
         return chosenWeapon;
+    }
+    public void SetRep(int rep)
+    {
+        bar.value = rep;
     }
 }
