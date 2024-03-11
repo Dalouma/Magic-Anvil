@@ -14,6 +14,7 @@ public class ShopManager : MonoBehaviour
     public int price = 0;
     public TextMeshProUGUI moneyText;
     public TMP_InputField moneyInputField;
+    private GameManager manager = GameManager.Instance;
 
     private void Awake()
     {
@@ -26,6 +27,12 @@ public class ShopManager : MonoBehaviour
     }
     public void Start()
     {
+        if (manager != null && manager.pullFromSave == true)
+        {
+            money = manager.currency;
+            Debug.Log(money);
+        }
+
         moneyText.text = money.ToString();
     }
     public void ShowShop()
@@ -72,6 +79,11 @@ public class ShopManager : MonoBehaviour
         money += price;
         moneyText.text =money.ToString();
         animator.SetBool("ShopShow", false);
+
+        if (manager != null)
+        {
+            manager.currency = money;
+        }
 
     }
 

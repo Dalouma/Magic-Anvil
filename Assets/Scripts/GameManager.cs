@@ -16,13 +16,16 @@ public class GameManager : MonoBehaviour
         else 
         {
             Instance = this;
-            LoadGame();
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
     // create variables for any game specific data
     // ...
-    public int score = 0;
+    public int currency = 0;
+    public int character = 0;
+
+    public bool pullFromSave = false;
 
     public void SaveGame() 
     {
@@ -35,14 +38,12 @@ public class GameManager : MonoBehaviour
 
         // set all variables back to loaded data
         // ...
-        score = data.score;
+        currency = data.currency;
+        character = data.character;
     }
 
-    public void AddScore() { score++; }
-
-    public void RemoveScore() { score--; }
-
-    public TMP_Text scoreText;
-
-    void Update() { scoreText.SetText("Score: " + score); }
+    public void FromSave() 
+    {
+        pullFromSave = true;
+    }
 }

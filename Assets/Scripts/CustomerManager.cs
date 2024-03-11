@@ -63,12 +63,25 @@ public class CustomerManager : MonoBehaviour
         return data;
     }
 
+    private GameManager manager = GameManager.Instance;
+
     public static CustomerState state = CustomerState.Intro;
     void Start()
     {
         levelChangerScript = levelChanger.GetComponent<LevelChanger>();
+        //GameManager manager = GameManager.Instance;
 
-        customer = cnum;
+        if (manager != null && manager.pullFromSave == true) 
+        {
+            customer = manager.character;
+            Debug.Log(customer);
+        }
+        else 
+        {
+            customer = cnum;
+        }
+
+        //customer = cnum;
         cust.changeSprite(customer);
         loadCustomer();
         Debug.Log(getData().name);
@@ -138,6 +151,12 @@ public class CustomerManager : MonoBehaviour
         if (customer < 2)
         {
             customer++;
+
+            if (manager != null)
+            {
+                manager.character++;
+            }
+
             cnum = customer;
             loadCustomer();
             cust.changeSpriteAnim(customer);
