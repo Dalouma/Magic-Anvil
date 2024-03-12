@@ -10,11 +10,14 @@ public class ShopManager : MonoBehaviour
     public CustomerManager customerManager;
     public static ShopManager instance;
     public Animator animator;
-    public static int money = 0;
+    public static int money = 450;
     public int price = 0;
     public TextMeshProUGUI moneyText;
     public TMP_InputField moneyInputField;
     private GameManager manager = GameManager.Instance;
+    public static int[] materials = { 0, 0 };
+    public TextMeshProUGUI metalAMT;
+    public TextMeshProUGUI woodAMT;
 
     private void Awake()
     {
@@ -64,15 +67,48 @@ public class ShopManager : MonoBehaviour
     }*/
     public void setPrice(string money)
     {
-        if(money.Length>9)
+        if (money.Length > 8)
         {
             customerManager.priceCheck(99999);
         }
-        price=int.Parse(money);
-        if (customerManager.priceCheck(price))
+        else
         {
-            UPdateMoney();
+            price = int.Parse(money);
+            if (customerManager.priceCheck(price))
+            {
+                UPdateMoney();
+            }
         }
+    }
+    public void addMetal()
+    {
+        if (money - 200 >= 0)
+        {
+            materials[0]++;
+            metalAMT.text = materials[0].ToString();
+            money -= 200;
+            moneyText.text = money.ToString();
+        }
+    }
+    public void addWood()
+    {
+        if (money - 200 >= 0)
+        {
+          materials[1]++;
+        woodAMT.text = materials[1].ToString();
+        money -= 200;
+        moneyText.text = money.ToString();
+        }
+    }
+    public void loseMetal()
+    {
+        materials[0]--;
+        metalAMT.text = materials[0].ToString();
+    }
+    public void loseWood()
+    {
+        materials[1]--;
+        woodAMT.text = materials[1].ToString();
     }
     public void UPdateMoney()
     {

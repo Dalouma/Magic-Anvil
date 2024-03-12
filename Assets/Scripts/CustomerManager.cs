@@ -136,10 +136,13 @@ public class CustomerManager : MonoBehaviour
 
     public void GoToForging()
     {
-        Debug.Log("loading forging scene");
-        Debug.Log("chosenWeapon: " + chosenWeapon);
-        state = CustomerState.GivenItem;
-        levelChangerScript.FadeToLevel("ForgingScene");
+        if (ShopManager.materials[0] > 0 && ShopManager.materials[1] > 0)
+        {
+            shopManager.loseMetal();
+            shopManager.loseWood();
+            state = CustomerState.GivenItem;
+            levelChangerScript.FadeToLevel("ForgingScene");
+        }
     }
     public void loadCustomer()
     {
@@ -180,19 +183,19 @@ public class CustomerManager : MonoBehaviour
     public bool priceCheck(int price)
     {
         
-        if(price>(1.4*400*data.stinginess+(400*(currRep/100)))||price<0)
+        if(price>(1.4*450*data.stinginess+(400*(currRep/100)))||price<0)
         {
             state = CustomerState.Refusal;
             return false;
         }
-        else if(price > (1.15 * 400 * data.stinginess + (400 * (currRep / 100))))
+        else if(price > (1.15 * 450 * data.stinginess + (400 * (currRep / 100))))
          {
             state = CustomerState.BadDeal;
             currRep -= 10;
             SetRep(currRep);
             return true;
         }
-        else if(price > (1 * 400 * data.stinginess + (400 * (currRep / 100))))
+        else if(price > (1 * 450 * data.stinginess + (400 * (currRep / 100))))
             {
             state = CustomerState.NeutralDeal;
             return true;
@@ -208,7 +211,7 @@ public class CustomerManager : MonoBehaviour
                 return true;
             }
             //Debug.Log(Math.Floor((400 * data.stinginess + (400 * (currRep / 100))))/price);
-            currRep += Convert.ToInt32(Math.Floor((400 * data.stinginess + (400 * (currRep / 100)))/price));
+            currRep += Convert.ToInt32(Math.Floor((400 * data.stinginess + (450 * (currRep / 100)))/price));
             SetRep(currRep);
             state = CustomerState.GoodDeal;
             return true;
