@@ -47,6 +47,7 @@ public class ForgingScript : MonoBehaviour
     private string weapon;
     private string sharpeninglevel = "SharpeningScene";
     private bool onCooldown;
+    public static int score;
 
     private bool activeScene;
     [SerializeField] private float cooldown = 0.5f;
@@ -227,7 +228,8 @@ public class ForgingScript : MonoBehaviour
 
     private int CalculateForgingScore(int great, int good, int bad)
     {
-        return (great * 200) + (good * 100) + (bad * 50);
+        score = (great * 20) + (good * 10) + (bad * 5);
+        return score;
     }
 
     IEnumerator showFinishButton(){

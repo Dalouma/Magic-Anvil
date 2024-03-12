@@ -41,7 +41,7 @@ public class SharpeningScript : MonoBehaviour
     private bool spinning, sharpening;
     private float spinTime;
     private int currentKeyIndex;
-    private float score;
+    public static float score;
 
     static public int correctWordInputs;
     [SerializeField] private float sharpeningTimer;

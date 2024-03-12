@@ -231,7 +231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -287, y: -20.849}
+  m_AnchoredPosition: {x: -527.11, y: -20.849}
   m_SizeDelta: {x: 218.45, y: 461.6987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &32032287
@@ -5890,6 +5890,7 @@ MonoBehaviour:
   weap: {fileID: 928904670}
   speechbubble: {fileID: 1618544510}
   bar: {fileID: 1645602547}
+  score: 0
 --- !u!4 &1866342038
 Transform:
   m_ObjectHideFlags: 0

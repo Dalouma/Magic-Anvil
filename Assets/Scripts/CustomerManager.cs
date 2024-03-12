@@ -52,6 +52,8 @@ public class CustomerManager : MonoBehaviour
     public SpriteSwapCustomer weap;
     public speechBubbleanimation speechbubble;
     public UnityEngine.UI.Slider bar;
+    public int score;
+    private int basePrice = 300;
     public enum CustomerState
     {
         Intro,
@@ -83,7 +85,10 @@ public class CustomerManager : MonoBehaviour
         {
             customer = cnum;
         }
-
+        if (ForgingScript.score != null)
+        {
+            score = ForgingScript.score;// + (int)SharpeningScript.score;
+        }
         //customer = cnum;
         cust.changeSprite(customer);
         loadCustomer();
@@ -183,19 +188,19 @@ public class CustomerManager : MonoBehaviour
     public bool priceCheck(int price)
     {
         
-        if(price>(1.4*450*data.stinginess+(400*(currRep/100)))||price<0)
+        if(price>(1.4*basePrice*data.stinginess+(basePrice*(currRep/100))+ (basePrice * (score / 100))) ||price<0)
         {
             state = CustomerState.Refusal;
             return false;
         }
-        else if(price > (1.15 * 450 * data.stinginess + (400 * (currRep / 100))))
+        else if(price > (1.15 * basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 100))))
          {
             state = CustomerState.BadDeal;
             currRep -= 10;
             SetRep(currRep);
             return true;
         }
-        else if(price > (1 * 450 * data.stinginess + (400 * (currRep / 100))))
+        else if(price > (1 * basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 100))))
             {
             state = CustomerState.NeutralDeal;
             return true;
@@ -211,7 +216,7 @@ public class CustomerManager : MonoBehaviour
                 return true;
             }
             //Debug.Log(Math.Floor((400 * data.stinginess + (400 * (currRep / 100))))/price);
-            currRep += Convert.ToInt32(Math.Floor((400 * data.stinginess + (450 * (currRep / 100)))/price));
+            currRep += Convert.ToInt32(Math.Floor((basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 100))) /price));
             SetRep(currRep);
             state = CustomerState.GoodDeal;
             return true;
