@@ -76,7 +76,7 @@ public class ForgingScript : MonoBehaviour
         finishtimer = 2f;
 
         // Change Music to appropriate track
-        AudioManager.instance.ChangeMusic("forge");
+       AudioManager.instance.ChangeMusic("forge");
     }
 
     // Update is called once per frame
