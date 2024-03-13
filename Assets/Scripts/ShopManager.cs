@@ -76,7 +76,7 @@ public class ShopManager : MonoBehaviour
             price = int.Parse(money);
             if (customerManager.priceCheck(price))
             {
-                UPdateMoney();
+                UPdateMoney(price);
             }
         }
     }
@@ -110,7 +110,7 @@ public class ShopManager : MonoBehaviour
         materials[1]--;
         woodAMT.text = materials[1].ToString();
     }
-    public void UPdateMoney()
+    public void UPdateMoney(int price)
     {
         money += price;
         moneyText.text =money.ToString();

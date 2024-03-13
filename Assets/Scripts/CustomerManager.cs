@@ -87,7 +87,7 @@ public class CustomerManager : MonoBehaviour
         }
         if (ForgingScript.score != null)
         {
-            score = ForgingScript.score;// + (int)SharpeningScript.score;
+            score = ForgingScript.score + (int)SharpeningScript.score;
         }
         //customer = cnum;
         cust.changeSprite(customer);
