@@ -122,6 +122,15 @@ public class ShopManager : MonoBehaviour
         }
 
     }
+    public void ResetMats()
+    {
+        UPdateMoney(200*(materials[0] + materials[1]));
+        materials[1]=0;
+        woodAMT.text = materials[1].ToString();
+        materials[0]=0;
+        metalAMT.text = materials[0].ToString();
+
+    }
 
 
 
