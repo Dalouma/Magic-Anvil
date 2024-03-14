@@ -304,7 +304,11 @@ public class SharpeningScript : MonoBehaviour
 
     public void GoToShop()
     {
-        AudioManager.instance.ChangeMusic("menu");
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ChangeMusic("menu");
+        }
+        
         Debug.Log("loading forging scene");
         SceneManager.LoadScene("TestScene");
     }

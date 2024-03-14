@@ -76,98 +76,116 @@ public class ForgingScript : MonoBehaviour
         finishtimer = 2f;
 
         // Change Music to appropriate track
-       AudioManager.instance.ChangeMusic("forge");
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.ChangeMusic("forge");
+        }
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheatKeys();
+
         if(activeScene){
-        // Valid Inputs
-        bool LMB = Input.GetMouseButtonDown(0);
-        bool RMB = Input.GetMouseButtonDown(1);
-        // Might use later ^^^^^
+            // Valid Inputs
+            bool LMB = Input.GetMouseButtonDown(0);
+            bool RMB = Input.GetMouseButtonDown(1);
+            // Might use later ^^^^^
 
-        float cursorPos = cursorTransform.position.x;
+            float cursorPos = cursorTransform.position.x;
 
-        cursorTransform.position += Vector3.right * currentSpeed * direction * Time.deltaTime;
+            cursorTransform.position += Vector3.right * currentSpeed * direction * Time.deltaTime;
 
-        // Change Directions
-        if (cursorTransform.position.x > EndRight.position.x && direction > 0)
-        {
-            direction *= -1;
-        }
-        if (cursorTransform.position.x < EndLeft.position.x && direction < 0)
-        {
-            direction *= -1;
-        }
-
-        // Check Click Timing
-        if (!onCooldown && Input.anyKeyDown && gameStart)
-        {
-            onCooldown = true;
-            StartCoroutine(SlowMo());
-            StartCoroutine(Cooldown());
-            clangAudio.Play();
-            hammerAnimator.Play("HammerSwing");
-            clicks++;
-            SetTimer();
-
-
-            // Check Zones
-            if (cursorPos >= greatLeft.position.x && cursorPos <= greatRight.position.x)
+            // Change Directions
+            if (cursorTransform.position.x > EndRight.position.x && direction > 0)
             {
-                Debug.Log("GREAT TIMING!!");
-                greatTiming++;
-                SetHitText();
-                timingText.text = "GREAT!!";
-                // bump speed up
-                if (speedLevel < cursorMovementSpeed.Count - 1)
+                direction *= -1;
+            }
+            if (cursorTransform.position.x < EndLeft.position.x && direction < 0)
+            {
+                direction *= -1;
+            }
+
+            // Check Click Timing
+            if (!onCooldown && Input.anyKeyDown && gameStart)
+            {
+                onCooldown = true;
+                StartCoroutine(SlowMo());
+                StartCoroutine(Cooldown());
+                clangAudio.Play();
+                hammerAnimator.Play("HammerSwing");
+                clicks++;
+                SetTimer();
+
+
+                // Check Zones
+                if (cursorPos >= greatLeft.position.x && cursorPos <= greatRight.position.x)
                 {
-                    speedLevel++;
+                    Debug.Log("GREAT TIMING!!");
+                    greatTiming++;
+                    SetHitText();
+                    timingText.text = "GREAT!!";
+                    // bump speed up
+                    if (speedLevel < cursorMovementSpeed.Count - 1)
+                    {
+                        speedLevel++;
+                    }
                 }
-            }
-            else if (cursorPos >= goodLeft.position.x && cursorPos <= goodRight.position.x)
-            {
-                Debug.Log("GOOD TIMING!");
-                goodTiming++;
-                SetHitText();
-                timingText.text = "GOOD!!";
-                // bump speed down
-                if (speedLevel > 0)
+                else if (cursorPos >= goodLeft.position.x && cursorPos <= goodRight.position.x)
                 {
-                    speedLevel--;
+                    Debug.Log("GOOD TIMING!");
+                    goodTiming++;
+                    SetHitText();
+                    timingText.text = "GOOD!!";
+                    // bump speed down
+                    if (speedLevel > 0)
+                    {
+                        speedLevel--;
+                    }
                 }
-            }
-            else if (cursorPos >= badLeft.position.x && cursorPos <= badRight.position.x)
-            {
-                Debug.Log("BAD TIMING");
-                badTiming++;
-                SetHitText();
-                timingText.text = "BAD";
-                // bump speed down
-                if (speedLevel > 0)
+                else if (cursorPos >= badLeft.position.x && cursorPos <= badRight.position.x)
                 {
-                    speedLevel--;
+                    Debug.Log("BAD TIMING");
+                    badTiming++;
+                    SetHitText();
+                    timingText.text = "BAD";
+                    // bump speed down
+                    if (speedLevel > 0)
+                    {
+                        speedLevel--;
+                    }
                 }
-            }
-            else
-            {
-                Debug.Log("FAIL");
-                timingText.text = "FAIL";
-                // reset speed
-                speedLevel= 0;
-            }
+                else
+                {
+                    Debug.Log("FAIL");
+                    timingText.text = "FAIL";
+                    // reset speed
+                    speedLevel= 0;
+                }
             
 
-            // end check
-            if (clicks == 10)
-            {
-                StartCoroutine(showFinishButton());
-                //ShowForgingResults();
-               // EndGame();
+                // end check
+                if (clicks == 10)
+                {
+                    StartCoroutine(showFinishButton());
+                    //ShowForgingResults();
+                    //EndGame();
+                }
             }
         }
+    }
+
+    void CheatKeys()
+    {
+        // Press P to skip game
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            greatTiming = 10;
+            goodTiming = 0;
+            badTiming = 0;
+            StartCoroutine(showFinishButton());
         }
     }
 
