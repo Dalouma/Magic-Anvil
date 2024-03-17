@@ -47,7 +47,7 @@ public class CustomerManager : MonoBehaviour
     public static CustomerManager Instance;
     public CustomerData data;
     public string chosenWeapon;
-    public string[] customerfileList = {"Adventurer","Paladin", "Rogue"};
+    public string[] customerfileList = {"Adventurer", "Rogue","Paladin"};
     public SpriteSwapCustomer cust;
     public SpriteSwapCustomer weap;
     public speechBubbleanimation speechbubble;
@@ -73,6 +73,10 @@ public class CustomerManager : MonoBehaviour
     public static CustomerState state = CustomerState.Intro;
     void Start()
     {
+        customerfileList[0] = "Adventurer";
+        customerfileList[1] = "Rogue";
+        customerfileList[2] = "Paladin";
+
         levelChangerScript = levelChanger.GetComponent<LevelChanger>();
         //GameManager manager = GameManager.Instance;
 
@@ -151,6 +155,8 @@ public class CustomerManager : MonoBehaviour
     }
     public void loadCustomer()
     {
+        Debug.Log(customerfileList[2]);
+        Debug.Log(customer);
         string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerfileList[customer] + ".json");
         string content = File.ReadAllText(filePath);
         data = JsonUtility.FromJson<CustomerData>(content);
