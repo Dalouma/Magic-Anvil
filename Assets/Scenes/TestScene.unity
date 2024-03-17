@@ -1061,7 +1061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5109663084787812377, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5478944550257880111, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
       propertyPath: m_IsActive
@@ -5328,14 +5328,14 @@ RectTransform:
   m_GameObject: {fileID: 1556722626}
   m_LocalRotation: {x: 0, y: 0, z: -0.09063256, w: 0.9958844}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8246104, y: 0.8246104, z: 0.8246104}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2081124771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.4}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.9, y: -66.4}
+  m_AnchoredPosition: {x: -4.04, y: -59.1}
   m_SizeDelta: {x: 56.9788, y: 56.9788}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1556722628
