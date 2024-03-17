@@ -24,11 +24,17 @@ public class CustomerData
     public string neutral;
     public string gooddeal;
     public string refusal;
+    public string headline1;
+    public string text1;
+    public string headline2;
+    public string text2;
+    public int[] newsOutcomes;
 
 }
 public class Weapon
 {
     public static string weapon;
+    public static Dictionary<string, string> chosenWeapons = new Dictionary<string, string>();
 }
 
 
@@ -239,6 +245,7 @@ public class CustomerManager : MonoBehaviour
     {
         chosenWeapon = weapon;
         Weapon.weapon=weapon;
+        Weapon.chosenWeapons.Add(customerfileList[cnum], weapon);
     }
     public string getWeapon()
     {

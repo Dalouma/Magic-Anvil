@@ -82,11 +82,12 @@ public class SharpeningScript : MonoBehaviour
         {
             sharpeningTimer += 10;
         }
-        // PRESS P TO INCREASE SCORE BY 100
+        // PRESS P TO SKIP GAME
         if (Input.GetKeyDown(KeyCode.P))
         {
-            score += 100;
+            score = 300;
             SetCorrectWordInputsText();
+            sharpeningTimer = 0f;
         }
     }
 

@@ -1,39 +1,77 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class NewspaperManager : MonoBehaviour
 {
+    [SerializeField] private float scrollSensitivity;
     [SerializeField] private GameObject newsBottom;
     [SerializeField] private List<GameObject> prefabList;
-
     [SerializeField] private List<Sprite> newsImages;
 
+    private CustomerData customerData;
     private int newsCount;
     private int sectionHeight = 530;
+    private float yMin = 190;
+    private float yMax = 520;
 
     // Start is called before the first frame update
     void Start()
     {
         newsCount = 0;
+        GenerateNewspaper();
     }
 
     private void Update()
     {
+        CheatKeys();
+        CanvasScrolling();
+    }
+
+    void CheatKeys()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GenerateNewspaper();
-        } 
+            //GenerateNewspaper();
+            AddSection(newsImages[0], "Test Headline", "Some more random text for testing the details section of the newspaper");
+        }
     }
 
+    // Generates the newspaper according to player's choices
     void GenerateNewspaper()
     {
-        addSection(newsImages[Random.Range(0, 5)], "Test Headline", "some random details that don't really have any meaning");
+        foreach (KeyValuePair<string, string> kvp in Weapon.chosenWeapons)
+        {
+            string customerName = kvp.Key;
+            string chosenWeapon = kvp.Value;
+            LoadCustomer(customerName);
+
+            if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
+            {
+                // Doesn't add section if customer left
+                continue;
+            }
+            if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
+            {
+                // Customer Good Ending
+                AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
+            }
+            else
+            {
+                // Customer Bad Ending
+                AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
+            }
+        }
+
     }
 
-    void addSection(Sprite newsImage, string headline, string details)
+    // Adds in a section to the newspaper
+    void AddSection(Sprite newsImage, string headline, string details)
     {
         // Position of the section
         GameObject newSection = Instantiate(prefabList[newsCount % 2], this.transform);
@@ -46,7 +84,32 @@ public class NewspaperManager : MonoBehaviour
         newSection.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = details;
         // Shifts the bottom of the scroll to make space for new section
         newsBottom.GetComponent<RectTransform>().anchoredPosition += new Vector2(0, -sectionHeight);
-        // increment newscount
+
         newsCount++;
+        yMax += sectionHeight;
+    }
+
+    // Loads customer data in customerData var
+    public void LoadCustomer(string customerName)
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerName + ".json");
+        string content = File.ReadAllText(filePath);
+        customerData = JsonUtility.FromJson<CustomerData>(content);
+    }
+
+    private void CanvasScrolling()
+    {
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        float scrollValue = Input.mouseScrollDelta.y;
+
+        if (scrollValue != 0)
+        {
+            float height = rectTransform.anchoredPosition.y;
+            float dHeight = height - scrollValue * scrollSensitivity;
+            float newHeight = Mathf.Clamp(dHeight, yMin, yMax);
+
+            rectTransform.anchoredPosition = new Vector2(0, newHeight);
+        }
+
     }
 }

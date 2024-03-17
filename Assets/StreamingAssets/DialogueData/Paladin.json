@@ -7,7 +7,7 @@
   "secondLine": "but I need a piece of equipment to bind my oath. Can you make me something to protect the people?",
   "payment": "How much do I owe you?",
   "preferred": "Excellent! The goddess will be pleased.",
-  "unpreferred": "What mockery is this? You’ve presented me with a coward’s weapon. The church will hear of this!",
+  "unpreferred": "What mockery is this? Youï¿½ve presented me with a cowardï¿½s weapon. The church will hear of this!",
   "baddeal": "Great heavens. What a scam!",
   "neutral": "A fair price for a fair item",
   "gooddeal": "You are most kind. I will remember this generosity",
@@ -15,7 +15,8 @@
   "headline1": "Rising Paladin",
   "text1": "The first knight has been sworn before the goddess at the holy temple",
   "headline2": "Knight Degraded",
-  "text2": "Reportedly, the holy priests of protection rejected his choice of weaponry deeming it too violent"
+  "text2": "Reportedly, the holy priests of protection rejected his choice of weaponry deeming it too violent",
+  "newsOutcomes": [1, 2]
 
 }
   
