@@ -1,0 +1,19 @@
+{
+  "name": "Andy Adventurer",
+  "preferredWeapons": [ "Axe, Sword" ],
+  "hatedWeapons": [],
+  "stinginess": ".9",
+  "introDialogue": "Hey there, I’ve... recently decided that I wanna explore the world and go on adventures, but I’ll need something to defend myself with. Do accomplish a lot with this weapon",
+  "secondLine": "You think you can make something for me?",
+  "payment": "How much?",
+  "preferred": "Ah, perfect! I feel like I’ll be able to accomplish a lot",
+  "unpreferred": "Wouldn’t be my first choice, but this will do nicely. Thanks",
+  "baddeal": "Not the price I wanted, but I’ll take what I can get I guess.",
+  "neutral": "Hmm… An acceptable price.",
+  "gooddeal": "What a steal! Getting prices this good, maybe I should become a thief.",
+  "refusal": "“Look buddy, I know I’m new around here but I know this is a scam.",
+  "headline1": "A New Face",
+  "text1": "Brave adventurer successfully defends village against giant rats",
+  "headline2": "A New Face",
+  "text2": "Brave adventurer successfully defends village against giant rats"
+}

@@ -1,17 +1,21 @@
 {
 
-      "name": "Randy Rogue",
-      "preferredWeapons": ["Dagger"],
-      "hatedWeapons": ["Shield"],
-      "stinginess":".8",
-      "introDialogue": "Hello smithy...",
-      "secondLine":"I need something... Discreet for completely legal reasons of course...",
-      "payment":"What do I owe you?",
-      "preferred": "Excellent",
-      "unpreferred": "What am I supposed to do with this?",
-      "baddeal":"What a ripoff",
-      "neutral":"Here.",
-      "gooddeal":"Heh, sucker.",
-      "refusal":"I'm not paying a price like that, Maybe 200?"
-      
-      }
+  "name": "Randy Rogue",
+  "preferredWeapons": [ "Dagger" ],
+  "hatedWeapons": [ "Shield" ],
+  "stinginess": ".8",
+  "introDialogue": "Hey, uh... I need a weapon. I’m not very strong so it needs to be something I can use very easily. ",
+  "secondLine": "And it would be better if you didn’t ask any questions…",
+  "payment": "What do I owe you?",
+  "preferred": "Oh yes.. hehehe... this’ll do",
+  "unpreferred": "Are you kidding me? This won’t help me ki– I mean... Agh!",
+  "baddeal": "If you offered me that price a coin higher, you would never have seen your family again",
+  "neutral": "I was never here. You hear me?",
+  "gooddeal": "Heh, sucker.*The rogue mumbles as he drops the coins on the counter and dashes off*",
+  "refusal": "Cut the crap smith. Lower the price before I slit your throat",
+  "headline1": "Serial Killer Executed",
+  "text1": "Known serial killer publicly executed. The perpetrator was reported and captured when a witness saw him stumbling with a weapon",
+  "headline2": "Serial Killer on the Loose",
+  "text2": "Victims were discovered with a bunch of holes in their bodies."
+
+}

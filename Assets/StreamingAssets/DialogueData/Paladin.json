@@ -1,17 +1,21 @@
 {
   "name": "Perry Paladin",
-  "preferredWeapons": ["Hammer", "Shield"],
-  "hatedWeapons": ["Dagger"],
+  "preferredWeapons": [ "Hammer", "Shield" ],
+  "hatedWeapons": [ "Dagger" ],
   "stinginess": "0.95",
-  "introDialogue": "Hello good Smith, I require your services",
-  "secondLine": "I am to be before the goddess, and I require something to protect the people",
+  "introDialogue": "Greetings, good smith I aim to be sworn before the goddess of protection at the temple of protection,",
+  "secondLine": "but I need a piece of equipment to bind my oath. Can you make me something to protect the people?",
   "payment": "How much do I owe you?",
-  "preferred": "Excellent! I shall report at once",
-  "unpreferred": "A cowards arm! No thanks!",
-  "baddeal": "No duty! What a Usurer...",
-  "neutral": "Fair enough",
-  "gooddeal": "Excellent Deal! Thank you very much!",
-  "refusal":"I'm not paying a price like that, will 450 do?"
+  "preferred": "Excellent! The goddess will be pleased.",
+  "unpreferred": "What mockery is this? You’ve presented me with a coward’s weapon. The church will hear of this!",
+  "baddeal": "Great heavens. What a scam!",
+  "neutral": "A fair price for a fair item",
+  "gooddeal": "You are most kind. I will remember this generosity",
+  "refusal": "Perhaps if you donated to the church more, I could afford that",
+  "headline1": "Rising Paladin",
+  "text1": "The first knight has been sworn before the goddess at the holy temple",
+  "headline2": "Knight Degraded",
+  "text2": "Reportedly, the holy priests of protection rejected his choice of weaponry deeming it too violent"
 
-    }
+}
   

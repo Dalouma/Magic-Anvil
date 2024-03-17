@@ -1061,7 +1061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5109663084787812377, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5478944550257880111, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
       propertyPath: m_IsActive
@@ -1259,10 +1259,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1135235172}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 110, y: 22}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 50.00001, y: 22}
+  m_SizeDelta: {x: -83.333, y: -6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &494583284
 MonoBehaviour:
@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 56523c7f089481e46b4b08a164d1b648, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91b6afa4ef620b2458c1f14ad4038d89, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2212,9 +2212,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currCustomer: {fileID: 677610561}
   spriteArray:
-  - {fileID: 21300000, guid: 56523c7f089481e46b4b08a164d1b648, type: 3}
-  - {fileID: 21300000, guid: c18c40f1e675d0d469d4b4a3e8ab9a3b, type: 3}
   - {fileID: 21300000, guid: 91b6afa4ef620b2458c1f14ad4038d89, type: 3}
+  - {fileID: 21300000, guid: c18c40f1e675d0d469d4b4a3e8ab9a3b, type: 3}
+  - {fileID: 21300000, guid: 56523c7f089481e46b4b08a164d1b648, type: 3}
   animator: {fileID: 677610566}
 --- !u!95 &677610566
 Animator:
@@ -3436,7 +3436,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 63.163208, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7154,8 +7154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 55, y: 15}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 64.02329, y: 15}
+  m_SizeDelta: {x: 325.2653, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2060610784
 MonoBehaviour:
@@ -7240,7 +7240,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 111.58825, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -8377,6 +8377,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1866342037}
+    - target: {fileID: 8992179769002373549, guid: a043709017b4f8a43a3b55ad1104977a, type: 3}
+      propertyPath: m_margin.z
+      value: 6.31633
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

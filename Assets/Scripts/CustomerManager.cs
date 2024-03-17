@@ -41,13 +41,13 @@ public class CustomerManager : MonoBehaviour
     public Animator animator;
     //public Image customerImage;
     public ShopManager shopManager;
-    public int customer = 20;
+    public int customer = 0;
     public static int cnum;
     public static int currRep=20;
     public static CustomerManager Instance;
     public CustomerData data;
     public string chosenWeapon;
-    public string[] customerfileList = { "Paladin", "Rogue", "Barbarian" };
+    public string[] customerfileList = {"Adventurer","Paladin", "Rogue"};
     public SpriteSwapCustomer cust;
     public SpriteSwapCustomer weap;
     public speechBubbleanimation speechbubble;
