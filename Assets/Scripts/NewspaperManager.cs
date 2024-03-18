@@ -29,7 +29,7 @@ public class NewspaperManager : MonoBehaviour
 
     private void Update()
     {
-        CheatKeys();
+        //CheatKeys();
         CanvasScrolling();
     }
 

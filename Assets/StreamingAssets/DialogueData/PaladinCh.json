@@ -1,0 +1,22 @@
+{
+  "name": "Perry Paladin",
+  "preferredWeapons": [ "Hammer", "Shield" ],
+  "hatedWeapons": [ "Dagger" ],
+  "stinginess": "0.95",
+  "introDialogue": "Greetings, good smith I aim to be sworn before the goddess of protection at the temple of protection,",
+  "secondLine": "but I need a piece of equipment to bind my oath. Can you make me something to protect the people?",
+  "payment": "我欠你多少錢?",
+  "preferred": "不錯! 女神會感到滿意的.",
+  "unpreferred": "這是何等的嘲諷? 你給我一件小人的武器. 教會會聽到這件事的!",
+  "baddeal": "天哪, 這是什麼騙局!",
+  "neutral": "公平的價格, 對應合理的裝備.",
+  "gooddeal": "您非常善良. 我會記住這份慷慨的.",
+  "refusal": "也许如果你多向教堂捐赠一些, 我就能负担得起.",
+  "headline1": "崛起的聖騎士",
+  "text1": "第一位在聖殿前向女神宣誓的騎士.",
+  "headline2": "騎士降級",
+  "text2": "據報導, 守護的聖祭司拒絕了他所選擇的武器, 認為它太暴力.",
+  "newsOutcomes": [1, 2]
+
+}
+  
