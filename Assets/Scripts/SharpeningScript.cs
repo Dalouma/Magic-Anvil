@@ -18,6 +18,8 @@ public class SharpeningScript : MonoBehaviour
     [SerializeField] private Transform yellowThreshold;
     [SerializeField] private Animator grindstoneAnimator;
     [SerializeField] private Animator itemAnimator;
+    [SerializeField] private AudioSource grindstoneSFX;
+    [SerializeField] private AudioSource sharpeningSFX;
     [SerializeField] private SpriteRenderer itemSprite;
     [SerializeField] private ParticleSystem sparks;
 
@@ -156,6 +158,7 @@ public class SharpeningScript : MonoBehaviour
             {
                 sharpening= true;
                 itemAnimator.Play("move");
+                sharpeningSFX.Play();
                 sparks.Play();
             }
         }
@@ -163,6 +166,7 @@ public class SharpeningScript : MonoBehaviour
         {
             sharpening = false;
             itemAnimator.Play("idle");
+            sharpeningSFX.Stop();
             sparks.Stop();
         }
 
@@ -224,10 +228,16 @@ public class SharpeningScript : MonoBehaviour
             spinTime -= Time.deltaTime;
             spinTimeText.text = "Spin Time: " + (int)spinTime;
 
+            if (!grindstoneSFX.isPlaying)
+            {
+                grindstoneSFX.Play();
+            }
+
             if (spinTime < 0f)
             {
                 spinning = false;
                 grindstoneAnimator.Play("idle");
+                grindstoneSFX.Stop();
                 spacebar.SetActive(false);
                 SetRandomKeyOrder();
             }
