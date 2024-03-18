@@ -174,7 +174,7 @@ public class SharpeningScript : MonoBehaviour
         if (cursorTransform.position.y > zoneBoundTop.position.y)
         {
             spinTime = 0.0f;
-            spinTimeText.text = "Spin Time: " + (int)spinTime;
+            spinTimeText.text = ((int)spinTime).ToString();
             GetComponent<Animator>().Play("Shake");
 
         }
@@ -226,7 +226,7 @@ public class SharpeningScript : MonoBehaviour
         if (spinning)
         {
             spinTime -= Time.deltaTime;
-            spinTimeText.text = "Spin Time: " + (int)spinTime;
+            spinTimeText.text = ((int)spinTime).ToString();
 
             if (!grindstoneSFX.isPlaying)
             {
@@ -303,11 +303,11 @@ public class SharpeningScript : MonoBehaviour
 
     void SetCorrectWordInputsText(){
         //wordCorrectText.text = "Hits:  " + correctWordInputs;
-        wordCorrectText.text = "Score: " + (int)score;
+        wordCorrectText.text = ((int)score).ToString();
     }
 
     void SetsharpeningTimerText(){
-       sharpeningTimerText.text = "Timer:  " + (int)sharpeningTimer;
+       sharpeningTimerText.text = ((int)sharpeningTimer).ToString();
        if((int)sharpeningTimer <= 0){
             GoToShop();
        }

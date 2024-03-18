@@ -91,15 +91,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2400868851712
-    m_Localized: Finish
+    m_Localized: Finish!!
     m_Metadata:
       m_Items: []
   - m_Id: 2401531551744
-    m_Localized: Hits
+    m_Localized: 'Strikes:'
     m_Metadata:
       m_Items: []
   - m_Id: 2402139725824
-    m_Localized: Score
+    m_Localized: 'Score:'
     m_Metadata:
       m_Items: []
   - m_Id: 2402806620160
@@ -111,19 +111,19 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2404069105664
-    m_Localized: Great Strikes
+    m_Localized: GREAT!!
     m_Metadata:
       m_Items: []
   - m_Id: 2404647919616
-    m_Localized: Good Strikes
+    m_Localized: GOOD!!
     m_Metadata:
       m_Items: []
   - m_Id: 2405277065216
-    m_Localized: Bad Strikes
+    m_Localized: BAD
     m_Metadata:
       m_Items: []
   - m_Id: 2405931376640
-    m_Localized: Misses
+    m_Localized: FAIL
     m_Metadata:
       m_Items: []
   - m_Id: 2406573105152
@@ -180,6 +180,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 23271046078464
     m_Localized: End of Vertical Slice
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59098958618624
+    m_Localized: 'Timer:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59100531482624
+    m_Localized: 'Spin Time:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64240936247296
+    m_Localized: NEXT!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68079659737088
+    m_Localized: Strike!
     m_Metadata:
       m_Items: []
   references:

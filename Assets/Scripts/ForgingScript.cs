@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class ForgingScript : MonoBehaviour
 {
@@ -34,6 +36,8 @@ public class ForgingScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI resultText;
 
     [SerializeField] private Button nextScene;
+
+    public LocalizedStringDatabase table;
 
     private AudioSource clangAudio;
     //private GameObject ResultCanvas;
@@ -127,7 +131,7 @@ public class ForgingScript : MonoBehaviour
                     Debug.Log("GREAT TIMING!!");
                     greatTiming++;
                     score += 20;
-                    timingText.text = "GREAT!!";
+                    timingText.text = table.GetLocalizedString("greatstrike");
                     // bump speed up
                     if (speedLevel < cursorMovementSpeed.Count - 1)
                     {
@@ -139,7 +143,7 @@ public class ForgingScript : MonoBehaviour
                     Debug.Log("GOOD TIMING!");
                     goodTiming++;
                     score += 10;
-                    timingText.text = "GOOD!!";
+                    timingText.text = table.GetLocalizedString("goodstrike");
                     // bump speed down
                     if (speedLevel > 0)
                     {
@@ -151,7 +155,7 @@ public class ForgingScript : MonoBehaviour
                     Debug.Log("BAD TIMING");
                     badTiming++;
                     score += 5;
-                    timingText.text = "BAD";
+                    timingText.text = table.GetLocalizedString("badstrike");
                     // bump speed down
                     if (speedLevel > 0)
                     {
@@ -161,9 +165,9 @@ public class ForgingScript : MonoBehaviour
                 else
                 {
                     Debug.Log("FAIL");
-                    timingText.text = "FAIL";
+                    timingText.text = table.GetLocalizedString("misses");
                     // reset speed
-                    speedLevel= 0;
+                    speedLevel = 0;
                 }
 
                 SetScoreText();
@@ -233,16 +237,16 @@ public class ForgingScript : MonoBehaviour
     }
 
     public void SetScoreText(){
-        scoreText.text = "Score: " + score;
+        scoreText.text = score.ToString();
     }
 
     public void SetHitsText(){
-        hitsText.text = "Strikes: "  + clicks + "/10";
+        hitsText.text = clicks.ToString() + "/10";
     }
 
     public void ShowForgingResults(){
         //forgingscore = CalculateForgingScore(greatTiming, goodTiming, badTiming); 
-        resultText.text = $"Forging Results\nScore: {score}";
+        resultText.text = $"{table.GetLocalizedString("forging")}\n{table.GetLocalizedString("score")} {score}";
         ResultsCanvas.GetComponent<Canvas>().enabled = true;
     }
 

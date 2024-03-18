@@ -42,7 +42,6 @@ public class Dialogue
                     customerData.unpreferred,
 
                    };
-                        customerManager.nextCustomer();
                     }
                     else
                     {
