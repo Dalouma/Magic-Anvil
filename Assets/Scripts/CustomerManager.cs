@@ -7,6 +7,8 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 [System.Serializable]
 public class CustomerData
@@ -42,6 +44,7 @@ public class Weapon
 [System.Serializable]
 public class CustomerManager : MonoBehaviour
 {
+    public GameObject triggerDialogueObj;
     public GameObject levelChanger;
     private LevelChanger levelChangerScript;
     public Animator animator;
@@ -75,13 +78,52 @@ public class CustomerManager : MonoBehaviour
     }
 
     private GameManager manager = GameManager.Instance;
+    Locale oldLocale;
+    Locale currentLocale;
+
+    void Update() 
+    {
+        currentLocale = LocalizationSettings.SelectedLocale;
+        if (oldLocale.Identifier != currentLocale.Identifier) 
+        {
+            oldLocale = LocalizationSettings.SelectedLocale;
+            DialogueTriggger triggerScript = triggerDialogueObj.GetComponent<DialogueTriggger>();
+
+            if (currentLocale.Identifier == "zh-Hans") 
+            {
+                customerfileList[0] = "AdventurerCh";
+                customerfileList[1] = "RogueCh";
+                customerfileList[2] = "PaladinCh";
+            }
+            else 
+            {
+                customerfileList[0] = "Adventurer";
+                customerfileList[1] = "Rogue";
+                customerfileList[2] = "Paladin";
+            }
+
+            loadCustomer();
+            triggerScript.triggerDialogue();
+        }
+    }
 
     public static CustomerState state = CustomerState.Intro;
     void Start()
     {
-        customerfileList[0] = "Adventurer";
-        customerfileList[1] = "Rogue";
-        customerfileList[2] = "Paladin";
+        oldLocale = LocalizationSettings.SelectedLocale;
+        currentLocale = LocalizationSettings.SelectedLocale;
+        if (currentLocale.Identifier == "en") 
+        {
+            customerfileList[0] = "Adventurer";
+            customerfileList[1] = "Rogue";
+            customerfileList[2] = "Paladin";
+        }
+        else 
+        {
+            customerfileList[0] = "AdventurerCh";
+            customerfileList[1] = "RogueCh";
+            customerfileList[2] = "PaladinCh";
+        }
 
         levelChangerScript = levelChanger.GetComponent<LevelChanger>();
         //GameManager manager = GameManager.Instance;
@@ -245,7 +287,19 @@ public class CustomerManager : MonoBehaviour
     {
         chosenWeapon = weapon;
         Weapon.weapon=weapon;
-        Weapon.chosenWeapons.Add(customerfileList[cnum], weapon);
+
+        if (currentLocale.Identifier == "en") 
+        {
+            string customerName = customerfileList[cnum];
+            Weapon.chosenWeapons.Add(customerName, weapon);
+            Weapon.chosenWeapons.Add(customerName + "Ch", weapon);
+        }
+        else 
+        {
+            string customerName = customerfileList[cnum];
+            Weapon.chosenWeapons.Add(customerName, weapon);
+            Weapon.chosenWeapons.Add(customerName.Substring(0, customerName.Length - 2), weapon);
+        }
     }
     public string getWeapon()
     {

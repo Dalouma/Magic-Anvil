@@ -6,6 +6,8 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class NewspaperManager : MonoBehaviour
 {
@@ -20,10 +22,13 @@ public class NewspaperManager : MonoBehaviour
     private float yMin = 190;
     private float yMax = 520;
 
+    Locale currentLocale;
+
     // Start is called before the first frame update
     void Start()
     {
         newsCount = 0;
+        currentLocale = LocalizationSettings.SelectedLocale;
         GenerateNewspaper();
     }
 
@@ -49,22 +54,52 @@ public class NewspaperManager : MonoBehaviour
         {
             string customerName = kvp.Key;
             string chosenWeapon = kvp.Value;
-            LoadCustomer(customerName);
 
-            if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
+            if (currentLocale.Identifier == "en")
             {
-                // Doesn't add section if customer left
-                continue;
+                if (customerName.Substring(customerName.Length - 2) != "Ch")
+                {
+                    LoadCustomer(customerName);
+
+                    if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
+                    {
+                        // Doesn't add section if customer left
+                        continue;
+                    }
+                    if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
+                    {
+                        // Customer Good Ending
+                        AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
+                    }
+                    else
+                    {
+                        // Customer Bad Ending
+                        AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
+                    }
+                }
             }
-            if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
+            else 
             {
-                // Customer Good Ending
-                AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
-            }
-            else
-            {
-                // Customer Bad Ending
-                AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
+                if (customerName.Substring(customerName.Length - 2) == "Ch")
+                {
+                    LoadCustomer(customerName);
+
+                    if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
+                    {
+                        // Doesn't add section if customer left
+                        continue;
+                    }
+                    if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
+                    {
+                        // Customer Good Ending
+                        AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
+                    }
+                    else
+                    {
+                        // Customer Bad Ending
+                        AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
+                    }
+                }
             }
         }
 

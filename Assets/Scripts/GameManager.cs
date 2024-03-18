@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     // create variables for any game specific data
     // ...
-    public int currency = 0;
+    public int currency = 450;
     public int character = 0;
 
     public bool pullFromSave = false;

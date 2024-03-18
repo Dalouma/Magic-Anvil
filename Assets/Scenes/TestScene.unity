@@ -7166,6 +7166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4207036cfe521d8438b87ecaaccb6c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerDialogueObj: {fileID: 1122512072}
   levelChanger: {fileID: 441377495}
   animator: {fileID: 928904666}
   shopManager: {fileID: 1147448570}

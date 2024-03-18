@@ -72,7 +72,7 @@ public class ForgingScript : MonoBehaviour
         gameStart = false;
         greatTiming = 0;
         goodTiming = 0; 
-        badTiming = 0; 
+        badTiming = 0;
         StartGame();
         weapon = Weapon.weapon;
         Debug.Log(weapon);
