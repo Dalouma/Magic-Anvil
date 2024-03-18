@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UITable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UITable
+  m_TableCollectionNameGuidString: 1f904366ab7563a418ea49ed624005e9
+  m_Entries:
+  - m_Id: 2367339585536
+    m_Key: title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2371898793984
+    m_Key: newgame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2374977413120
+    m_Key: save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2378483851264
+    m_Key: load
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2381386309632
+    m_Key: options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2386054569984
+    m_Key: back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2389443567616
+    m_Key: exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2391519748096
+    m_Key: full
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2393042280448
+    m_Key: credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2394371874816
+    m_Key: artists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2395491753984
+    m_Key: music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2396263505920
+    m_Key: programmers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2396913623040
+    m_Key: production
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2397626654720
+    m_Key: design
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2398297743360
+    m_Key: engine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2398931083264
+    m_Key: tools
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2399577006080
+    m_Key: playtest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2400243900416
+    m_Key: volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2400868851712
+    m_Key: finish
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2401531551744
+    m_Key: hits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2402139725824
+    m_Key: score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2402806620160
+    m_Key: forging
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2403431571456
+    m_Key: sharpening
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2404069105664
+    m_Key: greatstrike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2404647919616
+    m_Key: goodstrike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2405277065216
+    m_Key: badstrike
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2405931376640
+    m_Key: misses
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2406573105152
+    m_Key: next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2407198056448
+    m_Key: price
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13995489583104
+    m_Key: sword
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13996999532544
+    m_Key: hammer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13998366875648
+    m_Key: dagger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13999591612416
+    m_Key: axe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14000703102976
+    m_Key: shield
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18842569891840
+    m_Key: reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18844088229888
+    m_Key: loan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18845354909696
+    m_Key: reputation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18846931968000
+    m_Key: materials
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22581385060352
+    m_Key: mainmenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23271046078464
+    m_Key: endtext
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23272543444992
+    m_Key: thanktext
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5254955705748422658
+  references:
+    version: 2
+    RefIds:
+    - rid: 5254955705748422658
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1710731117377
