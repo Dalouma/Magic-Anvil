@@ -11,8 +11,8 @@ public class ForgingScript : MonoBehaviour
     [SerializeField] private List<float> cursorMovementSpeed;
 
     [SerializeField] private TMP_Text timingText;
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text hitsText;
+    [SerializeField] private TMP_Text hitText;
+    [SerializeField] private TMP_Text timerText;
     [SerializeField] private Transform cursorTransform;
     [SerializeField] private Animator hammerAnimator;
 
@@ -117,7 +117,7 @@ public class ForgingScript : MonoBehaviour
                 clangAudio.Play();
                 hammerAnimator.Play("HammerSwing");
                 clicks++;
-                SetHitsText();
+                SetTimer();
 
 
                 // Check Zones
@@ -125,7 +125,7 @@ public class ForgingScript : MonoBehaviour
                 {
                     Debug.Log("GREAT TIMING!!");
                     greatTiming++;
-                    score += 20;
+                    SetHitText();
                     timingText.text = "GREAT!!";
                     // bump speed up
                     if (speedLevel < cursorMovementSpeed.Count - 1)
@@ -137,7 +137,7 @@ public class ForgingScript : MonoBehaviour
                 {
                     Debug.Log("GOOD TIMING!");
                     goodTiming++;
-                    score += 10;
+                    SetHitText();
                     timingText.text = "GOOD!!";
                     // bump speed down
                     if (speedLevel > 0)
@@ -149,7 +149,7 @@ public class ForgingScript : MonoBehaviour
                 {
                     Debug.Log("BAD TIMING");
                     badTiming++;
-                    score += 5;
+                    SetHitText();
                     timingText.text = "BAD";
                     // bump speed down
                     if (speedLevel > 0)
@@ -164,8 +164,7 @@ public class ForgingScript : MonoBehaviour
                     // reset speed
                     speedLevel= 0;
                 }
-
-                SetScoreText();
+            
 
                 // end check
                 if (clicks == 10)
@@ -230,23 +229,18 @@ public class ForgingScript : MonoBehaviour
 
     }
 
-    //public void SetHitText(){
-    //    hitText.text = "Great: " + greatTiming + "\nGood: "
-    //     + goodTiming + "\nBad: " + badTiming;
-    //}
-
-    public void SetScoreText()
-    {
-        scoreText.text = $"Score: {score}";
+    public void SetHitText(){
+        hitText.text = "Great Timing: " + greatTiming + "\nGood Timing: "
+         + goodTiming + "\nBad Timing: " + badTiming;
     }
 
-    public void SetHitsText(){
-        hitsText.text = "Strikes: "  + clicks + "/10";
+    public void SetTimer(){
+        timerText.text = "Hits on " + weapon + ": "  + clicks;
     }
 
     public void ShowForgingResults(){
-        //forgingscore = CalculateForgingScore(greatTiming, goodTiming, badTiming); 
-        resultText.text = $"Forging Results\nScore: {score}";
+        forgingscore = CalculateForgingScore(greatTiming, goodTiming, badTiming); 
+        resultText.text = $"Forging Results\nScore: {forgingscore}\n{hitText.text}";
         ResultsCanvas.GetComponent<Canvas>().enabled = true;
     }
 
