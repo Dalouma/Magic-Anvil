@@ -21,6 +21,8 @@ public class SharpeningV2 : MonoBehaviour
     [Header("References")]
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text timeText;
+    [SerializeField] private GameObject startWindow;
+    [SerializeField] private GameObject resultsWindow;
 
     [Header("Settings")]
     [SerializeField] private float pointerSpeed;
@@ -31,7 +33,11 @@ public class SharpeningV2 : MonoBehaviour
     private float score;
     private int scoreMax;
     private float time;
-    public bool sharpening;
+    private bool sharpening;
+    private int goodReleases;
+    private int greatReleases;
+
+    private bool gameActive;
 
     void Start()
     {
@@ -50,16 +56,36 @@ public class SharpeningV2 : MonoBehaviour
         score = 0;
         scoreMax= 1000;
         time = 30f;
+        goodReleases = 0;
+        greatReleases = 0;
+        gameActive = false;
 
         ChangeScoreText();
+
+        // Pull up tutorial window
+        startWindow.GetComponent<Canvas>().enabled = true;
     }
 
     void Update()
     {
-        CountDown();
-        SharpenItem();
+        if (gameActive)
+        {
+            CountDown();
+            SharpenItem();
+        }
     }
 
+    public void StartGame()
+    {
+        gameActive = true;
+    }
+
+    public void SetSharpening(bool state)
+    {
+        sharpening = state;
+    }
+
+    // Accumulates points and checks for red zone
     public void SharpenItem()
     {
         if (sharpening)
@@ -81,6 +107,7 @@ public class SharpeningV2 : MonoBehaviour
         
     }
 
+    // Logic for when the item leaves the grindstone hitbox
     public void ReleaseSharpening()
     {
         // Red zone
@@ -92,10 +119,16 @@ public class SharpeningV2 : MonoBehaviour
             
         // Great release timing
         if (pointerTransform.position.x > greatThreshold.position.x)
+        {
             score += greatReleaseBonus;
+            greatReleases++;
+        }
         // Good release timing
         else if (pointerTransform.position.x > goodThreshold.position.x)
+        {
             score += goodReleaseBonus;
+            goodReleases++;
+        }
 
         // Reset pointer position
         pointerTransform.position = pointerStartTransform.position;
@@ -103,6 +136,7 @@ public class SharpeningV2 : MonoBehaviour
         ChangeScoreText();
     }
 
+    // Updates the score text
     public void ChangeScoreText()
     {
         scoreText.text = $"Score:\n{(int)score}/{scoreMax}";
@@ -113,5 +147,22 @@ public class SharpeningV2 : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeText.text = $"Time: {(int)time}";
+
+        if (time < 0)
+            EndGame();
+    }
+
+    // Ends the game and pulls up the results window
+    public void EndGame()
+    {
+        gameActive = false;
+
+        resultsWindow.GetComponentInChildren<TMP_Text>().text =
+            "Final Score\n" +
+            $"{(int)score} pts\n\n" +
+            $"Good Releases: {goodReleases}\n" +
+            $"Great Releases: {greatReleases}";
+
+        resultsWindow.GetComponent<Canvas>().enabled = true;
     }
 }

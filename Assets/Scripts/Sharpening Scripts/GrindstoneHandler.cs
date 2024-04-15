@@ -23,13 +23,13 @@ public class GrindstoneHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         sparksParticles.Play();
-        sharpeningManager.sharpening = true;
+        sharpeningManager.SetSharpening(true);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         sparksParticles.Stop();
-        sharpeningManager.sharpening = false;
+        sharpeningManager.SetSharpening(false);
         sharpeningManager.ReleaseSharpening();
     }
 
