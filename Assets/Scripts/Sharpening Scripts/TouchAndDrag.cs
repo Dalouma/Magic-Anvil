@@ -23,23 +23,25 @@ public class TouchAndDrag : MonoBehaviour
             {
                 RaycastHit2D hit = Physics2D.Raycast(touchPos, Vector2.zero);
                 if (hit && hit.transform.gameObject == gameObject)
-                {
-                    Debug.Log("Clicked on Item");
                     dragging = true;
-                }
             }
             // On Finger Drag, move item to finger position
             if (dragging && touch.phase == TouchPhase.Moved)
             {
                 touchPos.z = 0f;
-                transform.parent.position = touchPos;
+                transform.position = touchPos;
             }
             // On Finger release, snap item back to starting position
             if (touch.phase == TouchPhase.Ended)
             {
-                dragging = false;
-                transform.parent.position = startingPos.position;
+                ResetPosition();
             }
         }
+    }
+
+    public void ResetPosition()
+    {
+        dragging = false;
+        transform.position = startingPos.position;
     }
 }

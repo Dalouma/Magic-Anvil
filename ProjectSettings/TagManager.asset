@@ -6,6 +6,12 @@ TagManager:
   tags:
   - desk
   - customer
+  - item
+  - grindstone
+  - Sharpening Manager
+  - pointer
+  - sparks
+  - meter
   layers:
   - Default
   - TransparentFX
