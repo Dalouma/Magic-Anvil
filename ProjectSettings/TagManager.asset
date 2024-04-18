@@ -12,6 +12,7 @@ TagManager:
   - pointer
   - sparks
   - meter
+  - Inventory Manager
   layers:
   - Default
   - TransparentFX

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TouchAndDrag : MonoBehaviour
 {
-    [SerializeField] private Transform startingPos;
+    //[SerializeField] private Transform startingPos;
+    private Vector3 startPos;
     private bool dragging;
 
     private void Start()
     {
         dragging = false;
+        startPos = transform.position;
     }
 
     void Update()
@@ -42,6 +44,6 @@ public class TouchAndDrag : MonoBehaviour
     public void ResetPosition()
     {
         dragging = false;
-        transform.position = startingPos.position;
+        transform.position = startPos;
     }
 }
