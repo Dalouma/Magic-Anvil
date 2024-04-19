@@ -8,4 +8,5 @@ public class ItemData : ScriptableObject
     public Sprite fullArt;
     public Sprite icon;
     public GameObject prefab;
+    public string[] itemGrades;
 }

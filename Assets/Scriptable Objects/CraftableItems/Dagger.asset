@@ -16,3 +16,6 @@ MonoBehaviour:
   fullArt: {fileID: 21300000, guid: 322a82a2a8def53479e3a4683d3138ce, type: 3}
   icon: {fileID: 21300000, guid: f4643ba86bc03474586cca5062209bd0, type: 3}
   prefab: {fileID: 942526520198041795, guid: ebf8dabe31194a94fa696b6f0dae5aaf, type: 3}
+  itemGrades:
+  - Tiny
+  - Razor Sharp
