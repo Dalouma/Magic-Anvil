@@ -34,7 +34,12 @@ public class NewspaperManager : MonoBehaviour
 
     private void Update()
     {
-        //CheatKeys();
+         if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                Debug.Log("Touch Phase: " + touch.phase);
+            }
+        CheatKeys();
         CanvasScrolling();
     }
 
@@ -135,16 +140,22 @@ public class NewspaperManager : MonoBehaviour
     private void CanvasScrolling()
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
-        float scrollValue = Input.mouseScrollDelta.y;
-
-        if (scrollValue != 0)
+        if(Input.touchCount == 1)
         {
-            float height = rectTransform.anchoredPosition.y;
-            float dHeight = height - scrollValue * scrollSensitivity;
-            float newHeight = Mathf.Clamp(dHeight, yMin, yMax);
+            Touch touch = Input.GetTouch(0);
+            print(touch.deltaPosition.y);
+            if(touch.phase == TouchPhase.Moved)
+            {
+                float scrollValue = touch.deltaPosition.y;
+                if (scrollValue != 0)
+                {
+                    float height = rectTransform.anchoredPosition.y;
+                    float dHeight = height - scrollValue * scrollSensitivity;
+                    float newHeight = Mathf.Clamp(dHeight, yMin, yMax);
 
-            rectTransform.anchoredPosition = new Vector2(0, newHeight);
+                    rectTransform.anchoredPosition = new Vector2(0, newHeight);
+                }
+            }
         }
-
     }
 }
