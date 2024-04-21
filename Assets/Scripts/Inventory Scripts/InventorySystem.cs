@@ -87,4 +87,5 @@ public class InventorySystem : MonoBehaviour
 
     // Gets number of items currently in inventory
     public int GetItemCount() { return inventory.Count;}
+    public bool FullInventory() { return inventory.Count >= maxSize; }
 }
