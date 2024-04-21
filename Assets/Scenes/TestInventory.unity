@@ -372,6 +372,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
+--- !u!223 &1240251827681934265 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 5991035406121489898, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+  m_PrefabInstance: {fileID: 4837205336985740498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4837205336985740498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -383,6 +388,14 @@ PrefabInstance:
     - target: {fileID: 1677412263197082695, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
       propertyPath: m_Name
       value: Inventory Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2345047437110973862, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -460
+      objectReference: {fileID: 0}
+    - target: {fileID: 2463192229767461297, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -230
       objectReference: {fileID: 0}
     - target: {fileID: 2554009264685451116, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
       propertyPath: m_Pivot.x
@@ -463,6 +476,22 @@ PrefabInstance:
     - target: {fileID: 2554009264685451116, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488365749176966063, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1240251827681934265}
+    - target: {fileID: 3488365749176966063, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: set_enabled
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555176838782439333, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991035406121489898, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -32,8 +32,8 @@ public class InventorySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventory= new List<CraftedItem>();
-        itemScore= 0;
+        inventory = new List<CraftedItem>();
+        itemScore = 0;
         itemType = null;
     }
 
@@ -80,9 +80,15 @@ public class InventorySystem : MonoBehaviour
     // Returns CraftedItem by index from inventory
     public CraftedItem GetItem(int index)
     {
-        if (index > inventory.Count-1)
+        if (index > inventory.Count - 1)
             return null;
         return inventory[index];
+    }
+
+    // Removes Crafted Item by index from inventory
+    public void RemoveItem(int index)
+    {
+        inventory.RemoveAt(index);
     }
 
     // Gets number of items currently in inventory

@@ -7,6 +7,7 @@ public class ItemSlot : MonoBehaviour
 {
     [SerializeField] private Image backgroundArt;
     [SerializeField] private Image icon;
+    [SerializeField] private int index;
 
     private CraftedItem m_item;
 
@@ -36,5 +37,11 @@ public class ItemSlot : MonoBehaviour
             return;
         }
         transform.parent.gameObject.GetComponent<InventoryUI>().ViewItemInfo(m_item);
+    }
+
+    // Removes the item that is held in this slot
+    public void RemoveItem()
+    {
+        InventorySystem.instance.RemoveItem(index);
     }
 }
