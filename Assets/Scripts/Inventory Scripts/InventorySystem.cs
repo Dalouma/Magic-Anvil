@@ -8,7 +8,7 @@ public class InventorySystem : MonoBehaviour
     public static InventorySystem instance;
 
     private List<CraftedItem> inventory;
-    private int maxSize = 10;
+    private int maxSize = 6;
 
     [SerializeField] private ItemData itemType;
     [SerializeField] private int itemScore;

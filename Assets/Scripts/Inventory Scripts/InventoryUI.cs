@@ -24,10 +24,10 @@ public class InventoryUI : MonoBehaviour
     // Grabs references for Item Information Window
     private void GrabReferences()
     {
-        itemDisplayName = ItemInfoWindow.transform.GetChild(1).GetComponent<TMP_Text>();
-        borderImage = ItemInfoWindow.transform.GetChild(2).GetComponent<Image>();
-        gemEffectImage = ItemInfoWindow.transform.GetChild(3).GetComponent<Image>();
-        itemImage = ItemInfoWindow.transform.GetChild(4).GetComponent<Image>();
+        itemDisplayName = ItemInfoWindow.transform.GetChild(0).GetComponent<TMP_Text>();
+        borderImage = ItemInfoWindow.transform.GetChild(1).GetComponent<Image>();
+        gemEffectImage = ItemInfoWindow.transform.GetChild(2).GetComponent<Image>();
+        itemImage = ItemInfoWindow.transform.GetChild(3).GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -42,12 +42,12 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("Space pressed");
-            SetupIcons();
+            RefreshIcons();
         }
     }
 
     // Gives each Item Slot the item data from the inventory
-    private void SetupIcons()
+    private void RefreshIcons()
     {
         for(int i = 0; i < InventorySystem.instance.GetItemCount(); i++)
         {
