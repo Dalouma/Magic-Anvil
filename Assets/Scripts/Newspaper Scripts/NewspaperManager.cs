@@ -150,7 +150,7 @@ public class NewspaperManager : MonoBehaviour
                 if (scrollValue != 0)
                 {
                     float height = rectTransform.anchoredPosition.y;
-                    float dHeight = height - scrollValue * scrollSensitivity;
+                    float dHeight = height - scrollValue;
                     float newHeight = Mathf.Clamp(dHeight, yMin, yMax);
 
                     rectTransform.anchoredPosition = new Vector2(0, newHeight);
