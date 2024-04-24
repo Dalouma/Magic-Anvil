@@ -38,6 +38,7 @@ public class InputSequenceManager : MonoBehaviour
             UpdateLifeText();
             ResetSequence();
             ResetTimer();
+            Handheld.Vibrate();
         }
 
         if (lives <= 0) 
@@ -90,6 +91,7 @@ public class InputSequenceManager : MonoBehaviour
         {
             Debug.Log("Sequence Failed!");
             ResetSequence();
+            Handheld.Vibrate();
         }
     }
 
