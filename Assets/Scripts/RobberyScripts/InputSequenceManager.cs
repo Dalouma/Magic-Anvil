@@ -10,6 +10,12 @@ public class InputSequenceManager : MonoBehaviour
     private Vector2 startPosition;
 
     public TMP_Text sequenceText;
+    public TMP_Text lifeText;
+    private int lives = 3;
+
+    public TMP_Text timerText;
+    public float sequenceDuration = 10f;
+    private float remainingTime;
 
     private List<InputType> testSequence = new List<InputType> {
         InputType.Tap,
@@ -24,12 +30,29 @@ public class InputSequenceManager : MonoBehaviour
     {
         actionSequence = testSequence;
         UpdateSequenceText();
-        
+        lifeText.text = "Lives: 3";
+        remainingTime = sequenceDuration;
     }
 
     // Update is called once per frame
     void Update()
     {
+        remainingTime -= Time.deltaTime;
+        UpdateTimerText();
+
+        if (remainingTime <= 0f) 
+        {
+            Debug.Log("You were attacked!");
+            UpdateLifeText();
+            ResetSequence();
+            ResetTimer();
+        }
+
+        if (lives <= 0) 
+        {
+            Debug.Log("Robbery Minigame Failed!");
+        }
+
         if (Input.touchCount > 0) 
         {
             Touch touch = Input.GetTouch(0);
@@ -54,15 +77,14 @@ public class InputSequenceManager : MonoBehaviour
             if (currentAction >= actionSequence.Count) 
             {
                 Debug.Log("Sequence Completed!");
-                currentAction = 0;
-                UpdateSequenceText();
+                ResetSequence();
+                ResetTimer();
             }
         }
         else 
         {
             Debug.Log("Sequence Failed!");
-            currentAction = 0;
-            UpdateSequenceText();
+            ResetSequence();
         }
     }
 
@@ -95,6 +117,18 @@ public class InputSequenceManager : MonoBehaviour
         }
     }
 
+    void ResetSequence() 
+    {
+        Debug.Log("Sequence Reset!");
+        currentAction = 0;
+        UpdateSequenceText();
+    }
+
+    void ResetTimer() 
+    {
+        remainingTime = sequenceDuration;
+    }
+
     void UpdateSequenceText() 
     {
         string sequenceString = "Sequence: ";
@@ -103,6 +137,19 @@ public class InputSequenceManager : MonoBehaviour
             sequenceString += action.ToString() + " ";
         }
         sequenceText.text = sequenceString;
+    }
+
+    void UpdateLifeText()
+    {
+        string lifeString = "Lives: ";
+        lives--;
+        lifeString += lives.ToString();
+        lifeText.text = lifeString;
+    }
+
+    void UpdateTimerText() 
+    {
+        timerText.text = "Time: " + Mathf.CeilToInt(remainingTime).ToString();
     }
 }
 
