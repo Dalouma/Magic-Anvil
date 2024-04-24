@@ -17,19 +17,11 @@ public class InputSequenceManager : MonoBehaviour
     public float sequenceDuration = 10f;
     private float remainingTime;
 
-    private List<InputType> testSequence = new List<InputType> {
-        InputType.Tap,
-        InputType.SwipeUp,
-        InputType.SwipeDown,
-        InputType.SwipeLeft,
-        InputType.SwipeRight
-    };
 
     // Start is called before the first frame update
     void Start()
     {
-        actionSequence = testSequence;
-        UpdateSequenceText();
+        CreateRandomSequence();
         lifeText.text = "Lives: 3";
         remainingTime = sequenceDuration;
     }
@@ -69,6 +61,19 @@ public class InputSequenceManager : MonoBehaviour
         }
     }
 
+    void CreateRandomSequence() 
+    {
+        actionSequence.Clear();
+        currentAction = 0;
+
+        for (int i = 0; i < 5; i++) 
+        {
+            actionSequence.Add((InputType)Random.Range(0, System.Enum.GetValues(typeof(InputType)).Length));
+        }
+
+        UpdateSequenceText();
+    }
+
     void CheckInput(InputType input) 
     {
         if (input == actionSequence[currentAction]) 
@@ -77,7 +82,7 @@ public class InputSequenceManager : MonoBehaviour
             if (currentAction >= actionSequence.Count) 
             {
                 Debug.Log("Sequence Completed!");
-                ResetSequence();
+                CreateRandomSequence();
                 ResetTimer();
             }
         }
