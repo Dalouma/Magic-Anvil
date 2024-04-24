@@ -23,6 +23,7 @@ public class SharpeningV2 : MonoBehaviour
     [SerializeField] private TMP_Text timeText;
     [SerializeField] private GameObject startWindow;
     [SerializeField] private GameObject resultsWindow;
+    [SerializeField] private Transform itemStartPos;
 
     [Header("Settings")]
     [SerializeField] private float pointerSpeed;
@@ -78,6 +79,11 @@ public class SharpeningV2 : MonoBehaviour
     public void StartGame()
     {
         gameActive = true;
+    }
+
+    private void SpawnItem()
+    {
+
     }
 
     public void SetSharpening(bool state)
@@ -139,7 +145,7 @@ public class SharpeningV2 : MonoBehaviour
     // Updates the score text
     public void ChangeScoreText()
     {
-        scoreText.text = $"Score:\n{(int)score}/{scoreMax}";
+        scoreText.text = $"Score: {(int)score}/{scoreMax}";
     }
 
     // Timer countdown
