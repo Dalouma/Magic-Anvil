@@ -1,0 +1,105 @@
+{ "frames": {
+   "banditUpscale 0.aseprite": {
+    "frame": { "x": 1, "y": 1, "w": 33, "h": 50 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 2, "w": 33, "h": 50 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 1.aseprite": {
+    "frame": { "x": 35, "y": 1, "w": 33, "h": 49 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 3, "w": 33, "h": 49 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 2.aseprite": {
+    "frame": { "x": 69, "y": 1, "w": 33, "h": 48 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 4, "w": 33, "h": 48 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 3.aseprite": {
+    "frame": { "x": 103, "y": 1, "w": 33, "h": 49 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 3, "w": 33, "h": 49 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 4.aseprite": {
+    "frame": { "x": 137, "y": 1, "w": 33, "h": 50 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 2, "w": 33, "h": 50 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 5.aseprite": {
+    "frame": { "x": 171, "y": 1, "w": 33, "h": 50 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 2, "w": 33, "h": 50 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 6.aseprite": {
+    "frame": { "x": 205, "y": 1, "w": 33, "h": 49 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 3, "w": 33, "h": 49 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 7.aseprite": {
+    "frame": { "x": 239, "y": 1, "w": 33, "h": 49 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 3, "w": 33, "h": 49 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 8.aseprite": {
+    "frame": { "x": 273, "y": 1, "w": 33, "h": 49 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 3, "w": 33, "h": 49 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "banditUpscale 9.aseprite": {
+    "frame": { "x": 307, "y": 1, "w": 33, "h": 50 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 2, "w": 33, "h": 50 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.5-arm64",
+  "image": "banditUpscale.png",
+  "format": "RGBA8888",
+  "size": { "w": 341, "h": 52 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "boots", "opacity": 255, "blendMode": "normal" },
+   { "name": "cloak", "opacity": 255, "blendMode": "normal" },
+   { "name": "bod", "opacity": 255, "blendMode": "normal" },
+   { "name": "belt", "opacity": 255, "blendMode": "normal" },
+   { "name": "Larm", "opacity": 255, "blendMode": "normal" },
+   { "name": "Rarm", "opacity": 255, "blendMode": "normal" },
+   { "name": "head", "opacity": 255, "blendMode": "normal" },
+   { "name": "mask", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

@@ -1,0 +1,113 @@
+{ "frames": {
+   "paladinUpscale 0.aseprite": {
+    "frame": { "x": 1, "y": 1, "w": 44, "h": 44 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 2, "w": 44, "h": 44 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 1.aseprite": {
+    "frame": { "x": 46, "y": 1, "w": 44, "h": 43 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 3, "w": 44, "h": 43 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 2.aseprite": {
+    "frame": { "x": 91, "y": 1, "w": 44, "h": 42 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 4, "w": 44, "h": 42 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 3.aseprite": {
+    "frame": { "x": 136, "y": 1, "w": 44, "h": 43 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 3, "w": 44, "h": 43 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 4.aseprite": {
+    "frame": { "x": 181, "y": 1, "w": 44, "h": 43 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 3, "w": 44, "h": 43 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 5.aseprite": {
+    "frame": { "x": 226, "y": 1, "w": 44, "h": 44 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 2, "w": 44, "h": 44 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 6.aseprite": {
+    "frame": { "x": 271, "y": 1, "w": 44, "h": 43 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 3, "w": 44, "h": 43 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 7.aseprite": {
+    "frame": { "x": 316, "y": 1, "w": 44, "h": 42 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 4, "w": 44, "h": 42 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 8.aseprite": {
+    "frame": { "x": 361, "y": 1, "w": 44, "h": 43 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 3, "w": 44, "h": 43 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 9.aseprite": {
+    "frame": { "x": 406, "y": 1, "w": 44, "h": 44 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 2, "w": 44, "h": 44 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "paladinUpscale 10.aseprite": {
+    "frame": { "x": 451, "y": 1, "w": 44, "h": 45 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 1, "w": 44, "h": 45 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.5-arm64",
+  "image": "paladinUpscale.png",
+  "format": "RGBA8888",
+  "size": { "w": 496, "h": 47 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "body", "opacity": 255, "blendMode": "normal" },
+   { "name": "bodyDes", "opacity": 255, "blendMode": "normal" },
+   { "name": "armL", "opacity": 255, "blendMode": "normal" },
+   { "name": "head", "opacity": 255, "blendMode": "normal" },
+   { "name": "shoulders", "opacity": 255, "blendMode": "normal" },
+   { "name": "helmet", "opacity": 255, "blendMode": "normal" },
+   { "name": "Lwing", "opacity": 255, "blendMode": "normal" },
+   { "name": "Rwing", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

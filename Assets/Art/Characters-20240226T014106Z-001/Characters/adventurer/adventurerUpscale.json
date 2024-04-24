@@ -1,0 +1,90 @@
+{ "frames": {
+   "adventurerUpscale 0.aseprite": {
+    "frame": { "x": 1, "y": 1, "w": 34, "h": 42 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 6, "w": 34, "h": 42 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 300
+   },
+   "adventurerUpscale 1.aseprite": {
+    "frame": { "x": 36, "y": 1, "w": 34, "h": 42 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 6, "w": 34, "h": 42 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "adventurerUpscale 2.aseprite": {
+    "frame": { "x": 71, "y": 1, "w": 34, "h": 43 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 5, "w": 34, "h": 43 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "adventurerUpscale 3.aseprite": {
+    "frame": { "x": 106, "y": 1, "w": 34, "h": 43 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 5, "w": 34, "h": 43 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "adventurerUpscale 4.aseprite": {
+    "frame": { "x": 141, "y": 1, "w": 34, "h": 43 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 5, "w": 34, "h": 43 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "adventurerUpscale 5.aseprite": {
+    "frame": { "x": 176, "y": 1, "w": 34, "h": 42 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 6, "w": 34, "h": 42 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "adventurerUpscale 6.aseprite": {
+    "frame": { "x": 211, "y": 1, "w": 34, "h": 42 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 6, "w": 34, "h": 42 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   },
+   "adventurerUpscale 7.aseprite": {
+    "frame": { "x": 246, "y": 1, "w": 34, "h": 42 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 14, "y": 6, "w": 34, "h": 42 },
+    "sourceSize": { "w": 64, "h": 64 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.5-arm64",
+  "image": "adventurerUpscale.png",
+  "format": "RGBA8888",
+  "size": { "w": 281, "h": 45 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "idle", "from": 0, "to": 7, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "shirt Copy", "opacity": 255, "blendMode": "normal" },
+   { "name": "bag", "opacity": 255, "blendMode": "normal" },
+   { "name": "arm1", "opacity": 255, "blendMode": "normal" },
+   { "name": "arm2", "opacity": 255, "blendMode": "normal" },
+   { "name": "head", "opacity": 255, "blendMode": "normal" },
+   { "name": "mouth", "opacity": 255, "blendMode": "normal" },
+   { "name": "eyes", "opacity": 255, "blendMode": "normal" },
+   { "name": "hair", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
