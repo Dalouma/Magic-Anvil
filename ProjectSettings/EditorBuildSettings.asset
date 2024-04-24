@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndCredits.unity
     guid: 97cf1c1af33b49a4fb64ed7c953212b5
+  - enabled: 1
+    path: Assets/Scenes/SharpeningV2.unity
+    guid: e5204e3066283fa44a67ce84229de588
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: fa19a8855e04f1344b43001a8afe5b73, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 6c0be1ecebd1cc94ba6d0d5cc513b7a4, type: 2}

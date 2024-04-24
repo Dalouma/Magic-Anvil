@@ -50,7 +50,7 @@ public class ForgingScript : MonoBehaviour
     private int speedLevel;
     public static int greatTiming, goodTiming, badTiming;
     private string weapon;
-    private string sharpeninglevel = "SharpeningScene";
+    private string sharpeninglevel = "SharpeningV2";
     private bool onCooldown;
     public static int score;
 
@@ -233,7 +233,6 @@ public class ForgingScript : MonoBehaviour
             SceneManager.LoadScene(sharpeninglevel);
             //levelChangerScript.FadeToLevel(sharpeninglevel);
         }
-
     }
 
     public void SetScoreText(){
