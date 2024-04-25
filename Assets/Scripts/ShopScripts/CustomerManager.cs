@@ -203,10 +203,17 @@ public class CustomerManager : MonoBehaviour
     }
     public void loadCustomer()
     {
+        string content;
         Debug.Log(customerfileList[2]);
         Debug.Log(customer);
         string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerfileList[customer] + ".json");
-        string content = File.ReadAllText(filePath);
+        //Debug.Log("UNITY:" + System.Environment.NewLine + filePath);
+        //UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(filePath);
+        //yield return www.Send();
+        //    content = www.downloadHandler.text;
+        WWW www = new WWW(filePath);
+        while (!www.isDone) { }
+        content = www.text;
         data = JsonUtility.FromJson<CustomerData>(content);
         cnum = customer;
         
