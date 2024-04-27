@@ -132,9 +132,12 @@ public class NewspaperManager : MonoBehaviour
     // Loads customer data in customerData var
     public void LoadCustomer(string customerName)
     {
+        //string content;
         string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerName + ".json");
-        string content = File.ReadAllText(filePath);
-        customerData = JsonUtility.FromJson<CustomerData>(content);
+        WWW www = new WWW(filePath);
+        while (!www.isDone) { }
+        //content = www.text;
+        customerData = JsonUtility.FromJson<CustomerData>( www.text);
     }
 
     private void CanvasScrolling()
