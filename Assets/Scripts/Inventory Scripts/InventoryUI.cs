@@ -6,28 +6,25 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private GameObject ItemInfoWindow;
+    [Header("Display References")]
+    [SerializeField] private TMP_Text itemDisplayName;
+    [SerializeField] private Image borderImage;
+    [SerializeField] private Image gemEffectImage;
+    [SerializeField] private Image itemImage;
 
-    private TMP_Text itemDisplayName;
-    private Image borderImage;
-    private Image gemEffectImage;
-    private Image itemImage;
+    [Header("Button References")]
+    [SerializeField] private GameObject socketButton;
+    [SerializeField] private GameObject sellButton;
+
+    [Header("Variables")]
+    public int currentItemIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         //SetupIcons();
-        GrabReferences();
-    }
-
-    // Grabs references for Item Information Window
-    private void GrabReferences()
-    {
-        itemDisplayName = ItemInfoWindow.transform.GetChild(0).GetComponent<TMP_Text>();
-        borderImage = ItemInfoWindow.transform.GetChild(1).GetComponent<Image>();
-        gemEffectImage = ItemInfoWindow.transform.GetChild(2).GetComponent<Image>();
-        itemImage = ItemInfoWindow.transform.GetChild(3).GetComponent<Image>();
+        currentItemIndex = -1;
+        ResetDisplay();
     }
 
     // Update is called once per frame
@@ -49,15 +46,20 @@ public class InventoryUI : MonoBehaviour
     // Gives each Item Slot the item data from the inventory
     private void RefreshIcons()
     {
-        for(int i = 0; i < InventorySystem.instance.GetItemCount(); i++)
+        for(int i = 0; i < 6; i++)
         {
             ItemSlot currentSlot = transform.GetChild(i + 1).gameObject.GetComponent<ItemSlot>();
-            CraftedItem item = InventorySystem.instance.GetItem(i);
+
+            CraftedItem item;
+            if (i < InventorySystem.instance.GetItemCount())
+                item = InventorySystem.instance.GetItem(i);
+            else
+                item = null;
             currentSlot.Set(item);
         }
     }
 
-    // Open up Item Information Window
+    // Display Item Information on the right
     public void ViewItemInfo(CraftedItem item)
     {
         // determine item grade prefix (weak, strong)
@@ -72,7 +74,24 @@ public class InventoryUI : MonoBehaviour
         // change item image
         itemImage.sprite = item.data.fullArt;
 
-        // enable info canvas
-        ItemInfoWindow.GetComponent<Canvas>().enabled = true;
+        // turn on buttons
+        socketButton.SetActive(true);
+        sellButton.SetActive(true);
+    }
+
+    public void ResetDisplay()
+    {
+        itemDisplayName.text = "";
+        itemImage.sprite = null;
+        
+        socketButton.SetActive(false);
+        sellButton.SetActive(false);
+    }
+
+    public void SellItem()
+    {
+        InventorySystem.instance.RemoveItem(currentItemIndex);
+        RefreshIcons();
+        ResetDisplay();
     }
 }

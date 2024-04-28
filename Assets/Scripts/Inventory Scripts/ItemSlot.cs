@@ -16,13 +16,13 @@ public class ItemSlot : MonoBehaviour
     {
         if (item == null)
         {
-            Debug.Log("no item found whil setting itemSlot data");
+            Debug.Log("no item found while setting itemSlot data");
+            m_item = null;
+            icon.sprite = null;
             return;
         }
 
         m_item = item;
-
-        // set icon
         icon.sprite = item.data.icon;
 
         // set background
@@ -33,10 +33,12 @@ public class ItemSlot : MonoBehaviour
     {
         if (m_item == null)
         {
+            transform.parent.gameObject.GetComponent<InventoryUI>().ResetDisplay();
             Debug.Log("Item Slot has no item");
             return;
         }
         transform.parent.gameObject.GetComponent<InventoryUI>().ViewItemInfo(m_item);
+        transform.parent.gameObject.GetComponent<InventoryUI>().currentItemIndex = index;
     }
 
     // Removes the item that is held in this slot
