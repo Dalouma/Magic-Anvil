@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   ID: Sword
-  fullArt: {fileID: 21300000, guid: 3fff0a85a4f63704183c7e4801a59dc2, type: 3}
-  icon: {fileID: 21300000, guid: 3fff0a85a4f63704183c7e4801a59dc2, type: 3}
+  fullArt: {fileID: 21300000, guid: 8c296d572cf59274fbc43b70e4dbcfed, type: 3}
+  icon: {fileID: 21300000, guid: 5abb23de965886b4eb91e0e03ccafd8e, type: 3}
   prefab: {fileID: 4460541016397869990, guid: 95db64b4cae0bb8439b84f5ca7d94e81, type: 3}
   itemGrades:
   - Dull

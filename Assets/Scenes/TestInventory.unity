@@ -348,9 +348,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 972588512153621777, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -136
+      objectReference: {fileID: 0}
     - target: {fileID: 1677412263197082695, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
       propertyPath: m_Name
       value: Inventory Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095814371179862201, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095814371179862201, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095814371179862201, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2554009264685451116, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
       propertyPath: m_Pivot.x
@@ -432,6 +448,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3698365940777526585, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -202.99995
+      objectReference: {fileID: 0}
+    - target: {fileID: 8569900782448513940, guid: 5d40d83f2dce8c542ad795a616e81af3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3fff0a85a4f63704183c7e4801a59dc2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
