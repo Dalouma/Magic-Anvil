@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1da05537f8b5ad409516cd3c9b3a4b3, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  name: Fire
+  name: Water
   affixText: of Streams
   gemArt: {fileID: 21300000, guid: bbb52f0202acaf14fb392f35717651be, type: 3}
   slotArt: {fileID: 0}

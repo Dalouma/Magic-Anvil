@@ -86,6 +86,7 @@ public class InventoryUI : MonoBehaviour
         sellButton.SetActive(true);
     }
 
+    // Updates display 
     public void ResetDisplay()
     {
         itemDisplayName.text = "";
@@ -95,6 +96,7 @@ public class InventoryUI : MonoBehaviour
         sellButton.SetActive(false);
     }
 
+    // Removes item from inventory and refreshes display
     public void SellItem()
     {
         InventorySystem.instance.RemoveItem(currentItemIndex);

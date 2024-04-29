@@ -10,6 +10,10 @@ public class InventorySystem : MonoBehaviour
     private List<CraftedItem> inventory;
     private int maxSize = 6;
 
+    private Dictionary<string, int> gemInventory;
+    [SerializeField] private List<GemData> gemTypes;
+
+    [Header("Current item being crafted")]
     [SerializeField] private ItemData itemType;
     [SerializeField] private int itemScore;
 
@@ -24,6 +28,9 @@ public class InventorySystem : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Initialize Gem Inventory
+            LoadGems();
         }
         else
             Destroy(gameObject);
@@ -32,9 +39,27 @@ public class InventorySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventory = new List<CraftedItem>();
         itemScore = 0;
         itemType = null;
+
+        // Initialize Inventory 
+        inventory = new List<CraftedItem>();
+        
+        
+
+    }
+
+    // Currently this initializes an empty gem inventory using a dictionary with (gemData, int) kvp
+    // This should load gems from save data in the future
+    private void LoadGems()
+    {
+        gemInventory = new Dictionary<string, int>();
+        for (int i = 0; i < gemTypes.Count; i++)
+        {
+            Debug.Log("adding " + gemTypes[i].name + " to dictionary");
+            gemInventory.Add(gemTypes[i].name, 0);
+        }
+            
     }
 
     private void Update()
@@ -48,6 +73,7 @@ public class InventorySystem : MonoBehaviour
         
     }
 
+    // Generates a random item for testing purposes
     public void GenerateRandomItem()
     {
         if (inventory.Count >= maxSize)
@@ -66,16 +92,12 @@ public class InventorySystem : MonoBehaviour
     {
         itemScore = 0;
         itemType = itemData;
-
-        // scene switches to forging scene afterwards
     }
 
     // Adds Finished item stats to inventory
     public void FinishCrafting()
     {
         inventory.Add(new CraftedItem(itemType, itemScore));
-
-        // scene switch to shop
     }
 
     // Returns CraftedItem by index from inventory
@@ -90,6 +112,18 @@ public class InventorySystem : MonoBehaviour
     public void RemoveItem(int index)
     {
         inventory.RemoveAt(index);
+    }
+
+    // Get number of gems currently possessed by player by accessing dictionary
+    public int GetGemAmount(GemData type)
+    {
+        return gemInventory[type.name];
+    }
+
+    // Add or Subtract gems by type
+    public void ChangeGemAmount(GemData type, int amount)
+    {
+        gemInventory[type.name] = gemInventory[type.name] + amount;
     }
 
     // Gets number of items currently in inventory
