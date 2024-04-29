@@ -41,6 +41,13 @@ public class InventoryUI : MonoBehaviour
             Debug.Log("Space pressed");
             RefreshIcons();
         }
+
+        // Crafts a random item with random grade
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            InventorySystem.instance.GenerateRandomItem();
+            RefreshIcons();
+        }
     }
 
     // Gives each Item Slot the item data from the inventory

@@ -39,25 +39,26 @@ public class InventorySystem : MonoBehaviour
 
     private void Update()
     {
-        TestKeys();
+        //TestKeys();
     }
 
     // Test Keys (DELETE OUT OF UPDATE FUNCTION LATER)
     private void TestKeys()
     {
-        // Crafts a random item with random grade
-        if (Input.GetKeyDown(KeyCode.V))
+        
+    }
+
+    public void GenerateRandomItem()
+    {
+        if (inventory.Count >= maxSize)
         {
-            if (inventory.Count >= maxSize)
-            {
-                Debug.Log("Inventory Full!!!");
-                return;
-            }
-            itemType = testItems[Random.Range(0, testItems.Count)];
-            itemScore = Random.Range(0, 3000);
-            FinishCrafting();
-            Debug.Log("Created " + itemType.ID + " with grade " + itemScore);
+            Debug.Log("Inventory Full!!!");
+            return;
         }
+        itemType = testItems[Random.Range(0, testItems.Count)];
+        itemScore = Random.Range(0, 3000);
+        FinishCrafting();
+        Debug.Log("Created " + itemType.ID + " with grade " + itemScore);
     }
 
     // sets chosen weapon and sets item score to 0
