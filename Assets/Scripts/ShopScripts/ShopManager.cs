@@ -13,6 +13,9 @@ public class ShopManager : MonoBehaviour
     public static int money = 450;
     public int price = 0;
     public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI metalInv;
+    public TextMeshProUGUI woodInv;
+
     public TMP_InputField moneyInputField;
     private GameManager manager = GameManager.Instance;
     public static int[] materials = { 0, 0 };
@@ -86,6 +89,7 @@ public class ShopManager : MonoBehaviour
         {
             materials[0]++;
             metalAMT.text = materials[0].ToString();
+            metalInv.text = materials[0].ToString();
             money -= 200;
             moneyText.text = money.ToString();
         }
@@ -96,7 +100,8 @@ public class ShopManager : MonoBehaviour
         {
           materials[1]++;
         woodAMT.text = materials[1].ToString();
-        money -= 200;
+            woodInv.text = materials[1].ToString();
+            money -= 200;
         moneyText.text = money.ToString();
         }
     }
@@ -104,11 +109,13 @@ public class ShopManager : MonoBehaviour
     {
         materials[0]--;
         metalAMT.text = materials[0].ToString();
+        metalInv.text = materials[0].ToString();
     }
     public void loseWood()
     {
         materials[1]--;
         woodAMT.text = materials[1].ToString();
+        woodInv.text = materials[1].ToString();
     }
     public void UPdateMoney(int price)
     {

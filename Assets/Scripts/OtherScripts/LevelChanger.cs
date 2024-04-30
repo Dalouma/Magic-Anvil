@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class LevelChanger : MonoBehaviour
 {
+    void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
     public Animator animator;
 
     private string levelToLoad;
