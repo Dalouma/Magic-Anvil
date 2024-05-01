@@ -79,7 +79,7 @@ public class ForgingScript : MonoBehaviour
         onCooldown = false; 
         nextScene.onClick.AddListener(EndGame);     
         finishtimer = 2f;
-
+        score = 0;
         // Change Music to appropriate track
         if (AudioManager.instance != null)
         {
