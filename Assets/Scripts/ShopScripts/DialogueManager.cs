@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,13 @@ public class DialogueManager : MonoBehaviour
     }
     public void startDialogue(Dialogue x)
     {
+        /*if(lockstate){
+            Debug.Log("Lockstate already clicked");
+            return;
+        }
+        else{
+            lockstate = true;
+        } */
         animator.SetBool("Isopen", true);
         Debug.Log("starting"+x.name);
         nametext.text = x.name;
@@ -30,6 +38,7 @@ public class DialogueManager : MonoBehaviour
         }
         DisplayNextSentence();
     }
+    private Coroutine typeDialogueCoroutine = null;
     public void DisplayNextSentence()
     {
         if (sentences.Count == 0) {
@@ -37,7 +46,10 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         string sent=sentences.Dequeue();
-        StartCoroutine(TypeDialogue(sent));
+        if (typeDialogueCoroutine != null)
+            StopCoroutine(typeDialogueCoroutine);
+        typeDialogueCoroutine = StartCoroutine(TypeDialogue(sent));
+       
     }
     IEnumerator TypeDialogue(string sentence)
     {
@@ -47,10 +59,10 @@ public class DialogueManager : MonoBehaviour
             dialoguetext.text += letter;
             yield return null;
         }
+        typeDialogueCoroutine = null;
     }
     public void EndDialogue()
     {
-        
         animator.SetBool("Isopen", false);
         if(customerManager.getState()==CustomerManager.CustomerState.NeutralDeal|| customerManager.getState() == CustomerManager.CustomerState.BadDeal|| customerManager.getState() == CustomerManager.CustomerState.GoodDeal)
         {

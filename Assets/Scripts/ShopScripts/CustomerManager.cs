@@ -145,7 +145,7 @@ public class CustomerManager : MonoBehaviour
         cust.changeSprite(customer);
         loadCustomer();
         SetRep(currRep);
-        Debug.Log(getData().name);
+        //Debug.Log(getData().name);
         chosenWeapon = Weapon.weapon;
         
         if(chosenWeapon != null)

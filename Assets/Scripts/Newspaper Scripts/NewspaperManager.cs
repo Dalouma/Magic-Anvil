@@ -11,15 +11,15 @@ using UnityEngine.Localization.Settings;
 
 public class NewspaperManager : MonoBehaviour
 {
-    [SerializeField] private float scrollSensitivity;
     [SerializeField] private GameObject newsBottom;
     [SerializeField] private List<GameObject> prefabList;
     [SerializeField] private List<Sprite> newsImages;
 
     private CustomerData customerData;
+    private int scrollSensitivity = -20;
     private int newsCount;
     private int sectionHeight = 530;
-    private float yMin = 190;
+    private float yMin = 120;
     private float yMax = 520;
 
     Locale currentLocale;
@@ -149,7 +149,7 @@ public class NewspaperManager : MonoBehaviour
             print(touch.deltaPosition.y);
             if(touch.phase == TouchPhase.Moved)
             {
-                float scrollValue = touch.deltaPosition.y;
+                float scrollValue = touch.deltaPosition.y*(scrollSensitivity);
                 if (scrollValue != 0)
                 {
                     float height = rectTransform.anchoredPosition.y;

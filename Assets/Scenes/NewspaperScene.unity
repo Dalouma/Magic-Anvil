@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af02596079e2f934987f13d246182205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSensitivity: 100
+  scrollSensitivity: -50
   newsBottom: {fileID: 1292919208}
   prefabList:
   - {fileID: 3295611949263961211, guid: f4db2041543ac0f4688bf018172e9788, type: 3}

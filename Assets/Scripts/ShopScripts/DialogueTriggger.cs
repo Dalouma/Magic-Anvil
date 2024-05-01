@@ -11,7 +11,7 @@ public class DialogueTriggger : MonoBehaviour
         if (customerManager != null)
         {
             Debug.Log("chosenWeapon: " + customerManager.chosenWeapon);
-            Debug.Log(customerManager.getData().name);
+            //Debug.Log(customerManager.getData().name);
             Dialogue dialogue = new Dialogue(customerManager.getData(),customerManager);
             FindObjectOfType<DialogueManager>().startDialogue(dialogue);
         }
