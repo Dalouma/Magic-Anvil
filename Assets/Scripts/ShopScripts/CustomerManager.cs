@@ -46,6 +46,7 @@ public class CustomerManager : MonoBehaviour
 {
     public GameObject triggerDialogueObj;
     public GameObject levelChanger;
+    public GenericCustomerData GenericCustomer;
     private LevelChanger levelChangerScript;
     public Animator animator;
     //public Image customerImage;
@@ -56,13 +57,16 @@ public class CustomerManager : MonoBehaviour
     public static CustomerManager Instance;
     public CustomerData data;
     public string chosenWeapon;
-    public string[] customerfileList = {"Adventurer", "Rogue","Paladin"};
+    public static List<string> customerfileList = new List<string>();
+    public string[] namedCustomers = { "Adventurer", "Rogue", "Paladin" };
     public SpriteSwapCustomer cust;
     public SpriteSwapCustomer weap;
     public speechBubbleanimation speechbubble;
     public UnityEngine.UI.Slider bar;
     public int score;
+    private int day;
     private int basePrice = 300;
+    System.Random rnd = new System.Random();
     public enum CustomerState
     {
         Intro,
@@ -72,9 +76,35 @@ public class CustomerManager : MonoBehaviour
         NeutralDeal,
         Refusal
     }
+    ;
     public CustomerData getData()
     {
         return data;
+    }
+    private void GenDailyCustomers()
+    {
+        
+        //maybe get more customers based on reputation?
+        for (int i=0;i<Math.Ceiling(namedCustomers.Length*(double)(currRep/100));i++)
+        {
+
+            customerfileList.Add(namedCustomers[rnd.Next(0, namedCustomers.Length - 1)]);
+        }
+        for (int i = 0; i < Math.Floor(namedCustomers.Length * (double)(currRep / 100)); i++)
+        {
+            customerfileList.Insert(rnd.Next(0, namedCustomers.Length - 1), "Customer");
+        }
+
+
+    }
+    private CustomerData GenGenericCustomer()
+    {
+        CustomerData Gencust = new CustomerData();
+        Gencust.name = "Customer";
+        Gencust.stinginess=rnd.Next(7, 10)/10;
+
+        //generic customers don't show up in newspaper
+        Gencust.newsOutcomes= Array.Empty<int>();
     }
 
     private GameManager manager = GameManager.Instance;
@@ -112,7 +142,7 @@ public class CustomerManager : MonoBehaviour
     {
         oldLocale = LocalizationSettings.SelectedLocale;
         currentLocale = LocalizationSettings.SelectedLocale;
-        if (currentLocale.Identifier == "en") 
+/*        if (currentLocale.Identifier == "en") 
         {
             customerfileList[0] = "Adventurer";
             customerfileList[1] = "Rogue";
@@ -123,10 +153,16 @@ public class CustomerManager : MonoBehaviour
             customerfileList[0] = "AdventurerCh";
             customerfileList[1] = "RogueCh";
             customerfileList[2] = "PaladinCh";
-        }
+        }*/
+    
 
         levelChangerScript = levelChanger.GetComponent<LevelChanger>();
         //GameManager manager = GameManager.Instance;
+        if(levelChangerScript.daycount>day)
+        {
+            this.GenDailyCustomers();
+        }
+        day = levelChangerScript.daycount;
 
         if (manager != null && manager.pullFromSave == true) 
         {
@@ -206,15 +242,17 @@ public class CustomerManager : MonoBehaviour
         string content;
         Debug.Log(customerfileList[2]);
         Debug.Log(customer);
-        string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerfileList[customer] + ".json");
-        //Debug.Log("UNITY:" + System.Environment.NewLine + filePath);
-        //UnityEngine.Networking.UnityWebRequest www = UnityEngine.Networking.UnityWebRequest.Get(filePath);
-        //yield return www.Send();
-        //    content = www.downloadHandler.text;
-        WWW www = new WWW(filePath);
-        while (!www.isDone) { }
-        content = www.text;
-        data = JsonUtility.FromJson<CustomerData>(content);
+        if(customerfileList[customer]=="Customer")
+        {
+            data = GenGenericCustomer();
+        }
+        else {
+            string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerfileList[customer] + ".json");
+            WWW www = new WWW(filePath);
+            while (!www.isDone) { }
+            content = www.text;
+            data = JsonUtility.FromJson<CustomerData>(content);
+        }
         cnum = customer;
         
 
