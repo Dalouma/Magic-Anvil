@@ -42,6 +42,7 @@ public class ForgingScript : MonoBehaviour
     private AudioSource clangAudio;
     //private GameObject ResultCanvas;
     private int clicks;
+    private int totalhits;
     private float finishtimer;
     private int forgingscore;
     private bool gameStart;
@@ -61,6 +62,7 @@ public class ForgingScript : MonoBehaviour
     void Start()
     {
        // finishScene.gameObject.SetActive(false);
+        totalhits = 5;
         FinishCanvas.GetComponent<Canvas>().enabled = false;
         activeScene = true;
         ResultsCanvas.GetComponent<Canvas>().enabled = false;
@@ -174,7 +176,7 @@ public class ForgingScript : MonoBehaviour
             
 
                 // end check
-                if (clicks == 10)
+                if (clicks == totalhits)
                 {
                     StartCoroutine(showFinishButton());
                     //ShowForgingResults();
@@ -240,21 +242,14 @@ public class ForgingScript : MonoBehaviour
     }
 
     public void SetHitsText(){
-        hitsText.text = clicks.ToString() + "/10";
+        hitsText.text = clicks.ToString() + "/" + totalhits;
     }
 
     public void ShowForgingResults(){
         //forgingscore = CalculateForgingScore(greatTiming, goodTiming, badTiming); 
-        resultText.text = $"{table.GetLocalizedString("forging")}\n{table.GetLocalizedString("score")} {score}";
+        resultText.text = $"{table.GetLocalizedString("forging")}\n\n\n{table.GetLocalizedString("score")} {score} /100";
         ResultsCanvas.GetComponent<Canvas>().enabled = true;
     }
-
-    private int CalculateForgingScore(int great, int good, int bad)
-    {
-        score = (great * 20) + (good * 10) + (bad * 5);
-        return score;
-    }
-
     IEnumerator showFinishButton(){
         activeScene = false;
         FinishCanvas.GetComponent<Canvas>().enabled = true;
