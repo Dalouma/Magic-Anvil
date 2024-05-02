@@ -1143,7 +1143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5109663084787812377, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5478944550257880111, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
       propertyPath: m_IsActive
@@ -7449,6 +7449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerDialogueObj: {fileID: 1122512072}
   levelChanger: {fileID: 441377495}
+  GenericCustomer: {fileID: 0}
   animator: {fileID: 928904666}
   shopManager: {fileID: 1147448570}
   customer: 0
@@ -7472,10 +7473,10 @@ MonoBehaviour:
     text2: 
     newsOutcomes: 
   chosenWeapon: 
-  customerfileList:
-  - Paladin
+  namedCustomers:
+  - Adventurer
   - Rogue
-  - Barbarian
+  - Paladin
   cust: {fileID: 677610565}
   weap: {fileID: 928904670}
   speechbubble: {fileID: 1618544510}

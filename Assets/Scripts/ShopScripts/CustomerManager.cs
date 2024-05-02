@@ -14,8 +14,8 @@ using UnityEngine.Localization.Settings;
 public class CustomerData
 {
     public string name;
-    public string[] preferredWeapons;
-    public string[] hatedWeapons;
+    public List<string> preferredWeapons;
+    public List<string> hatedWeapons;
     public float stinginess;
     public string introDialogue;
     public string secondLine;
@@ -99,12 +99,44 @@ public class CustomerManager : MonoBehaviour
     }
     private CustomerData GenGenericCustomer()
     {
+        int customergenint = rnd.Next(0, 2);
         CustomerData Gencust = new CustomerData();
         Gencust.name = "Customer";
         Gencust.stinginess=rnd.Next(7, 10)/10;
+        if( customergenint == 0 )
+        {
+            Gencust.preferredWeapons.Add(GenericCustomer.preferredWeapons[customergenint]);
+            Gencust.hatedWeapons.Add(GenericCustomer.hatedWeapons[customergenint+1]);
+            Gencust.introDialogue = GenericCustomer.introDialogue[customergenint];
+            Gencust.secondLine = GenericCustomer.secondLine[customergenint];
 
+        }
+        if( customergenint == 1 )
+        {
+            Gencust.preferredWeapons.Add(GenericCustomer.preferredWeapons[customergenint]);
+            Gencust.preferredWeapons.Add(GenericCustomer.preferredWeapons[4]);
+            Gencust.hatedWeapons.Add(GenericCustomer.hatedWeapons[2]);
+            Gencust.introDialogue = GenericCustomer.introDialogue[customergenint];
+            Gencust.secondLine = GenericCustomer.secondLine[customergenint];
+        }
+        if( customergenint == 2 )
+        {
+            Gencust.preferredWeapons.Add(GenericCustomer.preferredWeapons[2]);
+            Gencust.preferredWeapons.Add(GenericCustomer.preferredWeapons[4]);
+            Gencust.hatedWeapons.Add(GenericCustomer.hatedWeapons[0]);
+            Gencust.introDialogue = GenericCustomer.introDialogue[customergenint];
+            Gencust.secondLine = GenericCustomer.secondLine[customergenint];
+        }
+        Gencust.payment= GenericCustomer.payment[rnd.Next(0, 2)];
+        Gencust.preferred = GenericCustomer.preferred[rnd.Next(0, 2)];
+        Gencust.unpreferred = GenericCustomer.unpreferred[rnd.Next(0, 2)];
+        Gencust.refusal= GenericCustomer.refusal[rnd.Next(0, 2)];
+        Gencust.baddeal = GenericCustomer.baddeal[rnd.Next(0, 2)];
+        Gencust.gooddeal = GenericCustomer.gooddeal[rnd.Next(0, 2)];
+        Gencust.neutral= GenericCustomer.neutral[rnd.Next(0, 2)];
         //generic customers don't show up in newspaper
         Gencust.newsOutcomes= Array.Empty<int>();
+        return Gencust;
     }
 
     private GameManager manager = GameManager.Instance;
