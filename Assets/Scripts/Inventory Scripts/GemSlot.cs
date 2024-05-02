@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GemSlot : MonoBehaviour
 {
     [SerializeField] private GemData gemData;
+    [SerializeField] private bool draggable;
 
     [Header("References")]
     [SerializeField] private Image gemImage;
@@ -22,7 +23,7 @@ public class GemSlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
