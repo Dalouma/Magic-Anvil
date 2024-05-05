@@ -7449,6 +7449,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerDialogueObj: {fileID: 1122512072}
   levelChanger: {fileID: 441377495}
+  GenericCustomer: {fileID: 0}
   animator: {fileID: 928904666}
   shopManager: {fileID: 1147448570}
   customer: 0
@@ -7472,10 +7473,10 @@ MonoBehaviour:
     text2: 
     newsOutcomes: 
   chosenWeapon: 
-  customerfileList:
-  - Paladin
+  namedCustomers:
+  - Adventurer
   - Rogue
-  - Barbarian
+  - Paladin
   cust: {fileID: 677610565}
   weap: {fileID: 928904670}
   speechbubble: {fileID: 1618544510}
