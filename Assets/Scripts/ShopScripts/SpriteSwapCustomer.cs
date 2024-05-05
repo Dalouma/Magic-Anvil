@@ -20,13 +20,13 @@ public class SpriteSwapCustomer : MonoBehaviour
     }
     public void changeSprite(int customer)
     {
-             if (customer >= spriteArray.Length)
-             {
-                 customer = 0;
-             }
+        if (customer >= spriteArray.Length)
+        {
+            customer = 0;
+        }
 
-             Image custimage = currCustomer.image;
-             custimage.sprite = spriteArray[customer];
+        Image custimage = currCustomer.image;
+        custimage.sprite = spriteArray[customer];
 
     }
     public void changeSpriteAnim(int customer)
@@ -54,7 +54,7 @@ public class SpriteSwapCustomer : MonoBehaviour
     IEnumerator Pause(float seconds, Action callback)
     {
         float elapsedtime = 0f;
-        while(elapsedtime<seconds)
+        while (elapsedtime < seconds)
         {
             elapsedtime += Time.deltaTime;
             yield return null;
@@ -65,4 +65,4 @@ public class SpriteSwapCustomer : MonoBehaviour
 
 
 
-   
+

@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelChanger : MonoBehaviour
 {
-    public int Maxdays = 7;
-    public int daycount = 0;
+    public int Maxdays = 8;
+    public int daycount = 1;
     void Start()
     {
         Application.targetFrameRate = 60;
