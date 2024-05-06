@@ -53,7 +53,7 @@ public class CustomerManager : MonoBehaviour
     public ShopManager shopManager;
     public int customer = 0;
     public static int cnum;
-    public static int currRep=20;
+    public static double currRep=20.0;
     public static CustomerManager Instance;
     public CustomerData data;
     public string chosenWeapon;
@@ -64,7 +64,7 @@ public class CustomerManager : MonoBehaviour
     public speechBubbleanimation speechbubble;
     public UnityEngine.UI.Slider bar;
     public int score;
-    private int day;
+    private static int day=0;
     private int basePrice = 300;
     System.Random rnd = new System.Random();
     public enum CustomerState
@@ -83,16 +83,18 @@ public class CustomerManager : MonoBehaviour
     }
     private void GenDailyCustomers()
     {
+        Debug.Log(Math.Ceiling(namedCustomers.Length * (currRep / 100)));
         
         //maybe get more customers based on reputation?
-        for (int i=0;i<Math.Ceiling(namedCustomers.Length*(double)(currRep/100));i++)
+        for (int i=0;i<Math.Ceiling(namedCustomers.Length*(currRep/100));i++)
         {
+            Debug.Log(namedCustomers[rnd.Next(0, namedCustomers.Length - 1)]);
 
             customerfileList.Add(namedCustomers[rnd.Next(0, namedCustomers.Length - 1)]);
         }
         for (int i = 0; i < Math.Floor(namedCustomers.Length * (double)(currRep / 100)); i++)
         {
-            customerfileList.Insert(rnd.Next(0, namedCustomers.Length - 1), "Customer");
+            customerfileList.Insert(rnd.Next(0, customerfileList.Count - 1), "Customer");
         }
 
 
@@ -145,13 +147,13 @@ public class CustomerManager : MonoBehaviour
 
     void Update() 
     {
-        currentLocale = LocalizationSettings.SelectedLocale;
+        /*currentLocale = LocalizationSettings.SelectedLocale;
         if (oldLocale.Identifier != currentLocale.Identifier) 
         {
             oldLocale = LocalizationSettings.SelectedLocale;
             DialogueTriggger triggerScript = triggerDialogueObj.GetComponent<DialogueTriggger>();
 
-            if (currentLocale.Identifier == "zh-Hans") 
+           *//* if (currentLocale.Identifier == "zh-Hans") 
             {
                 customerfileList[0] = "AdventurerCh";
                 customerfileList[1] = "RogueCh";
@@ -162,11 +164,11 @@ public class CustomerManager : MonoBehaviour
                 customerfileList[0] = "Adventurer";
                 customerfileList[1] = "Rogue";
                 customerfileList[2] = "Paladin";
-            }
+            }*//*
 
             loadCustomer();
             triggerScript.triggerDialogue();
-        }
+        }*/
     }
 
     public static CustomerState state = CustomerState.Intro;
@@ -190,9 +192,12 @@ public class CustomerManager : MonoBehaviour
 
         levelChangerScript = levelChanger.GetComponent<LevelChanger>();
         //GameManager manager = GameManager.Instance;
-        if(levelChangerScript.daycount>day)
+        Debug.Log(levelChangerScript.daycount);
+        if (levelChangerScript.daycount>day)
         {
-            this.GenDailyCustomers();
+            day++;
+            GenDailyCustomers();
+
         }
         day = levelChangerScript.daycount;
 
@@ -272,7 +277,7 @@ public class CustomerManager : MonoBehaviour
     public void loadCustomer()
     {
         string content;
-        Debug.Log(customerfileList[2]);
+        Debug.Log(customerfileList[0]);
         Debug.Log(customer);
         if(customerfileList[customer]=="Customer")
         {
@@ -284,6 +289,21 @@ public class CustomerManager : MonoBehaviour
             while (!www.isDone) { }
             content = www.text;
             data = JsonUtility.FromJson<CustomerData>(content);
+            if (customerfileList[customer]=="Rogue")
+            {
+                cust.changeSprite(1);
+            }
+            if (customerfileList[customer] == "Paladin")
+            {
+                cust.changeSprite(2);
+            }
+            if (customerfileList[customer] =="Adventurer")
+            {
+                if (customerfileList[customer] == "Rogue")
+                {
+                    cust.changeSprite(0);
+                }
+            }
         }
         cnum = customer;
         
@@ -382,8 +402,8 @@ public class CustomerManager : MonoBehaviour
     {
         return chosenWeapon;
     }
-    public void SetRep(int rep)
+    public void SetRep(double rep)
     {
-        bar.value = rep;
+        bar.value = (int)rep;
     }
 }
