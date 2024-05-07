@@ -92,7 +92,7 @@ public class CustomerManager : MonoBehaviour
 
             customerfileList.Add(namedCustomers[rnd.Next(0, namedCustomers.Length - 1)]);
         }
-        for (int i = 0; i < Math.Floor(namedCustomers.Length * (double)(currRep / 100)); i++)
+        for (int i = 0; i < Math.Floor(namedCustomers.Length * (currRep / 100)); i++)
         {
             customerfileList.Insert(rnd.Next(0, customerfileList.Count - 1), "Customer");
         }
