@@ -17,6 +17,9 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private ItemData itemType;
     [SerializeField] private int itemScore;
 
+    [Header("Selected Gem for Socket")]
+    public GemData selectedGem;
+
     [Header("For Testing")]
     [SerializeField] private List<ItemData> testItems;
 

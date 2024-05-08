@@ -8,6 +8,8 @@ public class SocketGem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 {
     [SerializeField] private GemData gemData;
     [SerializeField] private GameObject movableGem;
+    [SerializeField] private GameObject confirmationWindow;
+
     private Image gemImage;
 
     // Start is called before the first frame update
@@ -16,15 +18,17 @@ public class SocketGem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         gemImage = GetComponentInChildren<Image>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public GemData GetGemData()
     {
-        
+        return gemData;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (confirmationWindow.activeSelf)
+            return;
         gemImage.raycastTarget = false;
+        movableGem.GetComponent<Image>().raycastTarget = false;
         movableGem.GetComponent<Image>().sprite = gemData.gemArt;
         movableGem.SetActive(true);
     }
@@ -37,6 +41,7 @@ public class SocketGem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void OnEndDrag(PointerEventData eventData)
     {
         gemImage.raycastTarget = true;
+        movableGem.GetComponent<Image>().raycastTarget = true;
         movableGem.SetActive(false);
     }
 }
