@@ -2161,38 +2161,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3287832925229186654, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
-      propertyPath: gemTypes.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3287832925229186654, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
-      propertyPath: gemTypes.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 088928765ee21ba40854bf6a8cb65aa6, type: 2}
-    - target: {fileID: 3287832925229186654, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
-      propertyPath: gemTypes.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 2e59c132f6529654eb15513ad3d892e4, type: 2}
-    - target: {fileID: 3287832925229186654, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
-      propertyPath: gemTypes.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 26c0aa3f5858bd4479ed25f6faacff97, type: 2}
-    - target: {fileID: 3287832925229186654, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
-      propertyPath: gemTypes.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: b50e19226c67d9340be0fb79a6a54964, type: 2}
-    - target: {fileID: 3287832925229186654, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
-      propertyPath: gemTypes.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: f6781d1b69914a3449e62e9bfe8c47de, type: 2}
-    - target: {fileID: 3287832925229186654, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
-      propertyPath: gemTypes.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: d8177f13923f00443a8027d3898cc1d8, type: 2}
-    - target: {fileID: 3287832925229186654, guid: 78aad25d675fabc4b86e48c547181d55, type: 3}
-      propertyPath: gemTypes.Array.data[6]
-      value: 
-      objectReference: {fileID: 11400000, guid: 6f2386808bc55b34e9f2ddfd1e039509, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

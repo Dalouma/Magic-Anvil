@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Fire
   affixText: of Flames
   gemArt: {fileID: 21300000, guid: 80249fbd120bd964389fa0ef8fd2705d, type: 3}
-  slotArt: {fileID: 0}
+  backgroundArt: {fileID: 21300000, guid: e39d32db8c6768145af3d21ef4706b9e, type: 3}

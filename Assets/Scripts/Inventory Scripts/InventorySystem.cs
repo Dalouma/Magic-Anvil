@@ -32,6 +32,9 @@ public class InventorySystem : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
+            // Initialize Item Inventory
+            LoadInventory();
+
             // Initialize Gem Inventory
             LoadGems();
         }
@@ -44,12 +47,13 @@ public class InventorySystem : MonoBehaviour
     {
         itemScore = 0;
         itemType = null;
+    }
 
-        // Initialize Inventory 
+    // Currently initializes an empty item inventory as an empty list of type CraftedItem
+    // This should load items from save data in the future
+    private void LoadInventory()
+    {
         inventory = new List<CraftedItem>();
-        
-        
-
     }
 
     // Currently this initializes an empty gem inventory using a dictionary with (gemData, int) kvp
