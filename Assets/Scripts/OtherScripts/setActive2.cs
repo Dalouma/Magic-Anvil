@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +14,7 @@ public class setActive2 : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        _progressBar.fillAmount = time/totalTime;
+        _progressBar.fillAmount = time / totalTime;
         if (time >= totalTime)
         {
             timerEnded();

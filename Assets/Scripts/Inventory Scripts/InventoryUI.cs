@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -53,7 +51,7 @@ public class InventoryUI : MonoBehaviour
     // Gives each Item Slot the item data from the inventory
     private void RefreshIcons()
     {
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             ItemSlot currentSlot = transform.GetChild(i + 1).gameObject.GetComponent<ItemSlot>();
 
@@ -99,7 +97,7 @@ public class InventoryUI : MonoBehaviour
     {
         itemDisplayName.text = "";
         itemImage.sprite = null;
-        
+
         socketButton.SetActive(false);
         sellButton.SetActive(false);
     }

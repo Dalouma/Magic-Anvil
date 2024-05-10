@@ -1,19 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private void Awake() 
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
-        else 
+        else
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -27,12 +24,12 @@ public class GameManager : MonoBehaviour
 
     public bool pullFromSave = false;
 
-    public void SaveGame() 
+    public void SaveGame()
     {
         SaveSystem.SaveGame(this);
     }
 
-    public void LoadGame() 
+    public void LoadGame()
     {
         SaveData data = SaveSystem.LoadGame();
 
@@ -42,7 +39,7 @@ public class GameManager : MonoBehaviour
         character = data.character;
     }
 
-    public void FromSave() 
+    public void FromSave()
     {
         pullFromSave = true;
     }

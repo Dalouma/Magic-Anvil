@@ -13,18 +13,18 @@ public class LevelChanger : MonoBehaviour
 
     private string levelToLoad;
     private string prevLevel;
-    
+
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void FadeToLevel(string levelName) 
+    public void FadeToLevel(string levelName)
     {
         prevLevel = levelToLoad;
         levelToLoad = levelName;
-        if(prevLevel=="Newspaper Scene"&& daycount<Maxdays)
+        if (prevLevel == "Newspaper Scene" && daycount < Maxdays)
         {
             daycount++;
             levelToLoad = "Testscene";
@@ -32,9 +32,9 @@ public class LevelChanger : MonoBehaviour
         animator.SetTrigger("FadeOut");
     }
 
-    public void OnFadeComplete() 
+    public void OnFadeComplete()
     {
         SceneManager.LoadScene(levelToLoad);
     }
-    
+
 }

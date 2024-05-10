@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections;
+using UnityEngine;
 
 public class speechBubbleanimation : MonoBehaviour
 {
@@ -16,8 +15,8 @@ public class speechBubbleanimation : MonoBehaviour
             animator.SetBool("invis", false);
         }));
     }
-    
-    
+
+
     IEnumerator Pause(float seconds, Action callback)
     {
         float elapsedtime = 0f;

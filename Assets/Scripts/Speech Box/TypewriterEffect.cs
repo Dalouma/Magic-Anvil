@@ -1,9 +1,8 @@
-using System.Collections;
-using UnityEngine;
-using TMPro;
-using System.Linq;
 using System;
-using UnityEngine.TextCore.Text;
+using System.Collections;
+using System.Linq;
+using TMPro;
+using UnityEngine;
 
 // THIS CODE WAS COPIED AND MODIFIED FROM
 // https://github.com/Maraakis/ChristinaCreatesGames/tree/mains
@@ -100,7 +99,7 @@ public class TypewriterEffect : MonoBehaviour
         {
             StopCoroutine(_typewriterCoroutine);
         }
-        
+
         _typewriterCoroutine = StartCoroutine(routine: Typewriter());
     }
 
@@ -125,7 +124,8 @@ public class TypewriterEffect : MonoBehaviour
 
             _textBox.maxVisibleCharacters++;
 
-            if (!CurrentlySkipping && punctuations.Contains(character)){
+            if (!CurrentlySkipping && punctuations.Contains(character))
+            {
                 yield return _punctuationDelay;
             }
             else
@@ -145,7 +145,7 @@ public class TypewriterEffect : MonoBehaviour
             return;
         }
 
-        CurrentlySkipping= true;
+        CurrentlySkipping = true;
 
         if (!quickSkip)
         {

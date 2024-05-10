@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -29,10 +26,10 @@ public class DialogueManager : MonoBehaviour
             lockstate = true;
         } */
         animator.SetBool("Isopen", true);
-        Debug.Log("starting"+x.name);
+        Debug.Log("starting" + x.name);
         nametext.text = x.name;
         sentences.Clear();
-        foreach (string sentence in x.sentences) 
+        foreach (string sentence in x.sentences)
         {
             sentences.Enqueue(sentence);
         }
@@ -41,20 +38,21 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typeDialogueCoroutine = null;
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0) {
+        if (sentences.Count == 0)
+        {
             EndDialogue();
             return;
         }
-        string sent=sentences.Dequeue();
+        string sent = sentences.Dequeue();
         if (typeDialogueCoroutine != null)
             StopCoroutine(typeDialogueCoroutine);
         typeDialogueCoroutine = StartCoroutine(TypeDialogue(sent));
-       
+
     }
     IEnumerator TypeDialogue(string sentence)
     {
         dialoguetext.text = "";
-        foreach(char letter in sentence.ToCharArray())
+        foreach (char letter in sentence.ToCharArray())
         {
             dialoguetext.text += letter;
             yield return null;
@@ -64,7 +62,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         animator.SetBool("Isopen", false);
-        if(customerManager.getState()==CustomerManager.CustomerState.NeutralDeal|| customerManager.getState() == CustomerManager.CustomerState.BadDeal|| customerManager.getState() == CustomerManager.CustomerState.GoodDeal)
+        if (customerManager.getState() == CustomerManager.CustomerState.NeutralDeal || customerManager.getState() == CustomerManager.CustomerState.BadDeal || customerManager.getState() == CustomerManager.CustomerState.GoodDeal)
         {
             customerManager.nextCustomer();
         }

@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
 public class CraftedItem
@@ -9,7 +6,7 @@ public class CraftedItem
     public ItemData data { get; private set; }
     public GemData gData { get; private set; }
     public int scoreVal { get; private set; }
-    
+
     public CraftedItem(ItemData source, int score)
     {
         data = source;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Popup : MonoBehaviour
@@ -9,13 +7,13 @@ public class Popup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!PlayerPrefs.HasKey("PopupShown")) 
+        if (!PlayerPrefs.HasKey("PopupShown"))
         {
             popupObj.SetActive(true);
 
             PlayerPrefs.SetInt("PopupShown", 1);
         }
-        else 
+        else
         {
             popupObj.SetActive(false);
         }
@@ -24,6 +22,6 @@ public class Popup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

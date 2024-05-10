@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName=" New Customer",menuName="Customer")]
+[CreateAssetMenu(fileName = " New Customer", menuName = "Customer")]
 public class CustomerPrefab : ScriptableObject
 {
     public new string name;
