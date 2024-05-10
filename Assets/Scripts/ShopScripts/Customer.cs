@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
 
 public abstract class Customer
 {
@@ -37,7 +34,8 @@ public abstract class Customer
         {
             Debug.Log("GIVEN ITEM == NULL");
         }
-        else if (_rejectList.Contains(_givenItem)){
+        else if (_rejectList.Contains(_givenItem))
+        {
             _payment = 0;
             _responseText = _rejectText;
         }
@@ -104,7 +102,7 @@ public class BasicAdventurer : Customer
 
         _mediocreText = "\"I guess this technically helps me defend myself…\"";
     }
-    
+
 }
 
 public class Bandit : Customer

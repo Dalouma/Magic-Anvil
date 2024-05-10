@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Net;
 using TMPro;
 using UnityEngine;
 
@@ -16,7 +13,7 @@ public class SharpeningV2 : MonoBehaviour
 
     private GameObject itemObj;
     private GameObject grindstoneObj;
-    
+
 
     [Header("References")]
     [SerializeField] private TMP_Text scoreText;
@@ -52,10 +49,10 @@ public class SharpeningV2 : MonoBehaviour
 
         itemObj = GameObject.FindGameObjectWithTag("item");
         grindstoneObj = GameObject.FindGameObjectWithTag("grindstone");
-        
+
         // Set Variables
         score = 0;
-        scoreMax= 1000;
+        scoreMax = 1000;
         time = 30f;
         goodReleases = 0;
         greatReleases = 0;
@@ -110,7 +107,7 @@ public class SharpeningV2 : MonoBehaviour
                 // STUN
             }
         }
-        
+
     }
 
     // Logic for when the item leaves the grindstone hitbox
@@ -122,7 +119,7 @@ public class SharpeningV2 : MonoBehaviour
             pointerTransform.position = pointerStartTransform.position;
             return;
         }
-            
+
         // Great release timing
         if (pointerTransform.position.x > greatThreshold.position.x)
         {

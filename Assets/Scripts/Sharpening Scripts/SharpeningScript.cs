@@ -1,11 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class SharpeningScript : MonoBehaviour
 {
@@ -33,7 +29,7 @@ public class SharpeningScript : MonoBehaviour
 
     [SerializeField] private Sprite[] spriteArray;
     //private string shopLevel = "ResultsScene";
-    
+
     [SerializeField] private TextMeshProUGUI wordCorrectText;
     [SerializeField] private TextMeshProUGUI sharpeningTimerText;
     [SerializeField] private TextMeshProUGUI spinTimeText;
@@ -47,9 +43,9 @@ public class SharpeningScript : MonoBehaviour
 
     static public int correctWordInputs;
     [SerializeField] private float sharpeningTimer;
-    
-   // private float sharpeningMaxTime;  
-    
+
+    // private float sharpeningMaxTime;  
+
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +69,7 @@ public class SharpeningScript : MonoBehaviour
         SetsharpeningTimerText();
         HandleWheelSpin();
         HandleBarTrace();
-        
+
         CheatKeys();
     }
 
@@ -125,7 +121,7 @@ public class SharpeningScript : MonoBehaviour
             {
                 cursorTransform.position += Vector3.down * cursorSpeed * Time.deltaTime;
             }
-            
+
             // Reset hold animation
             if (!spacebar.activeSelf && cursorTransform.position.y <= startTransform.position.y)
             {
@@ -146,7 +142,7 @@ public class SharpeningScript : MonoBehaviour
             {
                 score += zoneMultipliers[0] * Time.deltaTime;
             }
-            
+
             SetCorrectWordInputsText();
 
             if (spacebar.activeSelf)
@@ -156,7 +152,7 @@ public class SharpeningScript : MonoBehaviour
 
             if (!sharpening)
             {
-                sharpening= true;
+                sharpening = true;
                 itemAnimator.Play("move");
                 sharpeningSFX.Play();
                 sparks.Play();
@@ -243,8 +239,9 @@ public class SharpeningScript : MonoBehaviour
             }
         }
     }
-    
-    void CheckKey(GameObject currentKey, string correctKey){
+
+    void CheckKey(GameObject currentKey, string correctKey)
+    {
         if (currentKey.name == correctKey)
         {
             //currentKey.transform.position += Vector3.down * 0.05f;
@@ -259,7 +256,7 @@ public class SharpeningScript : MonoBehaviour
                 GameObject nextKey = keyTransforms[currentKeyIndex].gameObject;
                 arrowIndicatorTransform.position = nextKey.transform.position + Vector3.up * 1.2f;
             }
-            
+
         }
         else
         {
@@ -269,7 +266,8 @@ public class SharpeningScript : MonoBehaviour
         }
     }
 
-    void setKeyVisibility(bool keystate){
+    void setKeyVisibility(bool keystate)
+    {
         for (int i = 0; i < keyTransforms.Count; i++)
         {
             keyTransforms[i].position = randomTransforms[i].position;
@@ -301,16 +299,19 @@ public class SharpeningScript : MonoBehaviour
         }
     }
 
-    void SetCorrectWordInputsText(){
+    void SetCorrectWordInputsText()
+    {
         //wordCorrectText.text = "Hits:  " + correctWordInputs;
         wordCorrectText.text = ((int)score).ToString();
     }
 
-    void SetsharpeningTimerText(){
-       sharpeningTimerText.text = ((int)sharpeningTimer).ToString();
-       if((int)sharpeningTimer <= 0){
+    void SetsharpeningTimerText()
+    {
+        sharpeningTimerText.text = ((int)sharpeningTimer).ToString();
+        if ((int)sharpeningTimer <= 0)
+        {
             GoToShop();
-       }
+        }
     }
 
     public void GoToShop()
@@ -319,7 +320,7 @@ public class SharpeningScript : MonoBehaviour
         {
             AudioManager.instance.ChangeMusic("menu");
         }
-        
+
         Debug.Log("loading forging scene");
         SceneManager.LoadScene("TestScene");
     }

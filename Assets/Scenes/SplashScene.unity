@@ -5544,6 +5544,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6829760223552577607, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
+      propertyPath: Maxdays
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829760223552577607, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
+      propertyPath: daycount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

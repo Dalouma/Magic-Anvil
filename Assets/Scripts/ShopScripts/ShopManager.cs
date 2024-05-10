@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -29,7 +26,7 @@ public class ShopManager : MonoBehaviour
             instance = this;
 
         }
-  
+
     }
     public void Start()
     {
@@ -54,20 +51,20 @@ public class ShopManager : MonoBehaviour
             animator.SetBool("ShopShow", true);
             customerManager.animator.SetBool("Available", false);
         }
-        
-    }
-   /* public void ShowForge()
-    {
-        if (forge.GetBool("forge",false)
-        {
-            forge.SetBool("forge", true);
-        }
-        else
-        {
-            forge.SetBool("forge", false);
-        }
 
-    }*/
+    }
+    /* public void ShowForge()
+     {
+         if (forge.GetBool("forge",false)
+         {
+             forge.SetBool("forge", true);
+         }
+         else
+         {
+             forge.SetBool("forge", false);
+         }
+
+     }*/
     public void setPrice(string money)
     {
         if (money.Length > 8)
@@ -98,11 +95,11 @@ public class ShopManager : MonoBehaviour
     {
         if (money - 200 >= 0)
         {
-          materials[1]++;
-        woodAMT.text = materials[1].ToString();
+            materials[1]++;
+            woodAMT.text = materials[1].ToString();
             woodInv.text = materials[1].ToString();
             money -= 200;
-        moneyText.text = money.ToString();
+            moneyText.text = money.ToString();
         }
     }
     public void loseMetal()
@@ -120,7 +117,7 @@ public class ShopManager : MonoBehaviour
     public void UPdateMoney(int price)
     {
         money += price;
-        moneyText.text =money.ToString();
+        moneyText.text = money.ToString();
         animator.SetBool("ShopShow", false);
 
         if (manager != null)
@@ -131,10 +128,10 @@ public class ShopManager : MonoBehaviour
     }
     public void ResetMats()
     {
-        UPdateMoney(200*(materials[0] + materials[1]));
-        materials[1]=0;
+        UPdateMoney(200 * (materials[0] + materials[1]));
+        materials[1] = 0;
         woodAMT.text = materials[1].ToString();
-        materials[0]=0;
+        materials[0] = 0;
         metalAMT.text = materials[0].ToString();
 
     }

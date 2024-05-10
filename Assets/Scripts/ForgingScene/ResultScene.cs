@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
 
 public class ResultScene : MonoBehaviour
 {
@@ -18,14 +14,15 @@ public class ResultScene : MonoBehaviour
     {
         string weaponText = "Weapon: " + Weapon.weapon;
         string sharpeningText = "\nSharpening Hits: " + sharpeningHits;
-        string forgingText =  "\nGreat Timing: " + greatTiming + "\nGood Timing: "
+        string forgingText = "\nGreat Timing: " + greatTiming + "\nGood Timing: "
          + goodTiming + "\nBad Timing: " + badTiming;
         calculateScore();
-        resultText.text = weaponText + forgingText + sharpeningText + "\n Score: " + score; 
+        resultText.text = weaponText + forgingText + sharpeningText + "\n Score: " + score;
     }
 
-    void calculateScore(){
-        score = (((greatTiming * 2) + goodTiming + badTiming/2)/20 + sharpeningHits/4)*100;
+    void calculateScore()
+    {
+        score = (((greatTiming * 2) + goodTiming + badTiming / 2) / 20 + sharpeningHits / 4) * 100;
 
     }
 }

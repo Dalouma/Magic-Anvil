@@ -1,10 +1,10 @@
-using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 public static class SaveSystem
 {
-    public static void SaveGame(GameManager manager) 
+    public static void SaveGame(GameManager manager)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/manager.save";
@@ -16,7 +16,7 @@ public static class SaveSystem
         stream.Close();
     }
 
-    public static SaveData LoadGame() 
+    public static SaveData LoadGame()
     {
         string path = Application.persistentDataPath + "/manager.save";
         if (File.Exists(path))
@@ -29,7 +29,7 @@ public static class SaveSystem
 
             return data;
         }
-        else 
+        else
         {
             Debug.LogError("Save file not found in " + path);
             return null;

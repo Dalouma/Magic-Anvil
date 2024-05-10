@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class InputSequenceManager : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class InputSequenceManager : MonoBehaviour
         remainingTime -= Time.deltaTime;
         UpdateTimerText();
 
-        if (remainingTime <= 0f) 
+        if (remainingTime <= 0f)
         {
             Debug.Log("You were attacked!");
             UpdateLifeText();
@@ -41,15 +40,15 @@ public class InputSequenceManager : MonoBehaviour
             Handheld.Vibrate();
         }
 
-        if (lives <= 0) 
+        if (lives <= 0)
         {
             Debug.Log("Robbery Minigame Failed!");
         }
 
-        if (Input.touchCount > 0) 
+        if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            switch (touch.phase) 
+            switch (touch.phase)
             {
                 case TouchPhase.Began:
                     startPosition = touch.position;
@@ -62,12 +61,12 @@ public class InputSequenceManager : MonoBehaviour
         }
     }
 
-    void CreateRandomSequence() 
+    void CreateRandomSequence()
     {
         actionSequence.Clear();
         currentAction = 0;
 
-        for (int i = 0; i < 5; i++) 
+        for (int i = 0; i < 5; i++)
         {
             actionSequence.Add((InputType)Random.Range(0, System.Enum.GetValues(typeof(InputType)).Length));
         }
@@ -75,19 +74,19 @@ public class InputSequenceManager : MonoBehaviour
         UpdateSequenceText();
     }
 
-    void CheckInput(InputType input) 
+    void CheckInput(InputType input)
     {
-        if (input == actionSequence[currentAction]) 
+        if (input == actionSequence[currentAction])
         {
             currentAction++;
-            if (currentAction >= actionSequence.Count) 
+            if (currentAction >= actionSequence.Count)
             {
                 Debug.Log("Sequence Completed!");
                 CreateRandomSequence();
                 ResetTimer();
             }
         }
-        else 
+        else
         {
             Debug.Log("Sequence Failed!");
             ResetSequence();
@@ -95,10 +94,10 @@ public class InputSequenceManager : MonoBehaviour
         }
     }
 
-    InputType GetSwipeDirection(Vector2 start, Vector2 end) 
+    InputType GetSwipeDirection(Vector2 start, Vector2 end)
     {
         float swipeMagnitude = (end - start).magnitude;
-        if (swipeMagnitude < 20f) 
+        if (swipeMagnitude < 20f)
         {
             return InputType.Tap;
         }
@@ -106,40 +105,40 @@ public class InputSequenceManager : MonoBehaviour
         Vector2 swipeDirection = end - start;
         float angle = Vector2.SignedAngle(swipeDirection, Vector2.right);
 
-        if (angle > -45f && angle <= 45f) 
+        if (angle > -45f && angle <= 45f)
         {
             return InputType.SwipeRight;
         }
-        else if (angle > 45f && angle <= 135f) 
+        else if (angle > 45f && angle <= 135f)
         {
             return InputType.SwipeDown;
         }
-        else if (angle > -135f && angle <= -45f) 
+        else if (angle > -135f && angle <= -45f)
         {
             return InputType.SwipeUp;
         }
-        else 
+        else
         {
             return InputType.SwipeLeft;
         }
     }
 
-    void ResetSequence() 
+    void ResetSequence()
     {
         Debug.Log("Sequence Reset!");
         currentAction = 0;
         UpdateSequenceText();
     }
 
-    void ResetTimer() 
+    void ResetTimer()
     {
         remainingTime = sequenceDuration;
     }
 
-    void UpdateSequenceText() 
+    void UpdateSequenceText()
     {
         string sequenceString = "Sequence: ";
-        foreach (var action in actionSequence) 
+        foreach (var action in actionSequence)
         {
             sequenceString += action.ToString() + " ";
         }
@@ -154,13 +153,13 @@ public class InputSequenceManager : MonoBehaviour
         lifeText.text = lifeString;
     }
 
-    void UpdateTimerText() 
+    void UpdateTimerText()
     {
         timerText.text = "Time: " + Mathf.CeilToInt(remainingTime).ToString();
     }
 }
 
-public enum InputType 
+public enum InputType
 {
     Tap,
     SwipeUp,

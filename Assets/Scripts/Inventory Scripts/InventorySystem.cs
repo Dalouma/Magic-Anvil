@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,8 +43,8 @@ public class InventorySystem : MonoBehaviour
 
         // Initialize Inventory 
         inventory = new List<CraftedItem>();
-        
-        
+
+
 
     }
 
@@ -59,7 +58,7 @@ public class InventorySystem : MonoBehaviour
             Debug.Log("adding " + gemTypes[i].name + " to dictionary");
             gemInventory.Add(gemTypes[i].name, 0);
         }
-            
+
     }
 
     private void Update()
@@ -70,7 +69,7 @@ public class InventorySystem : MonoBehaviour
     // Test Keys (DELETE OUT OF UPDATE FUNCTION LATER)
     private void TestKeys()
     {
-        
+
     }
 
     // Generates a random item for testing purposes
@@ -127,6 +126,6 @@ public class InventorySystem : MonoBehaviour
     }
 
     // Gets number of items currently in inventory
-    public int GetItemCount() { return inventory.Count;}
+    public int GetItemCount() { return inventory.Count; }
     public bool FullInventory() { return inventory.Count >= maxSize; }
 }

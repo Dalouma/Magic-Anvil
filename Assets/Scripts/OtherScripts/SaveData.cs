@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 [System.Serializable]
 public class SaveData
 {
@@ -10,7 +6,7 @@ public class SaveData
     public int currency;
     public int character;
 
-    public SaveData (GameManager manager) 
+    public SaveData(GameManager manager)
     {
         // set public variables above to data from the manager
         // ...

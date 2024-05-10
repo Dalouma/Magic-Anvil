@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class loanAnim : MonoBehaviour
@@ -15,7 +13,7 @@ public class loanAnim : MonoBehaviour
 
     private void Update()
     {
-        if (ShopManager.money < 200 && (ShopManager.materials[0]<1||ShopManager.materials[1] < 1))
+        if (ShopManager.money < 200 && (ShopManager.materials[0] < 1 || ShopManager.materials[1] < 1))
         {
             animator.SetBool("showloan", true);
         }

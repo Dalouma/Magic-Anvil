@@ -1,13 +1,11 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 public class NewspaperManager : MonoBehaviour
 {
@@ -34,11 +32,11 @@ public class NewspaperManager : MonoBehaviour
 
     private void Update()
     {
-         if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                Debug.Log("Touch Phase: " + touch.phase);
-            }
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Debug.Log("Touch Phase: " + touch.phase);
+        }
         CheatKeys();
         CanvasScrolling();
     }
@@ -83,7 +81,7 @@ public class NewspaperManager : MonoBehaviour
                     }
                 }
             }
-            else 
+            else
             {
                 if (customerName.Substring(customerName.Length - 2) == "Ch")
                 {
@@ -115,7 +113,7 @@ public class NewspaperManager : MonoBehaviour
     {
         // Position of the section
         GameObject newSection = Instantiate(prefabList[newsCount % 2], this.transform);
-        newSection.GetComponent<RectTransform>().anchoredPosition = Vector2.down * (sectionHeight * (newsCount+1) + 90);
+        newSection.GetComponent<RectTransform>().anchoredPosition = Vector2.down * (sectionHeight * (newsCount + 1) + 90);
         // Image
         newSection.transform.GetChild(0).GetComponent<Image>().sprite = newsImage;
         // Headline
@@ -137,19 +135,19 @@ public class NewspaperManager : MonoBehaviour
         WWW www = new WWW(filePath);
         while (!www.isDone) { }
         //content = www.text;
-        customerData = JsonUtility.FromJson<CustomerData>( www.text);
+        customerData = JsonUtility.FromJson<CustomerData>(www.text);
     }
 
     private void CanvasScrolling()
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
-        if(Input.touchCount == 1)
+        if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
             print(touch.deltaPosition.y);
-            if(touch.phase == TouchPhase.Moved)
+            if (touch.phase == TouchPhase.Moved)
             {
-                float scrollValue = touch.deltaPosition.y*(scrollSensitivity);
+                float scrollValue = touch.deltaPosition.y * (scrollSensitivity);
                 if (scrollValue != 0)
                 {
                     float height = rectTransform.anchoredPosition.y;
