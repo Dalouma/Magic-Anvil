@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space pressed");
+            //Debug.Log("Space pressed");
             RefreshIcons();
         }
 
@@ -110,6 +110,7 @@ public class InventoryUI : MonoBehaviour
         ResetDisplay();
     }
 
+    // Attaches currently selected item with gem that was dragged in.
     public void SocketItem()
     {
         GemData gem = InventorySystem.instance.selectedGem;
