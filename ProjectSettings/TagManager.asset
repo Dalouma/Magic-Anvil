@@ -14,6 +14,7 @@ TagManager:
   - meter
   - Inventory Manager
   - SpeechBox
+  - NameBox
   layers:
   - Default
   - TransparentFX

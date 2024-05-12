@@ -19,7 +19,7 @@ public class TypewriterEffect : MonoBehaviour
     // Basic Typewriter Functionality
     private int _iCharVisible;
     private Coroutine _typewriterCoroutine;
-    private bool _readyForNewText = true;
+    private bool _readyForNewText;
 
     private WaitForSeconds _simpleDelay;
     private WaitForSeconds _punctuationDelay;
@@ -47,6 +47,9 @@ public class TypewriterEffect : MonoBehaviour
     public static event Action CompleteTextRevealed;
     public static event Action<char> CharacterRevealed;
 
+    // Character reference
+    private Customer customer;
+
     private void Awake()
     {
         _textBox = GameObject.FindGameObjectWithTag("SpeechBox").GetComponent<TMP_Text>();
@@ -56,11 +59,17 @@ public class TypewriterEffect : MonoBehaviour
 
         _skipDelay = new WaitForSeconds(1 / (charsPerSecond * skipSpeedup));
         _textboxFullEventDelay = new WaitForSeconds(sendDoneDelay);
+
+        _readyForNewText = true;
+
+        // Grab customer reference
+        customer = GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>();
     }
 
     private void OnEnable()
     {
         TMPro_EventManager.TEXT_CHANGED_EVENT.Add(PrepareForNewText);
+        //Debug.Log("enabling with readyForNewText = " + _readyForNewText);
     }
 
     private void OnDisable()
@@ -70,11 +79,12 @@ public class TypewriterEffect : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (customer.isTalking() && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            //Debug.Log("Detected touch input");
+            //Debug.Log("readyForNewText = " + _readyForNewText);
             if (_readyForNewText)
             {
-                //GetComponent<SpeechBoxUI>().ProgressText();
                 GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>().ProgressText();
                 return;
             }
@@ -87,7 +97,7 @@ public class TypewriterEffect : MonoBehaviour
 
     public void PrepareForNewText(UnityEngine.Object obj)
     {
-        Debug.Log("Detected Text Change");
+        //Debug.Log("Detected Text Change");
         if (!_readyForNewText)
             return;
 

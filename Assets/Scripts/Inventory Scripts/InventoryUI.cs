@@ -14,7 +14,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject socketButton;
     [SerializeField] private GameObject sellButton;
 
-    [Header("Variables")]
+    [Header("Status")]
     public int currentItemIndex;
 
     // Start is called before the first frame update
