@@ -27,7 +27,8 @@ MonoBehaviour:
     do nicely.
   acceptText:
   - "Not what I had in mind, but maybe this might work\u2026"
-  disappointText: []
+  disappointText:
+  - ERROR. THIS CHARACTER HAS NO RESPONSE IN THIS CONTEXT.
   rejectText:
   - What a joke of a smith! Do I really look like I would use this thing?
   goodDeal:

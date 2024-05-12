@@ -74,7 +74,8 @@ public class TypewriterEffect : MonoBehaviour
         {
             if (_readyForNewText)
             {
-                GetComponent<SpeechBoxUI>().ProgressText();
+                //GetComponent<SpeechBoxUI>().ProgressText();
+                GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>().ProgressText();
                 return;
             }
             if (_textBox.maxVisibleCharacters != _textBox.textInfo.characterCount - 1)
@@ -86,7 +87,7 @@ public class TypewriterEffect : MonoBehaviour
 
     public void PrepareForNewText(UnityEngine.Object obj)
     {
-        //Debug.Log("Detected Text Change");
+        Debug.Log("Detected Text Change");
         if (!_readyForNewText)
             return;
 

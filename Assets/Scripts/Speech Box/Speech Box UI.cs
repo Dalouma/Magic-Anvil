@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpeechBoxUI : MonoBehaviour
 {
-    [Header("Refernces")]
+    [Header("References")]
     public TMP_Text speechBox;
 
     // Start is called before the first frame update
