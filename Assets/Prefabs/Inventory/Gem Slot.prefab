@@ -128,6 +128,7 @@ MonoBehaviour:
   gemData: {fileID: 0}
   gemImage: {fileID: 4222612396201230770}
   gemName: {fileID: 5143959060764331846}
+  amountText: {fileID: 0}
 --- !u!1 &5015740423459886835
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,8 +196,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lightning Gem\t\tx999
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 313940dc41544f64c87a0c37ddfd3916, type: 2}
-  m_sharedMaterial: {fileID: -3363992339502061062, guid: 313940dc41544f64c87a0c37ddfd3916, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c3a31d31adb50e344892c90991349103, type: 2}
+  m_sharedMaterial: {fileID: -3039077922445122848, guid: c3a31d31adb50e344892c90991349103, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -220,8 +221,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.4
-  m_fontSizeBase: 62.4
+  m_fontSize: 63
+  m_fontSizeBase: 63
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

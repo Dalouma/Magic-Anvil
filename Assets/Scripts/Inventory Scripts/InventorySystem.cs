@@ -16,6 +16,9 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private ItemData itemType;
     [SerializeField] private int itemScore;
 
+    [Header("Selected Gem for Socket")]
+    public GemData selectedGem;
+
     [Header("For Testing")]
     [SerializeField] private List<ItemData> testItems;
 
@@ -27,6 +30,9 @@ public class InventorySystem : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Initialize Item Inventory
+            LoadInventory();
 
             // Initialize Gem Inventory
             LoadGems();
@@ -40,12 +46,13 @@ public class InventorySystem : MonoBehaviour
     {
         itemScore = 0;
         itemType = null;
+    }
 
-        // Initialize Inventory 
+    // Currently initializes an empty item inventory as an empty list of type CraftedItem
+    // This should load items from save data in the future
+    private void LoadInventory()
+    {
         inventory = new List<CraftedItem>();
-
-
-
     }
 
     // Currently this initializes an empty gem inventory using a dictionary with (gemData, int) kvp
@@ -55,7 +62,7 @@ public class InventorySystem : MonoBehaviour
         gemInventory = new Dictionary<string, int>();
         for (int i = 0; i < gemTypes.Count; i++)
         {
-            Debug.Log("adding " + gemTypes[i].name + " to dictionary");
+            //Debug.Log("adding " + gemTypes[i].name + " to dictionary");
             gemInventory.Add(gemTypes[i].name, 0);
         }
 

@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space pressed");
+            //Debug.Log("Space pressed");
             RefreshIcons();
         }
 
@@ -69,12 +69,20 @@ public class InventoryUI : MonoBehaviour
     {
         // determine item grade prefix (weak, strong)
         string itemPrefix = "";
+        string itemAffix = " ";
         if (item.scoreVal >= 2000)
             itemPrefix = item.data.itemGrades[1] + " ";
         if (item.scoreVal < 1000)
             itemPrefix = item.data.itemGrades[0] + " ";
+        // set item gem affix text
+        if (item.gData != null)
+            itemAffix = " " + item.gData.affixText;
+        
+        itemDisplayName.text = itemPrefix + item.data.ID + itemAffix;
 
-        itemDisplayName.text = itemPrefix + item.data.ID;
+        // change background art
+        if (item.gData != null)
+            gemEffectImage.sprite = item.gData.backgroundArt;
 
         // change item image
         itemImage.sprite = item.data.fullArt;
@@ -100,5 +108,16 @@ public class InventoryUI : MonoBehaviour
         InventorySystem.instance.RemoveItem(currentItemIndex);
         RefreshIcons();
         ResetDisplay();
+    }
+
+    // Attaches currently selected item with gem that was dragged in.
+    public void SocketItem()
+    {
+        GemData gem = InventorySystem.instance.selectedGem;
+        CraftedItem item = InventorySystem.instance.GetItem(currentItemIndex);
+        item.Socket(gem);
+
+        ViewItemInfo(item);
+        RefreshIcons();
     }
 }

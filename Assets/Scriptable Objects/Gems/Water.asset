@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Water
   affixText: of Streams
   gemArt: {fileID: 21300000, guid: bbb52f0202acaf14fb392f35717651be, type: 3}
-  slotArt: {fileID: 0}
+  backgroundArt: {fileID: 21300000, guid: ef532ebbf1cd8fa47b57d71d4d6319bd, type: 3}
