@@ -39,7 +39,7 @@ public class ForgingScript : MonoBehaviour
 
     public LocalizedStringDatabase table;
 
-    private AudioSource clangAudio;
+   // private AudioSource clangAudio;
     //private GameObject ResultCanvas;
     private int clicks;
     private int totalhits;
@@ -66,7 +66,7 @@ public class ForgingScript : MonoBehaviour
         FinishCanvas.GetComponent<Canvas>().enabled = false;
         activeScene = true;
         ResultsCanvas.GetComponent<Canvas>().enabled = false;
-        clangAudio = GetComponent<AudioSource>();
+        //clangAudio = GetComponent<AudioSource>();
         clicks = 0;
         currentSpeed = 0;
         speedLevel= 0;
@@ -121,7 +121,11 @@ public class ForgingScript : MonoBehaviour
                 onCooldown = true;
                 StartCoroutine(SlowMo());
                 StartCoroutine(Cooldown());
-                clangAudio.Play();
+                //clangAudio.Play();
+                if (AudioManager.instance != null)
+                {
+                        AudioManager.instance.PlaySFX("Anvil");
+                }
                 hammerAnimator.Play("HammerSwing");
                 clicks++;
                 SetHitsText();
@@ -252,6 +256,10 @@ public class ForgingScript : MonoBehaviour
     }
     IEnumerator showFinishButton(){
         activeScene = false;
+        if (AudioManager.instance != null)
+                {
+                        AudioManager.instance.PlaySFX("Victory");
+                }
         FinishCanvas.GetComponent<Canvas>().enabled = true;
         yield return new WaitForSeconds(finishtimer);
         FinishCanvas.GetComponent<Canvas>().enabled = false;

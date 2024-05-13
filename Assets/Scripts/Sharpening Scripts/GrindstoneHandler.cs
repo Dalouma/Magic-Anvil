@@ -23,6 +23,10 @@ public class GrindstoneHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         sparksParticles.Play();
+        if (AudioManager.instance != null)
+            {
+                    AudioManager.instance.PlaySFX("SwordGrind");
+            }
         sharpeningManager.SetSharpening(true);
     }
 

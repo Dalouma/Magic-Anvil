@@ -5,14 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-
+    
+    
     public AudioSource musicSource;
     // Start is called before the first frame update
     void Start()
     {
-        PlayMusic();
+        AudioManager.instance.ChangeMusic("menu");
     }
-
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -21,8 +22,8 @@ public class MainMenuManager : MonoBehaviour
 
     public void GoToShopScene()
     {
-        musicSource.Stop();
-        SceneManager.LoadScene("TestScene");
+        //musicSource.Stop();
+        //SceneManager.LoadScene("TestScene");
     }
 
     public void QuitGame()
@@ -46,5 +47,5 @@ public class MainMenuManager : MonoBehaviour
         {
             Screen.SetResolution(1280, 720, state);
         }
-    }
+    }*/
 }

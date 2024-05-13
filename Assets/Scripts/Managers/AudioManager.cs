@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -8,7 +9,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     public AudioMixer mixer;
-    public List<AudioSource> musicSources;
+    public List<AudioSource> bgmusicSources;
+    public List<AudioSource> sfxSources;
 
     private void Awake()
     {
@@ -25,27 +27,65 @@ public class AudioManager : MonoBehaviour
 
     private void StopAllMusic()
     {
-        for (int i = 0; i < musicSources.Count; i++)
+        for (int i = 0; i < bgmusicSources.Count; i++)
         {
-            musicSources[i].Stop();
+            bgmusicSources[i].Stop();
         }
     }
 
+    public enum MusicTrack
+    {
+        Menu,
+        Forge,
+
+
+    }
     public void ChangeMusic(string trackName)
     {
         StopAllMusic();
         if (trackName == "menu")
         {
-            musicSources[0].Play();
+            bgmusicSources[0].Play();
         }
-        if (trackName == "forge")
+        else if (trackName == "forge")
         {
-            musicSources[1].Play();
+            bgmusicSources[1].Play();
+        }
+    } 
+
+    public void PlaySFX(string sfxName)
+    {
+        if ( sfxName == "Anvil")
+        {
+            sfxSources[0].Play();
+        }
+        else if ( sfxName == "Victory")
+        {
+            sfxSources[1].Play();
+        }
+        else if ( sfxName == "SwordGrind")
+        {
+            sfxSources[2].Play();
         }
     }
 
-    public void SetVolumeLevel (float sliderVal)
-    {
-        mixer.SetFloat("MusicVol", Mathf.Log10(sliderVal) * 20);
+    public void SetBGVolume(){
+        mixer.GetFloat("BGM", out float currVolume);
+        if(currVolume == -40){
+            mixer.SetFloat("BGM", 0);
+        }
+        else{
+            mixer.SetFloat("BGM", -40);
+        }
+    }
+
+    public void SetSFXVolume(){
+        mixer.GetFloat("BGM", out float currVolume);
+        if(currVolume == -40){
+            mixer.SetFloat("SFX", 0);
+        }
+        else{
+            mixer.SetFloat("SFX", -40);
+        }
     }
 }
