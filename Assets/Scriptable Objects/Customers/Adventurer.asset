@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c54948be500cf40afb898cae2eacdb, type: 3}
+  m_Name: Adventurer
+  m_EditorClassIdentifier: 
+  name: Adventurer
+  characterSprite: {fileID: -328622296, guid: 08be5016c2194cb45bfc1254b15f44df, type: 3}
+  preferredItems:
+  - {fileID: 11400000, guid: 021047a20a9b8de49b286205fe22874d, type: 2}
+  - {fileID: 11400000, guid: d910331da34b7c0468df2e5577ca9cbf, type: 2}
+  - {fileID: 11400000, guid: 4dc149aeae08712449e0c6a7ba9db12e, type: 2}
+  rejectedItems: []
+  introText:
+  - Hey there, I've decided that I want to explore the world and go on adventures.
+    I'll need a good weapon to protect myself. Do you have something for me?
+  happyText:
+  - Ah, perfect! I feel like I'll be able to accomplish a lot with this weapon.
+  - How much would this be?
+  acceptText:
+  - 'Wouldn''t be my first choice, but this will do nicely. '
+  - What's it gonna cost me?
+  disappointText: []
+  rejectText: []
+  goodDeal: []
+  neutralDeal: []
+  badDeal: []
+  headlines: []
+  storyText: []

@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 572960810}
   - component: {fileID: 572960811}
   m_Layer: 5
-  m_Name: Customer Sprite
+  m_Name: Customer
   m_TagString: customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,7 +721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -931454921, guid: a804d73cd5f28704ebbba2cce888de14, type: 3}
+  m_Sprite: {fileID: -328622296, guid: 08be5016c2194cb45bfc1254b15f44df, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c94f994f43a5b478006b6bac2909a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerData: {fileID: 11400000, guid: b888ac58623850f4f88c608b10ff81d0, type: 2}
+  customerData: {fileID: 11400000, guid: 0b7fbbc0cab90024f9943f6880376f08, type: 2}
   speechCanvas: {fileID: 1242898472}
 --- !u!1 &743426344
 GameObject:
@@ -1334,7 +1334,7 @@ GameObject:
   - component: {fileID: 1864957646}
   - component: {fileID: 1864957645}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: Price Input Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

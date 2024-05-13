@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c54948be500cf40afb898cae2eacdb, type: 3}
+  m_Name: Paladin
+  m_EditorClassIdentifier: 
+  name: Paladin
+  characterSprite: {fileID: -1309012469, guid: 2721d4fb86b92fe4894f1400b6c13921, type: 3}
+  preferredItems:
+  - {fileID: 11400000, guid: cf3d6693677f9184d8ba9a49c8e5d519, type: 2}
+  - {fileID: 11400000, guid: 4dc149aeae08712449e0c6a7ba9db12e, type: 2}
+  rejectedItems:
+  - {fileID: 11400000, guid: a153fd34ab424e0448b7995285bc6124, type: 2}
+  introText:
+  - Greetins, smith. I am in search of equipment befitting of a protector in order
+    to serve the goddess. What can you offer me?
+  happyText:
+  - Excellent! The goddess shall be pleased. With this I can protect the people while
+    avoiding killing.
+  - What do I owe you?
+  acceptText:
+  - I'm not too confident with what you presented me, but I shall accept this fine
+    weapon.
+  - How much?
+  disappointText: []
+  rejectText:
+  - Preposterous! You've presented me with a coward's weapon. The church shall hear
+    of this mockery.
+  goodDeal: []
+  neutralDeal: []
+  badDeal: []
+  headlines: []
+  storyText: []
