@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 // This is a wrapper class for the CharacterData for each customer
-public class Customer : MonoBehaviour
+public class Customer : MonoBehaviour, IDropHandler
 {
     [SerializeField] private CharacterData customerData;
 
     [Header("References")]
     [SerializeField] private Canvas speechCanvas;
+
+    // Other References
+    private TMP_Text nameBox;
 
     // Speech States
     private enum SpeechState
@@ -29,8 +33,6 @@ public class Customer : MonoBehaviour
     private Dictionary<SpeechState, string[]> responseDict;
     private bool talking;
 
-    // Other Variables
-    private TMP_Text nameBox;
 
     private void Start()
     {
@@ -48,6 +50,9 @@ public class Customer : MonoBehaviour
         speechIndex = 0;
         talking = false;
     }
+
+    public bool isTalking() { return talking; }
+    public void SetTalking(bool state) { talking = state; }
 
     // Maps enum states to string arrays according to customer data
     private void SetupResponses()
@@ -87,14 +92,62 @@ public class Customer : MonoBehaviour
         speechCanvas.enabled = false;
         GetComponent<Image>().raycastTarget = true;
         speechIndex = 0;
+
+        // Customer leaves if state is in Reject
     }
 
-    public bool isTalking() { return talking; }
-    public void SetTalking(bool state) { talking = state; }
+    // Opens speech box. This is called in ReceiveItem().
+    private void TurnOnSpeechBox()
+    {
+        ProgressText();
+        talking = true;
+        speechCanvas.enabled = true;
+        GetComponent<Image>().raycastTarget = false;
+    }
+
+    // Detects the player dropping the item on the customer
+    public void OnDrop(PointerEventData eventData)
+    {
+        Debug.Log("detected drop event");
+        if (eventData.pointerDrag.CompareTag("item"))
+        {
+            ReceiveItem(eventData.pointerDrag.GetComponent<CounterItem>().GetItem());
+        }
+    }
+    
+    // Determines next state and response depending on which item is received
+    public void ReceiveItem(CraftedItem item)
+    {
+        // Rejected Items
+        foreach (ItemData rejectedItem in customerData.rejectedItems)
+        {
+            if (item.data.ID == rejectedItem.ID)
+            {
+                state = SpeechState.Reject;
+                TurnOnSpeechBox();
+                return;
+            }
+        }
+        // Preferred Items
+        foreach (ItemData preferredItem in customerData.preferredItems)
+        {
+            if (item.data.ID == preferredItem.ID)
+            {
+                state = SpeechState.Happy;
+                TurnOnSpeechBox();
+                return;
+            }
+        }
+        // Accepted Items (default)
+        state = SpeechState.Accept;
+        TurnOnSpeechBox();
+    }
+    
 
     public void CalculatePayment()
     {
 
     }
 
+    
 }

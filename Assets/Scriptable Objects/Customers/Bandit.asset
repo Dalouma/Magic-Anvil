@@ -23,16 +23,18 @@ MonoBehaviour:
     easily.
   - It would be better if you didn't ask any questions.
   happyText:
-  - <i>The bandit holds the dagger in the air, inspecting it.<i> Hehehe... This will
-    do nicely.
+  - <i>The bandit holds the dagger in the air, inspecting it.</i> Hehehe... This
+    will do nicely.
+  - How much?
   acceptText:
   - "Not what I had in mind, but maybe this might work\u2026"
+  - How much?
   disappointText:
   - ERROR. THIS CHARACTER HAS NO RESPONSE IN THIS CONTEXT.
   rejectText:
   - What a joke of a smith! Do I really look like I would use this thing?
   goodDeal:
-  - Hehehe...good, good... <i>The bandit seems pleased with the price.<i>
+  - Hehehe...good, good... <i>The bandit seems pleased with the price.</i>
   neutralDeal:
   - Hmph! <i>The bandit drops some coins on the table and leaves with the weapon.<i>
   badDeal:

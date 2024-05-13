@@ -102,6 +102,19 @@ public class InventoryUI : MonoBehaviour
         sellButton.SetActive(false);
     }
 
+    // Place item on counter
+    public void PlaceItem()
+    {
+        CraftedItem toPlace = InventorySystem.instance.GetItem(currentItemIndex);
+        CounterItem itemOnCounter = GameObject.FindGameObjectWithTag("item").GetComponent<CounterItem>();
+        if (itemOnCounter == null)
+        {
+            Debug.Log("item on counter not found");
+            return;
+        }
+        itemOnCounter.SetItem(toPlace);
+    }
+
     // Removes item from inventory and refreshes display
     public void SellItem()
     {
