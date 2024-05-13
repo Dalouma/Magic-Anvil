@@ -226,7 +226,7 @@ public class ForgingScript : MonoBehaviour
         currentSpeed = 0;
         if (weapon == "Shield" || weapon == "Hammer")
         {
-            AudioManager.instance.ChangeMusic("menu");
+            //AudioManager.instance.ChangeMusic("menu");
             Debug.Log("loading customer scene");
             SceneManager.LoadScene("TestScene");
         }

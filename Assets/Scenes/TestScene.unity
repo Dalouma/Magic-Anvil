@@ -2266,8 +2266,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -28, y: -30}
-  m_SizeDelta: {x: 209.4044, y: 258.6734}
+  m_AnchoredPosition: {x: -47.3393, y: -35.849}
+  m_SizeDelta: {x: 176.3187, y: 258.6734}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &677610561
 MonoBehaviour:
@@ -2345,7 +2345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -328622296, guid: 08be5016c2194cb45bfc1254b15f44df, type: 3}
+  m_Sprite: {fileID: -931454921, guid: a804d73cd5f28704ebbba2cce888de14, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2353,7 +2353,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &677610563
 CanvasRenderer:
@@ -2393,6 +2393,14 @@ MonoBehaviour:
   - {fileID: -328622296, guid: 08be5016c2194cb45bfc1254b15f44df, type: 3}
   - {fileID: -931454921, guid: a804d73cd5f28704ebbba2cce888de14, type: 3}
   - {fileID: -1309012469, guid: 2721d4fb86b92fe4894f1400b6c13921, type: 3}
+  spriteNames:
+  - Adventurer
+  - Bandit
+  - Paladin
+  sprites:
+  - {fileID: -328622296, guid: 08be5016c2194cb45bfc1254b15f44df, type: 3}
+  - {fileID: -931454921, guid: a804d73cd5f28704ebbba2cce888de14, type: 3}
+  - {fileID: -1309012469, guid: 2721d4fb86b92fe4894f1400b6c13921, type: 3}
   animator: {fileID: 677610566}
 --- !u!95 &677610566
 Animator:
@@ -2427,54 +2435,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33387cf4accd06c468394f373924e8e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preferredWeapons:
-  - Axe
-  - Shield
-  - Dagger
-  - Hammer
-  - Sword
-  hatedWeapons:
-  - Axe
-  - Shield
-  - Dagger
-  - Hammer
-  - Sword
-  introDialogue:
-  - Hello smithy, I'm looking to get something to help me with the trees on my farm
-  - Hey! I need something to help in my next battle!
-  - It's time for my kid to learn the blade, could you make something fit for him?
-  secondLine:
-  - Got anything like that?
-  - Something for the front lines
-  - Nothing too fancy, he's still small
-  payment:
-  - Neat, how much?
-  - Alright, name your price
-  - Hmm lets see, how far will this set me back?
-  preferred:
-  - I think this will do
-  - Alright, I bet I can make this work
-  - Cool, I'll take it
-  unpreferred:
-  - Ah, nah, I think I'll look elsewhere
-  - You kidding me? No thanks
-  - Hmm, um, you can keep it
-  baddeal:
-  - '*Sigh* alright, I''ll take it, but man that''s steep'
-  - Jeez, alright then.
-  - You're clearing me out but, alright.
-  neutral:
-  - That's fine, sure.
-  - Fair deal, I'll take it. Here's the money
-  - Acceptable, you got yourself a deal
-  gooddeal:
-  - Wow, yeah I'll do that, thanks
-  - Great deal! I'll have to tell my boys about this place
-  - Yeah sure, that's a great price yeah.
-  refusal:
-  - You're funny, what's your actual price?
-  - I don't have that much money boss
-  - Uh that's a little much dont you think?
 --- !u!1 &679319600
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,6 +3612,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cc97b3ecd24c72b42bccd283abad0ad1, type: 3}
   - {fileID: 21300000, guid: 551ed83aa929ffa45b49941120910363, type: 3}
   - {fileID: 21300000, guid: 0558ac84ff63cff4e9fef0a8a5fd1ae0, type: 3}
+  spriteNames: []
+  sprites: []
   animator: {fileID: 928904666}
 --- !u!1 &1016601587
 GameObject:
@@ -7010,6 +6972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378eb50219773f944bc11670b27cc640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1618544509}
 --- !u!1 &1645602545
 GameObject:
   m_ObjectHideFlags: 0
