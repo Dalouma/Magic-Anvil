@@ -67,6 +67,10 @@ public class AudioManager : MonoBehaviour
         {
             sfxSources[2].Play();
         }
+        else if ( sfxName == "Newspaper")
+        {
+            sfxSources[3].Play();
+        }
     }
 
     public void SetBGVolume(){

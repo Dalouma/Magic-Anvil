@@ -257,9 +257,9 @@ public class ForgingScript : MonoBehaviour
     IEnumerator showFinishButton(){
         activeScene = false;
         if (AudioManager.instance != null)
-                {
-                        AudioManager.instance.PlaySFX("Victory");
-                }
+        {
+                AudioManager.instance.PlaySFX("Victory");
+        }
         FinishCanvas.GetComponent<Canvas>().enabled = true;
         yield return new WaitForSeconds(finishtimer);
         FinishCanvas.GetComponent<Canvas>().enabled = false;
