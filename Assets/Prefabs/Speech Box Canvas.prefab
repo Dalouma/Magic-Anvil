@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b679fbd73786a44490d58fa9f4fb512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charsPerSecond: 50
+  charsPerSecond: 20
   punctuationDelay: 0.5
   punctuations: 
   quickSkip: 0

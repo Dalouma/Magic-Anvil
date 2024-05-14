@@ -288,10 +288,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 370600403}
     m_Modifications:
-    - target: {fileID: 898213512084351038, guid: 04eb98f128006244f97179d9b8df53b3, type: 3}
-      propertyPath: m_TagString
-      value: NameBox
-      objectReference: {fileID: 0}
     - target: {fileID: 3963527825934147968, guid: 04eb98f128006244f97179d9b8df53b3, type: 3}
       propertyPath: m_Name
       value: Speech Box Canvas
@@ -304,9 +300,9 @@ PrefabInstance:
       propertyPath: m_OverrideSorting
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6514558142049445036, guid: 04eb98f128006244f97179d9b8df53b3, type: 3}
-      propertyPath: m_text
-      value: ...
+    - target: {fileID: 6546250733266773236, guid: 04eb98f128006244f97179d9b8df53b3, type: 3}
+      propertyPath: quickSkip
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6928856653394905595, guid: 04eb98f128006244f97179d9b8df53b3, type: 3}
       propertyPath: m_Pivot.x
@@ -831,7 +827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c94f994f43a5b478006b6bac2909a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customerData: {fileID: 11400000, guid: 0b7fbbc0cab90024f9943f6880376f08, type: 2}
+  customerData: {fileID: 11400000, guid: b888ac58623850f4f88c608b10ff81d0, type: 2}
   speechCanvas: {fileID: 1242898472}
 --- !u!1 &743426344
 GameObject:

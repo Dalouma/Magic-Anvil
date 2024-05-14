@@ -12,14 +12,10 @@ public class TypewriterEffect : MonoBehaviour
 {
     private TMP_Text _textBox;
 
-    // For testing
-    //[Header("Test string")]
-    //[SerializeField] private string testText;
-
     // Basic Typewriter Functionality
     private int _iCharVisible;
     private Coroutine _typewriterCoroutine;
-    private bool _readyForNewText;
+    private bool _readyForNewText = true;
 
     private WaitForSeconds _simpleDelay;
     private WaitForSeconds _punctuationDelay;
@@ -60,8 +56,6 @@ public class TypewriterEffect : MonoBehaviour
         _skipDelay = new WaitForSeconds(1 / (charsPerSecond * skipSpeedup));
         _textboxFullEventDelay = new WaitForSeconds(sendDoneDelay);
 
-        _readyForNewText = true;
-
         // Grab customer reference
         customer = GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>();
     }
@@ -69,7 +63,6 @@ public class TypewriterEffect : MonoBehaviour
     private void OnEnable()
     {
         TMPro_EventManager.TEXT_CHANGED_EVENT.Add(PrepareForNewText);
-        //Debug.Log("enabling with readyForNewText = " + _readyForNewText);
     }
 
     private void OnDisable()
@@ -81,10 +74,11 @@ public class TypewriterEffect : MonoBehaviour
     {
         if (customer.isTalking() && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            //Debug.Log("Detected touch input");
-            //Debug.Log("readyForNewText = " + _readyForNewText);
             if (_readyForNewText)
             {
+                _textBox.maxVisibleCharacters = 0;
+                _iCharVisible = 0;
+                CurrentlySkipping = false;
                 GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>().ProgressText();
                 return;
             }
@@ -97,19 +91,19 @@ public class TypewriterEffect : MonoBehaviour
 
     public void PrepareForNewText(UnityEngine.Object obj)
     {
-        //Debug.Log("Detected Text Change");
-        if (!_readyForNewText)
+        if (obj != _textBox || !_readyForNewText || CurrentlySkipping)
+        {
             return;
+        }
 
-        _textBox.maxVisibleCharacters = 0;
-        _iCharVisible = 0;
-
+        CurrentlySkipping = false;
         _readyForNewText = false;
 
         if (_typewriterCoroutine != null)
-        {
             StopCoroutine(_typewriterCoroutine);
-        }
+
+        _textBox.maxVisibleCharacters = 0;
+        _iCharVisible = 0;
 
         _typewriterCoroutine = StartCoroutine(routine: Typewriter());
     }
@@ -122,7 +116,7 @@ public class TypewriterEffect : MonoBehaviour
         {
             var lastCharIndex = textInfo.characterCount - 1;
 
-            if (_iCharVisible == lastCharIndex)
+            if (_iCharVisible >= lastCharIndex)
             {
                 _textBox.maxVisibleCharacters++;
                 yield return _textboxFullEventDelay;
@@ -166,8 +160,8 @@ public class TypewriterEffect : MonoBehaviour
 
         StopCoroutine(_typewriterCoroutine);
         _textBox.maxVisibleCharacters = _textBox.textInfo.characterCount;
-        CompleteTextRevealed?.Invoke();
         _readyForNewText = true;
+        CompleteTextRevealed?.Invoke();
     }
 
     private IEnumerator SkipSpeedupReset()
