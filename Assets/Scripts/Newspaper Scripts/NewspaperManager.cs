@@ -13,7 +13,7 @@ public class NewspaperManager : MonoBehaviour
     [SerializeField] private List<GameObject> prefabList;
     [SerializeField] private List<Sprite> newsImages;
 
-    private CustomerData customerData;
+    //private CustomerData customerData;
     private int scrollSensitivity = -20;
     private int newsCount;
     private int sectionHeight = 530;
@@ -27,7 +27,7 @@ public class NewspaperManager : MonoBehaviour
     {
         newsCount = 0;
         currentLocale = LocalizationSettings.SelectedLocale;
-        GenerateNewspaper();
+        //GenerateNewspaper();
     }
 
     private void Update()
@@ -51,62 +51,62 @@ public class NewspaperManager : MonoBehaviour
     }
 
     // Generates the newspaper according to player's choices
-    void GenerateNewspaper()
-    {
-        foreach (KeyValuePair<string, string> kvp in Weapon.chosenWeapons)
-        {
-            string customerName = kvp.Key;
-            string chosenWeapon = kvp.Value;
+    //void GenerateNewspaper()
+    //{
+    //    foreach (KeyValuePair<string, string> kvp in Weapon.chosenWeapons)
+    //    {
+    //        string customerName = kvp.Key;
+    //        string chosenWeapon = kvp.Value;
 
-            if (currentLocale.Identifier == "en")
-            {
-                if (customerName.Substring(customerName.Length - 2) != "Ch")
-                {
-                    LoadCustomer(customerName);
+    //        if (currentLocale.Identifier == "en")
+    //        {
+    //            if (customerName.Substring(customerName.Length - 2) != "Ch")
+    //            {
+    //                LoadCustomer(customerName);
 
-                    if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
-                    {
-                        // Doesn't add section if customer left
-                        continue;
-                    }
-                    if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
-                    {
-                        // Customer Good Ending
-                        AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
-                    }
-                    else
-                    {
-                        // Customer Bad Ending
-                        AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
-                    }
-                }
-            }
-            else
-            {
-                if (customerName.Substring(customerName.Length - 2) == "Ch")
-                {
-                    LoadCustomer(customerName);
+    //                if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
+    //                {
+    //                    // Doesn't add section if customer left
+    //                    continue;
+    //                }
+    //                if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
+    //                {
+    //                    // Customer Good Ending
+    //                    AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
+    //                }
+    //                else
+    //                {
+    //                    // Customer Bad Ending
+    //                    AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
+    //                }
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (customerName.Substring(customerName.Length - 2) == "Ch")
+    //            {
+    //                LoadCustomer(customerName);
 
-                    if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
-                    {
-                        // Doesn't add section if customer left
-                        continue;
-                    }
-                    if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
-                    {
-                        // Customer Good Ending
-                        AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
-                    }
-                    else
-                    {
-                        // Customer Bad Ending
-                        AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
-                    }
-                }
-            }
-        }
+    //                if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
+    //                {
+    //                    // Doesn't add section if customer left
+    //                    continue;
+    //                }
+    //                if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
+    //                {
+    //                    // Customer Good Ending
+    //                    AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
+    //                }
+    //                else
+    //                {
+    //                    // Customer Bad Ending
+    //                    AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
+    //                }
+    //            }
+    //        }
+    //    }
 
-    }
+    //}
 
     // Adds in a section to the newspaper
     void AddSection(Sprite newsImage, string headline, string details)
@@ -128,15 +128,15 @@ public class NewspaperManager : MonoBehaviour
     }
 
     // Loads customer data in customerData var
-    public void LoadCustomer(string customerName)
-    {
-        //string content;
-        string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerName + ".json");
-        WWW www = new WWW(filePath);
-        while (!www.isDone) { }
-        //content = www.text;
-        customerData = JsonUtility.FromJson<CustomerData>(www.text);
-    }
+    //public void LoadCustomer(string customerName)
+    //{
+    //    //string content;
+    //    string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerName + ".json");
+    //    WWW www = new WWW(filePath);
+    //    while (!www.isDone) { }
+
+    //    customerData = JsonUtility.FromJson<CustomerData>(www.text);
+    //}
 
     private void CanvasScrolling()
     {
