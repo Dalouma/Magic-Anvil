@@ -8,7 +8,7 @@ using TMPro;
 // This is a wrapper class for the CharacterData for each customer
 public class Customer : MonoBehaviour, IDropHandler
 {
-    [SerializeField] private CharacterData customerData;
+    [SerializeField] private CharacterData NPC;
 
     [Header("References")]
     [SerializeField] private Canvas speechCanvas;
@@ -50,9 +50,9 @@ public class Customer : MonoBehaviour, IDropHandler
 
     public bool isTalking() { return talking; }
     public void SetTalking(bool state) { talking = state; }
-    public void SetCustomer(CharacterData data)
+    public void SetCharacter(CharacterData data)
     {
-        customerData= data;
+        NPC = data;
         nameBox.text = data.name;
         GetComponent<Image>().sprite = data.characterSprite;
         SetupResponses();
@@ -61,17 +61,24 @@ public class Customer : MonoBehaviour, IDropHandler
     // Maps enum states to string arrays according to customer data
     private void SetupResponses()
     {
+
+
         responseDict = new Dictionary<SpeechState, string[]>()
         {
-            { SpeechState.Intro,        customerData.introText },
-            { SpeechState.Happy,        customerData.happyText },
-            { SpeechState.Accept,       customerData.acceptText },
-            { SpeechState.Disappoint,   customerData.disappointText },
-            { SpeechState.Reject,       customerData.rejectText },
-            { SpeechState.GoodDeal,     customerData.goodDeal },
-            { SpeechState.NeutralDeal,  customerData.neutralDeal },
-            { SpeechState.BadDeal,      customerData.badDeal },
+            { SpeechState.Intro,        NPC.introText }
         };
+
+        // Add additional responses if character has customerData
+        if (NPC.customerData != null)
+        {
+            responseDict.Add(SpeechState.Happy, NPC.customerData.happyText);
+            responseDict.Add(SpeechState.Accept, NPC.customerData.acceptText);
+            responseDict.Add(SpeechState.Disappoint, NPC.customerData.disappointText);
+            responseDict.Add(SpeechState.Reject, NPC.customerData.rejectText);
+            responseDict.Add(SpeechState.GoodDeal, NPC.customerData.goodDeal);
+            responseDict.Add(SpeechState.NeutralDeal, NPC.customerData.neutralDeal);
+            responseDict.Add(SpeechState.BadDeal, NPC.customerData.badDeal);
+        }
     }
 
     // Progresses active speech box to display next set of sentences
@@ -109,11 +116,12 @@ public class Customer : MonoBehaviour, IDropHandler
         GetComponent<Image>().raycastTarget = false;
     }
 
-    // Detects the player dropping the item on the customer
+    // Detects the player dropping the item on the character
+    // Only runs if the character has customer data
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("detected drop event");
-        if (eventData.pointerDrag.CompareTag("item"))
+        if (NPC.customerData != null && eventData.pointerDrag.CompareTag("item"))
         {
             ReceiveItem(eventData.pointerDrag.GetComponent<CounterItem>().GetItem());
         }
@@ -123,7 +131,7 @@ public class Customer : MonoBehaviour, IDropHandler
     public void ReceiveItem(CraftedItem item)
     {
         // Rejected Items
-        foreach (ItemData rejectedItem in customerData.rejectedItems)
+        foreach (ItemData rejectedItem in NPC.customerData.rejectedItems)
         {
             if (item.data.ID == rejectedItem.ID)
             {
@@ -133,7 +141,7 @@ public class Customer : MonoBehaviour, IDropHandler
             }
         }
         // Preferred Items
-        foreach (ItemData preferredItem in customerData.preferredItems)
+        foreach (ItemData preferredItem in NPC.customerData.preferredItems)
         {
             if (item.data.ID == preferredItem.ID)
             {

@@ -24,18 +24,20 @@ public class ShopManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    // Player Resources
     [Header("Status")]
     [SerializeField] private int money;
     [SerializeField] private int reputationValue;
     [SerializeField] private int wood;
     [SerializeField] private int iron;
 
+    // List of Special Customers with news stories
     [Header("Special Customers")]
     [SerializeField] private List<CharacterData> specialCust;
 
     // Customer Queue
-    public List<(CharacterData, CraftedItem)> customerQueue { get; private set; }
-    private int customerIndex;
+    public List<(CharacterData, CraftedItem)> npcQueue { get; private set; }
+    private int npcQueueIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -55,20 +57,20 @@ public class ShopManager : MonoBehaviour
     // For now it will load the 3 current customers
     private void LoadCustomers()
     {
-        customerQueue = new List<(CharacterData, CraftedItem)>
+        npcQueue = new List<(CharacterData, CraftedItem)>
         {
             (specialCust[0], null),
             (specialCust[1], null),
             (specialCust[2], null)
         };
-        customerIndex = 0;
+        npcQueueIndex = 0;
     }
 
     // This function makes the next customer in the queue appear
     private void NextCustomer()
     {
         Customer customer = GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>();
-        customer.SetCustomer(customerQueue[customerIndex].Item1);
+        customer.SetCharacter(npcQueue[npcQueueIndex].Item1);
     }
 
 }
