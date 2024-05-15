@@ -93,6 +93,22 @@ public class InventorySystem : MonoBehaviour
         Debug.Log("Created " + itemType.ID + " with grade " + itemScore);
     }
 
+    public void GenerateFullSet()
+    {
+        if (inventory.Count > 1)
+        {
+            Debug.Log("Too many items in inventory!!!");
+            return;
+        }
+        foreach (ItemData item in testItems)
+        {
+            itemType = item;
+            itemScore = 3000;
+            FinishCrafting();
+        }
+        Debug.Log("generated perfect set of items");
+    }
+
     // sets chosen weapon and sets item score to 0
     public void StartCrafting(ItemData itemData)
     {

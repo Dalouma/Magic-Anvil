@@ -105,6 +105,12 @@ public class Customer : MonoBehaviour, IDropHandler
         speechCanvas.enabled = false;
 
         // Customer leaves if state is in Reject
+        if (state == SpeechState.Reject)
+        {
+            Debug.Log("Calling NextCustomer()");
+            ShopManager.instance.npcQueueIndex++;
+            ShopManager.instance.NextCustomer();
+        }
     }
 
     // Opens speech box. This is called in ReceiveItem().

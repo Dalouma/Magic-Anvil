@@ -36,7 +36,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Debug.Log("Space pressed");
+            InventorySystem.instance.GenerateFullSet();
             RefreshIcons();
         }
 

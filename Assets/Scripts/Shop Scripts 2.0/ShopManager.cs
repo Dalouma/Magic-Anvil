@@ -37,7 +37,7 @@ public class ShopManager : MonoBehaviour
 
     // Customer Queue
     public List<(CharacterData, CraftedItem)> npcQueue { get; private set; }
-    private int npcQueueIndex;
+    public int npcQueueIndex;
 
     // Start is called before the first frame update
     void Start()
@@ -59,15 +59,15 @@ public class ShopManager : MonoBehaviour
     {
         npcQueue = new List<(CharacterData, CraftedItem)>
         {
-            (specialCust[0], null),
             (specialCust[1], null),
-            (specialCust[2], null)
+            (specialCust[2], null),
+            (specialCust[0], null)
         };
         npcQueueIndex = 0;
     }
 
     // This function makes the next customer in the queue appear
-    private void NextCustomer()
+    public void NextCustomer()
     {
         Customer customer = GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>();
         customer.SetCharacter(npcQueue[npcQueueIndex].Item1);

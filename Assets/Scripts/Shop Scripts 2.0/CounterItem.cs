@@ -8,14 +8,14 @@ public class CounterItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 {
     private Image thisImage;
     [SerializeField]
-    private Vector3 startPos;
+    private Vector2 startPos;
     private CraftedItem item;
 
     // Start is called before the first frame update
     void Start()
     {
         thisImage = GetComponent<Image>();
-        startPos = transform.position;
+        startPos = GetComponent<RectTransform>().anchoredPosition;
     }
 
     public CraftedItem GetItem() { return item; }
@@ -38,7 +38,7 @@ public class CounterItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.position = startPos;
+        GetComponent<RectTransform>().anchoredPosition = startPos;
         thisImage.raycastTarget = true;
     }
 }
