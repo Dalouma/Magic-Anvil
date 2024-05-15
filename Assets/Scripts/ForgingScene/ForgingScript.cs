@@ -7,6 +7,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Analytics;
 
 public class ForgingScript : MonoBehaviour
 {
@@ -182,7 +183,7 @@ public class ForgingScript : MonoBehaviour
                 // end check
                 if (clicks == totalhits)
                 {
-                    StartCoroutine(showFinishButton());
+                    StartCoroutine(ShowFinishButton());
                     //ShowForgingResults();
                     //EndGame();
                 }
@@ -198,7 +199,7 @@ public class ForgingScript : MonoBehaviour
             greatTiming = 10;
             goodTiming = 0;
             badTiming = 0;
-            StartCoroutine(showFinishButton());
+            StartCoroutine(ShowFinishButton());
         }
     }
 
@@ -253,8 +254,23 @@ public class ForgingScript : MonoBehaviour
         //forgingscore = CalculateForgingScore(greatTiming, goodTiming, badTiming); 
         resultText.text = $"{table.GetLocalizedString("forging")}\n\n\n{table.GetLocalizedString("score")} {score} /100";
         ResultsCanvas.GetComponent<Canvas>().enabled = true;
+        AnalyticsForging();
     }
-    IEnumerator showFinishButton(){
+    public void AnalyticsForging(){
+        //#if ENABLE_CLOUD_SERVICES_ANALYTICS
+        AnalyticsResult ForgingScore = Analytics.CustomEvent("ForgingScore", new Dictionary<string, object>
+        {
+            { "score", score },{"great", greatTiming}, {"good", goodTiming},{"bad", badTiming}
+        });
+        AnalyticsResult ForgingWeapon = Analytics.CustomEvent("ForgingWeapon", new Dictionary<string, object>
+        {
+            { "weapon", Weapon.weapon} 
+        });
+        Debug.Log("analyticsresults:    " + ForgingScore + ":    " + ForgingWeapon);
+        //#endif
+    }
+
+    IEnumerator ShowFinishButton(){
         activeScene = false;
         if (AudioManager.instance != null)
         {

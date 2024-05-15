@@ -84,7 +84,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void SetSFXVolume(){
-        mixer.GetFloat("BGM", out float currVolume);
+        mixer.GetFloat("SFX", out float currVolume);
         if(currVolume == -40){
             mixer.SetFloat("SFX", 0);
         }
