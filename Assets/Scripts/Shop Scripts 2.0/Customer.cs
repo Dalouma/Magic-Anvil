@@ -33,18 +33,15 @@ public class Customer : MonoBehaviour, IDropHandler
     private Dictionary<SpeechState, string[]> responseDict;
     private bool talking;
 
-
-    private void Start()
+    private void Awake()
     {
         // Grab References
         speechBox = GameObject.FindGameObjectWithTag("SpeechBox").GetComponent<TMP_Text>();
         nameBox = GameObject.FindGameObjectWithTag("NameBox").GetComponent<TMP_Text>();
+    }
 
-        // Setup specific customer
-        nameBox.text = customerData.name;
-        GetComponent<Image>().sprite = customerData.characterSprite;
-        SetupResponses();
-
+    private void Start()
+    {
         // Setup Vars
         state = SpeechState.Intro;
         speechIndex = 0;
@@ -53,6 +50,13 @@ public class Customer : MonoBehaviour, IDropHandler
 
     public bool isTalking() { return talking; }
     public void SetTalking(bool state) { talking = state; }
+    public void SetCustomer(CharacterData data)
+    {
+        customerData= data;
+        nameBox.text = data.name;
+        GetComponent<Image>().sprite = data.characterSprite;
+        SetupResponses();
+    }
 
     // Maps enum states to string arrays according to customer data
     private void SetupResponses()
@@ -88,10 +92,10 @@ public class Customer : MonoBehaviour, IDropHandler
     private void TurnOffSpeechBox()
     {
         speechBox.text = "...";
-        talking = false;
-        speechCanvas.enabled = false;
-        GetComponent<Image>().raycastTarget = true;
         speechIndex = 0;
+        talking = false;
+        GetComponent<Image>().raycastTarget = true;
+        speechCanvas.enabled = false;
 
         // Customer leaves if state is in Reject
     }

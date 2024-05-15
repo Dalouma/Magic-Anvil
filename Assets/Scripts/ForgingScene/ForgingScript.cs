@@ -74,7 +74,7 @@ public class ForgingScript : MonoBehaviour
         goodTiming = 0;
         badTiming = 0;
         StartGame();
-        weapon = Weapon.weapon;
+        //weapon = Weapon.weapon;
         Debug.Log(weapon);
         onCooldown = false;
         nextScene.onClick.AddListener(EndGame);

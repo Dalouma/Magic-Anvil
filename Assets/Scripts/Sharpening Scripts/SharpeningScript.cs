@@ -59,7 +59,7 @@ public class SharpeningScript : MonoBehaviour
         //sharpeningMaxTime = 20;
 
         SetRandomKeyOrder();
-        SetSprite(Weapon.weapon);
+        //SetSprite(Weapon.weapon);
     }
 
     // Update is called once per frame

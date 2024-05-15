@@ -15,6 +15,7 @@ TagManager:
   - Inventory Manager
   - SpeechBox
   - NameBox
+  - ShopCanvas
   layers:
   - Default
   - TransparentFX

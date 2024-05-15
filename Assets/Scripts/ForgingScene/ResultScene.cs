@@ -12,7 +12,8 @@ public class ResultScene : MonoBehaviour
     private int badTiming = ForgingScript.badTiming;
     void Start()
     {
-        string weaponText = "Weapon: " + Weapon.weapon;
+        //string weaponText = "Weapon: " + Weapon.weapon;
+        string weaponText = "Weapon: EMPTY (REFACTOR)";
         string sharpeningText = "\nSharpening Hits: " + sharpeningHits;
         string forgingText = "\nGreat Timing: " + greatTiming + "\nGood Timing: "
          + goodTiming + "\nBad Timing: " + badTiming;
