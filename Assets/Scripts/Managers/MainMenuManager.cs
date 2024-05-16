@@ -23,6 +23,7 @@ public class MainMenuManager : MonoBehaviour
         var options = new InitializationOptions();
         options.SetEnvironmentName("testing");
         await UnityServices.InitializeAsync(options);
+        Debug.Log("UnityServicesState:   " +UnityServices.State);
         AnalyticsService.Instance.Flush();
         isInitialized = true;
     }

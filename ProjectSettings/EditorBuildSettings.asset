@@ -17,12 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScene.unity
     guid: 3c3368461fe71eb46b6bfd71dfd85188
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ResultsScene.unity
     guid: eb7af6018ffb309f1b0947ddd927f0e5
   - enabled: 1
     path: Assets/Scenes/NewspaperScene.unity
-    guid: 7e6219856335eea449a19150b61bb7ff
+    guid: 09795fde35d8e7144b8220ec82824f49
   - enabled: 1
     path: Assets/Scenes/EndCredits.unity
     guid: 97cf1c1af33b49a4fb64ed7c953212b5

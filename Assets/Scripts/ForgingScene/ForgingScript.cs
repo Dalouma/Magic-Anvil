@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 public class ForgingScript : MonoBehaviour
 {
@@ -227,6 +228,7 @@ public class ForgingScript : MonoBehaviour
 
     public void EndGame()
     {
+        
         Debug.Log("button clicked for end game");
         gameStart = false;
         currentSpeed = 0;
@@ -257,17 +259,23 @@ public class ForgingScript : MonoBehaviour
         AnalyticsForging();
     }
     public void AnalyticsForging(){
-        //#if ENABLE_CLOUD_SERVICES_ANALYTICS
-        AnalyticsResult ForgingScore = Analytics.CustomEvent("ForgingScore", new Dictionary<string, object>
+        CustomEvent ForgingScore = new CustomEvent("ForgingScore")
         {
-            { "score", score },{"great", greatTiming}, {"good", goodTiming},{"bad", badTiming}
-        });
-        AnalyticsResult ForgingWeapon = Analytics.CustomEvent("ForgingWeapon", new Dictionary<string, object>
-        {
+            { "score", score },
+            { "great", greatTiming },
+            { "good", goodTiming },
+            { "bad", badTiming },
             { "weapon", Weapon.weapon} 
-        });
-        Debug.Log("analyticsresults:    " + ForgingScore + ":    " + ForgingWeapon);
-        //#endif
+        };
+        AnalyticsService.Instance.RecordEvent(ForgingScore);
+        Debug.Log("ForgingScoreResults" + ForgingScore);
+        foreach (KeyValuePair<string, object> kvp in ForgingScore)
+        {
+            Debug.Log($"Key: {kvp.Key}, Value: {kvp.Value}");
+        }
+
+        Debug.Log("ForgingScoreResults recorded");
+        
     }
 
     IEnumerator ShowFinishButton(){
