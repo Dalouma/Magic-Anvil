@@ -87,7 +87,6 @@ public class ShopManager : MonoBehaviour
     public void UpdateMoney(int value)
     {
         money+= value;
-        moneyText.text = money.ToString();
 
     }
 
