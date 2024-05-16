@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -79,6 +80,7 @@ public class CustomerManager : MonoBehaviour
     public UnityEngine.UI.Slider bar;
     public int score;
     private static int day = 0;
+    private static CustomerData tempData;
     private int basePrice = 300;
     System.Random rnd = new System.Random();
 
@@ -198,22 +200,10 @@ public class CustomerManager : MonoBehaviour
         {
             day++;
             GenDailyCustomers();
-            if (customerfileList[customer] == "Rogue")
-            {
-                cust.changeSprite(1);
-            }
-            if (customerfileList[customer] == "Paladin")
-            {
-                cust.changeSprite(2);
-            }
-            if (customerfileList[customer] == "Adventurer")
-            {
-
-                cust.changeSprite(0);
-            }
+            loadCustomer();
 
         }
-        //day = levelChangerScript.daycount;
+        data = tempData;
 
         if (manager != null && manager.pullFromSave == true)
         {
@@ -229,8 +219,7 @@ public class CustomerManager : MonoBehaviour
             score = ForgingScript.score + (int)SharpeningScript.score;
         }
         //customer = cnum;
-        cust.changeSprite(customer);
-        loadCustomer();
+        cust.changeSprite(customerfileList[customer]);
         SetRep(currRep);
         //Debug.Log(getData().name);
         chosenWeapon = Weapon.weapon;
@@ -295,15 +284,23 @@ public class CustomerManager : MonoBehaviour
         Debug.Log(customerfileList.Count);
         if (customerfileList[customer] == "Customer")
         {
-            data = GenGenericCustomer();
+            tempData = GenGenericCustomer();
             
         }
         else
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerfileList[customer] + ".json");
-            WWW www = new WWW(filePath);
+            string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/GenericCustomerData.json");
+            UnityWebRequest www = UnityWebRequest.Get(filePath);
+            www.SendWebRequest();
+
             while (!www.isDone) { }
-            content = www.text;
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Failed to load file: " + www.error);
+            }
+
+            content = www.downloadHandler.text;           
             data = JsonUtility.FromJson<CustomerData>(content);
          
         }
@@ -324,6 +321,7 @@ public class CustomerManager : MonoBehaviour
 
             cnum = customer;
             loadCustomer();
+            data = tempData;
             cust.changeSpriteAnim(customerfileList[customer]);
             speechbubble.speechFade();
             Weapon.weapon = null;
