@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
     // instance reference
     public static ShopManager instance;
+    
 
     // Only one instance
     private void Awake()
@@ -26,8 +28,8 @@ public class ShopManager : MonoBehaviour
 
     // Player Resources
     [Header("Status")]
-    [SerializeField] private int money;
-    [SerializeField] private int reputationValue;
+    [SerializeField] private int money=450;
+    [SerializeField] private int reputationValue=20;
     [SerializeField] private int wood;
     [SerializeField] private int iron;
 
@@ -38,6 +40,10 @@ public class ShopManager : MonoBehaviour
     // Customer Queue
     public List<(CharacterData, CraftedItem)> npcQueue { get; private set; }
     public int npcQueueIndex;
+    
+    //UI objects
+    public UnityEngine.UI.Slider bar;
+    public TextMeshProUGUI moneyText;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +77,15 @@ public class ShopManager : MonoBehaviour
     {
         Customer customer = GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>();
         customer.SetCharacter(npcQueue[npcQueueIndex].Item1);
+    }
+    public void SetRep(double rep)
+    {
+        bar.value = (int)rep;
+    }
+    public void UpdateMoney(int value)
+    {
+        money+= value;
+
     }
 
 }
