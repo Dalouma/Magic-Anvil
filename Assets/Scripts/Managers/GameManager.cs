@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -21,6 +21,23 @@ public class GameManager : MonoBehaviour
     // ...
     public int currency = 450;
     public int character = 0;
+
+    // Customer Queue save data
+    public string[] customerQueue;
+    public itemSaveData[] givenItems;
+    public int queueIndex;
+    public int dayCount;
+
+    // Inventory save data
+    public itemSaveData[] inventorySaveData;
+
+    // Gem Inventory save data
+    public (string, int)[] gemInventory;
+
+    // Analytics save data
+    public bool tracking;
+    public bool consent;
+
 
     public bool pullFromSave = false;
 
@@ -35,8 +52,8 @@ public class GameManager : MonoBehaviour
 
         // set all variables back to loaded data
         // ...
-        currency = data.currency;
-        character = data.character;
+        //currency = data.currency;
+        //character = data.character;
     }
 
     public void FromSave()

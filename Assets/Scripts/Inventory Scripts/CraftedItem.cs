@@ -26,4 +26,23 @@ public class CraftedItem
         gData = gem;
     }
 
+    public itemSaveData GetSaveData()
+    {
+        itemSaveData saveData = new itemSaveData();
+
+        saveData.itemName = data.ID;
+        saveData.gemName = gData.name;
+        saveData.itemGrade = scoreVal;
+
+        return saveData;
+    }
+
+}
+
+[System.Serializable]
+public struct itemSaveData
+{
+    public string itemName;
+    public string gemName;
+    public int itemGrade;
 }

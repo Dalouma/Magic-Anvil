@@ -31,6 +31,8 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private int wood;
     [SerializeField] private int iron;
 
+    public int GetMoney() { return money; }
+
     // List of Special Customers with news stories
     [Header("Special Customers")]
     [SerializeField] private List<CharacterData> specialCust;

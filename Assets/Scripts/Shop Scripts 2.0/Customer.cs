@@ -61,8 +61,7 @@ public class Customer : MonoBehaviour, IDropHandler
     // Maps enum states to string arrays according to customer data
     private void SetupResponses()
     {
-
-
+        //
         responseDict = new Dictionary<SpeechState, string[]>()
         {
             { SpeechState.Intro,        NPC.introText }
@@ -160,7 +159,6 @@ public class Customer : MonoBehaviour, IDropHandler
         state = SpeechState.Accept;
         TurnOnSpeechBox();
     }
-    
 
     public void CalculatePayment()
     {
