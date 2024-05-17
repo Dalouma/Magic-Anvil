@@ -57,7 +57,7 @@ public class InventoryUI : MonoBehaviour
 
             CraftedItem item;
             if (i < InventorySystem.instance.GetItemCount())
-                item = InventorySystem.instance.GetItem(i);
+                item = InventorySystem.instance.GetItemAt(i);
             else
                 item = null;
             currentSlot.Set(item);
@@ -105,7 +105,7 @@ public class InventoryUI : MonoBehaviour
     // Place item on counter
     public void PlaceItem()
     {
-        CraftedItem toPlace = InventorySystem.instance.GetItem(currentItemIndex);
+        CraftedItem toPlace = InventorySystem.instance.GetItemAt(currentItemIndex);
         CounterItem itemOnCounter = GameObject.FindGameObjectWithTag("item").GetComponent<CounterItem>();
         if (itemOnCounter == null)
         {
@@ -127,7 +127,7 @@ public class InventoryUI : MonoBehaviour
     public void SocketItem()
     {
         GemData gem = InventorySystem.instance.selectedGem;
-        CraftedItem item = InventorySystem.instance.GetItem(currentItemIndex);
+        CraftedItem item = InventorySystem.instance.GetItemAt(currentItemIndex);
         item.Socket(gem);
 
         ViewItemInfo(item);

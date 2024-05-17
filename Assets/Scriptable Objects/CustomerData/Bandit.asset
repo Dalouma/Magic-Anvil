@@ -30,8 +30,18 @@ MonoBehaviour:
   disappointText: []
   rejectText:
   - What a joke of a smith! Do i REALLY look like I would use this thing?
-  goodDeal: []
-  neutralDeal: []
-  badDeal: []
+  tooExpensive:
+  - Stop playing games, smith. Lower the price or never see the light of day again.
+  highPrice:
+  - If you offered me that price a single coin higher, I would have added your name
+    to the list.
+  midPrice:
+  - <i>The Bandit drops his payment on the counter and turns to leave. Before exiting
+    he looks back at you.</i>
+  - I was never here.
+  lowPrice:
+  - <i>The bandit places a handful of coins on the counter and turns to leave. As
+    he exits the shop, he mumbles something.</i>
+  - Heh... Sucker.
   headlines: []
   storyText: []

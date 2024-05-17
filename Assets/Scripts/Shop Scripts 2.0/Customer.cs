@@ -12,6 +12,7 @@ public class Customer : MonoBehaviour, IDropHandler
 
     [Header("References")]
     [SerializeField] private Canvas speechCanvas;
+    [SerializeField] private ShopUI shopUI;
 
     // Other References
     private TMP_Text nameBox;
@@ -23,7 +24,7 @@ public class Customer : MonoBehaviour, IDropHandler
         // Item responses
         Happy, Accept, Disappoint, Reject,
         // Haggling responses
-        GoodDeal, NeutralDeal, BadDeal
+        TooExpensive, HighPrice, MidPrice, LowPrice
     }
 
     // Speech Tracker Variables
@@ -32,6 +33,11 @@ public class Customer : MonoBehaviour, IDropHandler
     private int speechIndex;
     private Dictionary<SpeechState, string[]> responseDict;
     private bool talking;
+
+    // Payment tracker
+    private CraftedItem presentedItem;
+    private int goodPrice, idealPrice, maxPrice;
+    private int offeredPrice;
 
     private void Awake()
     {
@@ -61,22 +67,24 @@ public class Customer : MonoBehaviour, IDropHandler
     // Maps enum states to string arrays according to customer data
     private void SetupResponses()
     {
-        //
         responseDict = new Dictionary<SpeechState, string[]>()
         {
-            { SpeechState.Intro,        NPC.introText }
+            { SpeechState.Intro, NPC.introText }
         };
 
         // Add additional responses if character has customerData
         if (NPC.customerData != null)
         {
-            responseDict.Add(SpeechState.Happy, NPC.customerData.happyText);
-            responseDict.Add(SpeechState.Accept, NPC.customerData.acceptText);
-            responseDict.Add(SpeechState.Disappoint, NPC.customerData.disappointText);
-            responseDict.Add(SpeechState.Reject, NPC.customerData.rejectText);
-            responseDict.Add(SpeechState.GoodDeal, NPC.customerData.goodDeal);
-            responseDict.Add(SpeechState.NeutralDeal, NPC.customerData.neutralDeal);
-            responseDict.Add(SpeechState.BadDeal, NPC.customerData.badDeal);
+            // Item responses
+            responseDict.Add(SpeechState.Happy,         NPC.customerData.happyText);
+            responseDict.Add(SpeechState.Accept,        NPC.customerData.acceptText);
+            responseDict.Add(SpeechState.Disappoint,    NPC.customerData.disappointText);
+            responseDict.Add(SpeechState.Reject,        NPC.customerData.rejectText);
+            // Price responses
+            responseDict.Add(SpeechState.TooExpensive,  NPC.customerData.tooExpensive);
+            responseDict.Add(SpeechState.HighPrice,     NPC.customerData.highPrice);
+            responseDict.Add(SpeechState.MidPrice,      NPC.customerData.midPrice);
+            responseDict.Add(SpeechState.LowPrice,      NPC.customerData.lowPrice);
         }
     }
 
@@ -94,24 +102,6 @@ public class Customer : MonoBehaviour, IDropHandler
             TurnOffSpeechBox();
     }
 
-    // Closes speech box; resets speech index; reactivates character button
-    private void TurnOffSpeechBox()
-    {
-        speechBox.text = "...";
-        speechIndex = 0;
-        talking = false;
-        GetComponent<Image>().raycastTarget = true;
-        speechCanvas.enabled = false;
-
-        // Customer leaves if state is in Reject
-        if (state == SpeechState.Reject)
-        {
-            Debug.Log("Calling NextCustomer()");
-            ShopManager.instance.npcQueueIndex++;
-            ShopManager.instance.NextCustomer();
-        }
-    }
-
     // Opens speech box. This is called in ReceiveItem().
     private void TurnOnSpeechBox()
     {
@@ -121,19 +111,63 @@ public class Customer : MonoBehaviour, IDropHandler
         GetComponent<Image>().raycastTarget = false;
     }
 
+    // Closes speech box; resets speech index; reactivates character button
+    private void TurnOffSpeechBox()
+    {
+        speechBox.text = "...";
+        speechIndex = 0;
+        talking = false;
+        GetComponent<Image>().raycastTarget = true;
+        speechCanvas.enabled = false;
+
+        
+        // Customer leaves if state is in Reject
+        if (state == SpeechState.Reject)
+        {
+            ShopManager.instance.NextCustomer();
+        }
+        // Let player offer a price
+        else if (state == SpeechState.Happy || state == SpeechState.Accept || state == SpeechState.Disappoint)
+        {
+            shopUI.ShowPriceInputField();
+        }
+        // Will give player another opportunity to offer price unless too annoyed
+        else if (state == SpeechState.TooExpensive)
+        {
+            shopUI.ShowPriceInputField();
+            // implement incrementing annoyance value later
+        }
+        // Pays player; records item sold; removes item from inventory; customer leaves
+        else if (state == SpeechState.HighPrice || state == SpeechState.MidPrice || state == SpeechState.LowPrice)
+        {
+            // pay player
+            ShopManager.instance.AddMoney(offeredPrice);
+            shopUI.RefreshMoney();
+            // record item
+            ShopManager.instance.RecordItem(presentedItem);
+            // remove item from inventory
+            GameObject.FindGameObjectWithTag("InventoryCanvas").GetComponent<InventoryUI>().SellItem();
+            GameObject.FindGameObjectWithTag("item").GetComponent<Image>().enabled = false;
+            // customer leave
+            ShopManager.instance.NextCustomer();
+        }
+
+    }
+
     // Detects the player dropping the item on the character
     // Only runs if the character has customer data
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("detected drop event");
         if (NPC.customerData != null && eventData.pointerDrag.CompareTag("item"))
         {
-            ReceiveItem(eventData.pointerDrag.GetComponent<CounterItem>().GetItem());
+            presentedItem = eventData.pointerDrag.GetComponent<CounterItem>().GetItem();
+            ReceiveItem(presentedItem);
+            CalculatePriceThreshold();
         }
     }
     
     // Determines next state and response depending on which item is received
-    public void ReceiveItem(CraftedItem item)
+    private void ReceiveItem(CraftedItem item)
     {
         // Rejected Items
         foreach (ItemData rejectedItem in NPC.customerData.rejectedItems)
@@ -160,9 +194,33 @@ public class Customer : MonoBehaviour, IDropHandler
         TurnOnSpeechBox();
     }
 
-    public void CalculatePayment()
+    // This function calculates the pricing thresholds that the customer tolerates
+    // It is currently set to arbitrary numbers for testing
+    // This should take into account customer's stinginess
+    private void CalculatePriceThreshold()
     {
+        maxPrice = 60;
+        idealPrice = 40;
+        goodPrice = 20;
+    }
 
+    // This function is called after the player offers a price by finishing the input field
+    public void OfferPrice(string input)
+    {
+        if (input == null) { return; }
+
+        offeredPrice = int.Parse(input);
+
+        if (offeredPrice > maxPrice)
+            state = SpeechState.TooExpensive;
+        else if (offeredPrice > idealPrice)
+            state = SpeechState.HighPrice;
+        else if (offeredPrice > goodPrice)
+            state = SpeechState.MidPrice;
+        else
+            state = SpeechState.LowPrice;
+
+        TurnOnSpeechBox();
     }
 
     

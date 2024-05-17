@@ -16,9 +16,10 @@ public class CustomerData : ScriptableObject
     [TextArea(3, 5)] public string[] rejectText;
 
     [Header("Haggling response")]
-    [TextArea(3, 5)] public string[] goodDeal;
-    [TextArea(3, 5)] public string[] neutralDeal;
-    [TextArea(3, 5)] public string[] badDeal;
+    [TextArea(3, 5)] public string[] tooExpensive;
+    [TextArea(3, 5)] public string[] highPrice;
+    [TextArea(3, 5)] public string[] midPrice;
+    [TextArea(3, 5)] public string[] lowPrice;
 
     [Header("Newspaper outcomes")]
     public string[] headlines;

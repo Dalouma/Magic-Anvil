@@ -21,6 +21,13 @@ public class CraftedItem
         gData = gem;
     }
 
+    public CraftedItem(CraftedItem original)
+    {
+        data = original.data;
+        scoreVal = original.scoreVal;
+        gData = original.gData;
+    }
+
     public void Socket(GemData gem)
     {
         gData = gem;

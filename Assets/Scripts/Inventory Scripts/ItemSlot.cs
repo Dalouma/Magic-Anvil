@@ -23,7 +23,9 @@ public class ItemSlot : MonoBehaviour
         m_item = item;
         icon.sprite = item.data.icon;
 
-        // set background
+        // set border
+
+
     }
 
     // The function the button calls in order to set the Item Info Window

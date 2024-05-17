@@ -9,13 +9,15 @@ public class ShopUI : MonoBehaviour
     [Header("Craftable Items")]
     [SerializeField] private List<ItemData> items;
 
-    [Header("Resource Text References")]
+    [Header("Player Resource References")]
     [SerializeField] private TMP_Text nMoneyText;
 
     [Header("Crafting Menu References")]
     [SerializeField] GameObject confirmationPanel;
     [SerializeField] private TMP_Text confirmationText;
-    
+
+    [Header("Other References")]
+    [SerializeField] private GameObject priceInputField;
 
     // Variables
     private ItemData selectedItem;
@@ -23,8 +25,10 @@ public class ShopUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        nMoneyText.text = ShopManager.instance.GetMoney().ToString();
+        RefreshMoney();
     }
+
+    public void RefreshMoney() { nMoneyText.text = ShopManager.instance.GetMoney().ToString(); }
 
     public void SelectItem(int itemIndex)
     {
@@ -36,5 +40,10 @@ public class ShopUI : MonoBehaviour
     {
         InventorySystem.instance.StartCrafting(selectedItem);
         SceneManager.LoadScene("ForgingScene");
+    }
+
+    public void ShowPriceInputField()
+    {
+        priceInputField.SetActive(true);
     }
 }

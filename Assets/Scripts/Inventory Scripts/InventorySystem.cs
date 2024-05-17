@@ -68,17 +68,6 @@ public class InventorySystem : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        //TestKeys();
-    }
-
-    // Test Keys (DELETE OUT OF UPDATE FUNCTION LATER)
-    private void TestKeys()
-    {
-
-    }
-
     // Generates a random item for testing purposes
     public void GenerateRandomItem()
     {
@@ -123,18 +112,10 @@ public class InventorySystem : MonoBehaviour
     }
 
     // Returns CraftedItem by index from inventory
-    public CraftedItem GetItem(int index)
-    {
-        if (index > inventory.Count - 1)
-            return null;
-        return inventory[index];
-    }
+    public CraftedItem GetItemAt(int index) { return inventory[index]; }
 
     // Removes Crafted Item by index from inventory
-    public void RemoveItem(int index)
-    {
-        inventory.RemoveAt(index);
-    }
+    public void RemoveItem(int index) { inventory.RemoveAt(index); }
 
     // Get number of gems currently possessed by player by accessing dictionary
     public int GetGemAmount(GemData type)
@@ -148,7 +129,8 @@ public class InventorySystem : MonoBehaviour
         gemInventory[type.name] = gemInventory[type.name] + amount;
     }
 
+    public List<CraftedItem> GetInventory() { return inventory; }
+    public bool FullInventory() { return inventory.Count >= maxSize; }
     // Gets number of items currently in inventory
     public int GetItemCount() { return inventory.Count; }
-    public bool FullInventory() { return inventory.Count >= maxSize; }
 }
