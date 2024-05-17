@@ -29,8 +29,14 @@ MonoBehaviour:
   rejectText:
   - Preposterous! You've presented me with a coward's weapon. The church shall hear
     of this mockery.
-  goodDeal: []
-  neutralDeal: []
-  badDeal: []
+  tooExpensive:
+  - By the gods! I may be a Paladin, but that amount is simply too much! I beseech
+    you to be more considerate in your pricing.
+  highPrice:
+  - You have steep prices, smith. I only hope that it's worth it.
+  midPrice:
+  - A fair price for a fair item.
+  lowPrice:
+  - You are most kind. I will remember this generosity.
   headlines: []
   storyText: []

@@ -72,16 +72,16 @@ public class InventoryUI : MonoBehaviour
     {
         // determine item grade prefix (weak, strong)
         string itemPrefix = "";
-        string itemAffix = " ";
         if (item.scoreVal >= 2000)
-            itemPrefix = item.data.itemGrades[1] + " ";
+            itemPrefix = item.data.itemGrades[1];
         if (item.scoreVal < 1000)
-            itemPrefix = item.data.itemGrades[0] + " ";
+            itemPrefix = item.data.itemGrades[0];
+
+        itemDisplayName.text = $"{itemPrefix} {item.data.ID}";
+
         // set item gem affix text
         if (item.gData != null)
-            itemAffix = " " + item.gData.affixText;
-        
-        itemDisplayName.text = itemPrefix + item.data.ID + itemAffix;
+            itemDisplayName.text += $" {item.gData.affixText}";
 
         // change background art
         if (item.gData != null)
@@ -96,7 +96,7 @@ public class InventoryUI : MonoBehaviour
         sellButton.SetActive(true);
     }
 
-    // Updates display 
+    // Resets display 
     public void ResetDisplay()
     {
         itemDisplayName.text = "";
@@ -107,6 +107,7 @@ public class InventoryUI : MonoBehaviour
     }
 
     // Place item on counter
+    // Called when player presses Sell button in inventory
     public void PlaceItem()
     {
         CraftedItem toPlace = InventorySystem.instance.GetItemAt(currentItemIndex);

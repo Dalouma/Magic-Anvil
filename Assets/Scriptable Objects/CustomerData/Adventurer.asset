@@ -25,8 +25,15 @@ MonoBehaviour:
   - What's it gonna cost me?
   disappointText: []
   rejectText: []
-  goodDeal: []
-  neutralDeal: []
-  badDeal: []
+  tooExpensive:
+  - Look buddy, I may be green, but I'm at least smart enough to know that this is
+    a scam. Cut it out will ya?
+  highPrice:
+  - Not the price that I hoped for, but I'll take what I can get.
+  midPrice:
+  - Hmm... Seems about right. Thanks!
+  lowPrice:
+  - What a steal! Getting prices this good, I'll have more to spend down the road.
+    I'll let everyone know about this place.
   headlines: []
   storyText: []
