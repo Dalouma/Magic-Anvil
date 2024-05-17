@@ -20,9 +20,12 @@ public class InventoryUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //SetupIcons();
         currentItemIndex = -1;
         ResetDisplay();
+
+        // FOR TESTING. DELETE  LATER
+        InventorySystem.instance.GenerateFullSet();
+        RefreshIcons();
     }
 
     // Update is called once per frame
@@ -86,6 +89,7 @@ public class InventoryUI : MonoBehaviour
 
         // change item image
         itemImage.sprite = item.data.fullArt;
+        itemImage.enabled = true;
 
         // turn on buttons
         socketButton.SetActive(true);
@@ -96,7 +100,7 @@ public class InventoryUI : MonoBehaviour
     public void ResetDisplay()
     {
         itemDisplayName.text = "";
-        itemImage.sprite = null;
+        itemImage.enabled = false;
 
         socketButton.SetActive(false);
         sellButton.SetActive(false);

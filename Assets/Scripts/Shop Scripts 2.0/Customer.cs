@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-// This is a wrapper class for the CharacterData for each customer
 public class Customer : MonoBehaviour, IDropHandler
 {
     [SerializeField] private CharacterData NPC;
@@ -52,6 +51,9 @@ public class Customer : MonoBehaviour, IDropHandler
         state = SpeechState.Intro;
         speechIndex = 0;
         talking = false;
+
+        // setup customer
+        SetCharacter(ShopManager.instance.GetCurrentCharacter());
     }
 
     public bool isTalking() { return talking; }
@@ -125,6 +127,7 @@ public class Customer : MonoBehaviour, IDropHandler
         if (state == SpeechState.Reject)
         {
             ShopManager.instance.NextCustomer();
+            state = SpeechState.Intro;
         }
         // Let player offer a price
         else if (state == SpeechState.Happy || state == SpeechState.Accept || state == SpeechState.Disappoint)
@@ -141,7 +144,7 @@ public class Customer : MonoBehaviour, IDropHandler
         else if (state == SpeechState.HighPrice || state == SpeechState.MidPrice || state == SpeechState.LowPrice)
         {
             // pay player
-            ShopManager.instance.AddMoney(offeredPrice);
+            ShopManager.instance.UpdateMoney(offeredPrice);
             shopUI.RefreshMoney();
             // record item
             ShopManager.instance.RecordItem(presentedItem);
@@ -150,6 +153,7 @@ public class Customer : MonoBehaviour, IDropHandler
             GameObject.FindGameObjectWithTag("item").GetComponent<Image>().enabled = false;
             // customer leave
             ShopManager.instance.NextCustomer();
+            state = SpeechState.Intro;
         }
 
     }

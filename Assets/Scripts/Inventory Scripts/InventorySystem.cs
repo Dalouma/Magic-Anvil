@@ -46,6 +46,7 @@ public class InventorySystem : MonoBehaviour
     {
         itemScore = 0;
         itemType = null;
+
     }
 
     // Currently initializes an empty item inventory as an empty list of type CraftedItem
