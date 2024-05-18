@@ -39,12 +39,6 @@ public class SpriteSwapCustomer : MonoBehaviour
         custimage.sprite = spriteArray[customer];
 
     }
-    public void changeSprite(string customer)
-    {
-        Image custimage = currCustomer.image;
-        custimage.sprite = spriteMap[customer];
-
-    }
     public void changeSpriteAnim(string customer)
     {
         animator.SetBool("ChangeCustomer", true);

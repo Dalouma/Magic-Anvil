@@ -2393,12 +2393,10 @@ MonoBehaviour:
   - {fileID: -328622296, guid: 08be5016c2194cb45bfc1254b15f44df, type: 3}
   - {fileID: -931454921, guid: a804d73cd5f28704ebbba2cce888de14, type: 3}
   - {fileID: -1309012469, guid: 2721d4fb86b92fe4894f1400b6c13921, type: 3}
-  - {fileID: -328622296, guid: 08be5016c2194cb45bfc1254b15f44df, type: 3}
   spriteNames:
   - Adventurer
   - Bandit
   - Paladin
-  - Customer
   sprites:
   - {fileID: -328622296, guid: 08be5016c2194cb45bfc1254b15f44df, type: 3}
   - {fileID: -931454921, guid: a804d73cd5f28704ebbba2cce888de14, type: 3}
