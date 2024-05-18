@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1b4892fce1534792ff6e3a37267a7, type: 3}
+  m_Name: Bandit
+  m_EditorClassIdentifier: 
+  preferredItems:
+  - {fileID: 11400000, guid: a153fd34ab424e0448b7995285bc6124, type: 2}
+  rejectedItems:
+  - {fileID: 11400000, guid: cf3d6693677f9184d8ba9a49c8e5d519, type: 2}
+  happyText:
+  - '<i>The Bandit holds the dagger in the air, inspecting it.</i>
+
+    Hehehe...
+    This will do nicely'
+  - '<i>He looks at you with a wary look in his eyes.</i>
+
+    How much?'
+  acceptText:
+  - Not what I had in mind, but maybe this might work...
+  - How much?
+  disappointText: []
+  rejectText:
+  - What a joke of a smith! Do i REALLY look like I would use this thing?
+  tooExpensive:
+  - Stop playing games, smith. Lower the price or never see the light of day again.
+  highPrice:
+  - If you offered me that price a single coin higher, I would have added your name
+    to the list.
+  midPrice:
+  - <i>The Bandit drops his payment on the counter and turns to leave. Before exiting
+    he looks back at you.</i>
+  - I was never here.
+  lowPrice:
+  - Wait till the squad hears about this.
+  - <i>The bandit places a handful of coins on the counter and turns to leave. As
+    he exits the shop, he mumbles something.</i>
+  - Heh... Sucker.
+  headlines: []
+  storyText: []

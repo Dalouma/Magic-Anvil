@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1b4892fce1534792ff6e3a37267a7, type: 3}
+  m_Name: Adventurer
+  m_EditorClassIdentifier: 
+  preferredItems:
+  - {fileID: 11400000, guid: 021047a20a9b8de49b286205fe22874d, type: 2}
+  - {fileID: 11400000, guid: d910331da34b7c0468df2e5577ca9cbf, type: 2}
+  - {fileID: 11400000, guid: 4dc149aeae08712449e0c6a7ba9db12e, type: 2}
+  rejectedItems: []
+  happyText:
+  - Ah, perfect! I feel like I'll be able to accomplish a lot with this weapon.
+  - How much would this be?
+  acceptText:
+  - Wouldn't be my first choice, but this should work.
+  - What's it gonna cost me?
+  disappointText: []
+  rejectText: []
+  tooExpensive:
+  - Look buddy, I may be green, but I'm at least smart enough to know that this is
+    a scam. Cut it out will ya?
+  highPrice:
+  - Not the price that I hoped for, but I'll take what I can get.
+  midPrice:
+  - Hmm... Seems about right. Thanks!
+  lowPrice:
+  - What a steal! Getting prices this good, I'll have more to spend down the road.
+    I'll let everyone know about this place.
+  headlines: []
+  storyText: []
