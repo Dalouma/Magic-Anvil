@@ -183,12 +183,48 @@ public class CustomerManager : MonoBehaviour
 
     void Update()
     {
-        
+        /*currentLocale = LocalizationSettings.SelectedLocale;
+        if (oldLocale.Identifier != currentLocale.Identifier) 
+        {
+            oldLocale = LocalizationSettings.SelectedLocale;
+            DialogueTriggger triggerScript = triggerDialogueObj.GetComponent<DialogueTriggger>();
+
+           *//* if (currentLocale.Identifier == "zh-Hans") 
+            {
+                customerfileList[0] = "AdventurerCh";
+                customerfileList[1] = "RogueCh";
+                customerfileList[2] = "PaladinCh";
+            }
+            else 
+            {
+                customerfileList[0] = "Adventurer";
+                customerfileList[1] = "Rogue";
+                customerfileList[2] = "Paladin";
+            }*//*
+
+            loadCustomer();
+            triggerScript.triggerDialogue();
+        }*/
     }
 
     public static CustomerState state = CustomerState.Intro;
     void Start()
     {
+
+        oldLocale = LocalizationSettings.SelectedLocale;
+        currentLocale = LocalizationSettings.SelectedLocale;
+        /*        if (currentLocale.Identifier == "en") 
+                {
+                    customerfileList[0] = "Adventurer";
+                    customerfileList[1] = "Rogue";
+                    customerfileList[2] = "Paladin";
+                }
+                else 
+                {
+                    customerfileList[0] = "AdventurerCh";
+                    customerfileList[1] = "RogueCh";
+                    customerfileList[2] = "PaladinCh";
+                }*/
 
 
         levelChangerScript = levelChanger.GetComponent<LevelChanger>();
@@ -198,19 +234,6 @@ public class CustomerManager : MonoBehaviour
         {
             day++;
             GenDailyCustomers();
-            if (customerfileList[customer] == "Rogue")
-            {
-                cust.changeSprite(1);
-            }
-            if (customerfileList[customer] == "Paladin")
-            {
-                cust.changeSprite(2);
-            }
-            if (customerfileList[customer] == "Adventurer")
-            {
-
-                cust.changeSprite(0);
-            }
 
         }
         //day = levelChangerScript.daycount;
@@ -296,7 +319,6 @@ public class CustomerManager : MonoBehaviour
         if (customerfileList[customer] == "Customer")
         {
             data = GenGenericCustomer();
-            
         }
         else
         {
@@ -305,7 +327,21 @@ public class CustomerManager : MonoBehaviour
             while (!www.isDone) { }
             content = www.text;
             data = JsonUtility.FromJson<CustomerData>(content);
-         
+            if (customerfileList[customer] == "Rogue")
+            {
+                cust.changeSprite(1);
+            }
+            if (customerfileList[customer] == "Paladin")
+            {
+                cust.changeSprite(2);
+            }
+            if (customerfileList[customer] == "Adventurer")
+            {
+                if (customerfileList[customer] == "Rogue")
+                {
+                    cust.changeSprite(0);
+                }
+            }
         }
         cnum = customer;
 
@@ -324,7 +360,7 @@ public class CustomerManager : MonoBehaviour
 
             cnum = customer;
             loadCustomer();
-            cust.changeSpriteAnim(customerfileList[customer]);
+            cust.changeSpriteAnim(customer);
             speechbubble.speechFade();
             Weapon.weapon = null;
             chosenWeapon = null;
@@ -341,19 +377,19 @@ public class CustomerManager : MonoBehaviour
     public bool priceCheck(int price)
     {
 
-        if (price > (1.4 * basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 50))) || price < 0)
+        if (price > (1.4 * basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 100))) || price < 0)
         {
             state = CustomerState.Refusal;
             return false;
         }
-        else if (price > (1.15 * basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 50))))
+        else if (price > (1.15 * basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 100))))
         {
             state = CustomerState.BadDeal;
             currRep -= 10;
             SetRep(currRep);
             return true;
         }
-        else if (price > (1 * basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 50))))
+        else if (price > (1 * basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 100))))
         {
             state = CustomerState.NeutralDeal;
             return true;
@@ -369,7 +405,7 @@ public class CustomerManager : MonoBehaviour
                 return true;
             }
             //Debug.Log(Math.Floor((400 * data.stinginess + (400 * (currRep / 100))))/price);
-            currRep += Convert.ToInt32(Math.Floor((basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 50))) / price));
+            currRep += Convert.ToInt32(Math.Floor((basePrice * data.stinginess + (basePrice * (currRep / 100)) + (basePrice * (score / 100))) / price));
             SetRep(currRep);
             state = CustomerState.GoodDeal;
             return true;
@@ -387,7 +423,7 @@ public class CustomerManager : MonoBehaviour
         chosenWeapon = weapon;
         Weapon.weapon = weapon;
 
-       /* if (currentLocale.Identifier == "en")
+        if (currentLocale.Identifier == "en")
         {
             string customerName = customerfileList[cnum];
             Weapon.chosenWeapons.Add(customerName, weapon);
@@ -398,7 +434,7 @@ public class CustomerManager : MonoBehaviour
             string customerName = customerfileList[cnum];
             Weapon.chosenWeapons.Add(customerName, weapon);
             Weapon.chosenWeapons.Add(customerName.Substring(0, customerName.Length - 2), weapon);
-        }*/
+        }
     }
     public string getWeapon()
     {

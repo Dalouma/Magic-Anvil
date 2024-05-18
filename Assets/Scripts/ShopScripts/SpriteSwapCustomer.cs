@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,22 +8,13 @@ public class SpriteSwapCustomer : MonoBehaviour
     //public SpriteRenderer spriteRenderer;
     public Button currCustomer;
     public Sprite[] spriteArray;
-    public Dictionary<string, Sprite> spriteMap = new Dictionary<string, Sprite>();
-    public List<string> spriteNames = new List<string>();
-    public List<Sprite> sprites = new List<Sprite>();
     public Animator animator;
     private Animation anim;
     void Start()
     {
-        
+        //spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        //spriteRenderer.sprite=spriteArray[customer];
         anim = GetComponent<Animation>();
-        for (int i = 0; i < spriteNames.Count; i++)
-        {
-            if (!spriteMap.ContainsKey(spriteNames[i]))
-            {
-                spriteMap.Add(spriteNames[i], sprites[i]);
-            }
-        }
 
     }
     public void changeSprite(int customer)
@@ -39,15 +28,19 @@ public class SpriteSwapCustomer : MonoBehaviour
         custimage.sprite = spriteArray[customer];
 
     }
-    public void changeSpriteAnim(string customer)
+    public void changeSpriteAnim(int customer)
     {
         animator.SetBool("ChangeCustomer", true);
         animator.SetBool("invis", true);
-        StartCoroutine(Pause(3.6f, () =>
+        StartCoroutine(Pause(4.0f, () =>
         {
-    
+            if (customer >= spriteArray.Length)
+            {
+                customer = 0;
+            }
+
             Image custimage = currCustomer.image;
-            custimage.sprite=spriteMap[customer];
+            custimage.sprite = spriteArray[customer];
             animator.SetBool("ChangeCustomer", false);
             animator.SetBool("invis", false);
         }));
