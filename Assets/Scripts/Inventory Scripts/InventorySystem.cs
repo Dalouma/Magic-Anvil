@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -99,12 +100,15 @@ public class InventorySystem : MonoBehaviour
         Debug.Log("generated perfect set of items");
     }
 
+    public void SelectItem(ItemData item) { itemType = item; }
+
     // sets chosen weapon and sets item score to 0
-    public void StartCrafting(ItemData itemData)
-    {
-        itemScore = 0;
-        itemType = itemData;
-    }
+    //public void StartCrafting()
+    //{
+    //    //itemScore = 0;
+    //    //itemType = itemData;
+    //    SceneManager.LoadScene("ForgingScene");
+    //}
 
     // Adds Finished item stats to inventory
     public void FinishCrafting()
@@ -130,6 +134,7 @@ public class InventorySystem : MonoBehaviour
         gemInventory[type.name] = gemInventory[type.name] + amount;
     }
 
+    // Returns list of all crafted items in inventory
     public List<CraftedItem> GetInventory() { return inventory; }
     public bool FullInventory() { return inventory.Count >= maxSize; }
     // Gets number of items currently in inventory

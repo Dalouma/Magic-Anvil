@@ -6,9 +6,6 @@ using TMPro;
 
 public class ShopUI : MonoBehaviour
 {
-    [Header("Craftable Items")]
-    [SerializeField] private List<ItemData> items;
-
     [Header("Player Resource References")]
     [SerializeField] private TMP_Text nMoneyText;
 
@@ -19,9 +16,6 @@ public class ShopUI : MonoBehaviour
     [Header("Other References")]
     [SerializeField] private GameObject priceInputField;
 
-    // Variables
-    private ItemData selectedItem;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,16 +24,10 @@ public class ShopUI : MonoBehaviour
 
     public void RefreshMoney() { nMoneyText.text = ShopManager.instance.GetMoney().ToString(); }
 
-    public void SelectItem(int itemIndex)
+    public void SelectItem(ItemData item) 
     {
-        selectedItem = items[itemIndex];
-        confirmationText.text = $"Craft a {selectedItem.ID}?";
-    }
-
-    public void StartCrafting()
-    {
-        InventorySystem.instance.StartCrafting(selectedItem);
-        SceneManager.LoadScene("ForgingScene");
+        InventorySystem.instance.SelectItem(item);
+        confirmationText.text = $"Craft a {item.ID}?"; 
     }
 
     public void ShowPriceInputField()

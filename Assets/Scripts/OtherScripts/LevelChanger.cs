@@ -7,7 +7,7 @@ public class LevelChanger : MonoBehaviour
     public int daycount = 1;
     void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 300;
     }
     public Animator animator;
 
