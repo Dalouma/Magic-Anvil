@@ -22,10 +22,6 @@ public class InventoryUI : MonoBehaviour
     {
         currentItemIndex = -1;
         ResetDisplay();
-
-        // FOR TESTING. DELETE  LATER
-        InventorySystem.instance.GenerateFullSet();
-        RefreshIcons();
     }
 
     // Update is called once per frame

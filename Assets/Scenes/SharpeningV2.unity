@@ -1215,7 +1215,7 @@ GameObject:
   - component: {fileID: 936677636}
   - component: {fileID: 936677637}
   m_Layer: 0
-  m_Name: Sharpening Minigame Manager
+  m_Name: Sharpening Game Manager
   m_TagString: Sharpening Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1254,7 +1254,7 @@ MonoBehaviour:
   resultsWindow: {fileID: 1416075512}
   itemStartPos: {fileID: 0}
   pointerSpeed: 8
-  pointsRate: 10
+  pointsRate: 20
   goodReleaseBonus: 50
   greatReleaseBonus: 100
 --- !u!1 &966145241
@@ -12337,7 +12337,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: TestScene
+          m_StringArgument: ShopScene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1772277176

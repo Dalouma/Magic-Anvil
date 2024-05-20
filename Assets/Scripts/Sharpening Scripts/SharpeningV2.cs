@@ -53,7 +53,7 @@ public class SharpeningV2 : MonoBehaviour
         // Set Variables
         score = 0;
         scoreMax = 1000;
-        time = 30f;
+        time = 15f;
         goodReleases = 0;
         greatReleases = 0;
         gameActive = false;
@@ -142,7 +142,7 @@ public class SharpeningV2 : MonoBehaviour
     // Updates the score text
     public void ChangeScoreText()
     {
-        scoreText.text = $"Score: {(int)score}/{scoreMax}";
+        scoreText.text = $"Score: {(int)score}";
     }
 
     // Timer countdown
@@ -167,5 +167,7 @@ public class SharpeningV2 : MonoBehaviour
             $"Great Releases: {greatReleases}";
 
         resultsWindow.GetComponent<Canvas>().enabled = true;
+        InventorySystem.instance.AddScore((int)score);
+        InventorySystem.instance.FinishCrafting();
     }
 }
