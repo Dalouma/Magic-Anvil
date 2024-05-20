@@ -101,14 +101,7 @@ public class InventorySystem : MonoBehaviour
     }
 
     public void SelectItem(ItemData item) { itemType = item; }
-
-    // sets chosen weapon and sets item score to 0
-    //public void StartCrafting()
-    //{
-    //    //itemScore = 0;
-    //    //itemType = itemData;
-    //    SceneManager.LoadScene("ForgingScene");
-    //}
+    public void AddScore(int score) { itemScore += score; }
 
     // Adds Finished item stats to inventory
     public void FinishCrafting()

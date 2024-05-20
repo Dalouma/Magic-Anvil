@@ -180,6 +180,7 @@ public class ForgingScript : MonoBehaviour
                     StartCoroutine(showFinishButton());
                     //ShowForgingResults();
                     //EndGame();
+                    InventorySystem.instance.AddScore(score * 15);
                 }
             }
         }
