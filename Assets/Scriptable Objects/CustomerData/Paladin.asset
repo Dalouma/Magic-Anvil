@@ -38,5 +38,13 @@ MonoBehaviour:
   - A fair price for a fair item.
   lowPrice:
   - You are most kind. I will remember this generosity.
-  headlines: []
-  storyText: []
+  storyGraphics:
+  - {fileID: 21300000, guid: d0b1bc993a8d60c42a4a1e2dcbae5bb9, type: 3}
+  - {fileID: 21300000, guid: 12a78ddc085e0f749b07087445dc6823, type: 3}
+  headlines:
+  - Rising Paladin
+  - Knight Degraded
+  storyText:
+  - The first knight has been sworn before the goddess at the holy temple.
+  - Onlookers reported that the holy priests of protection rejected his choice of
+    weaponry deeming it too violent.

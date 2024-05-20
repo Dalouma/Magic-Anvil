@@ -30,6 +30,7 @@ public class ForgingV2 : MonoBehaviour
     {
         pointerTransform = GameObject.FindGameObjectWithTag("pointer").transform;
         inGreen = inYellow = inOrange = false;
+        good = great = perfect = 0;
     }
 
     // Start is called before the first frame update

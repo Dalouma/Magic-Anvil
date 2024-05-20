@@ -121,11 +121,13 @@ public class Customer : MonoBehaviour, IDropHandler
         talking = false;
         GetComponent<Image>().raycastTarget = true;
         speechCanvas.enabled = false;
-
         
         // Customer leaves if state is in Reject
-        if (state == SpeechState.Reject)
+        // Same behavior if NPC is not a customer
+        if (state == SpeechState.Reject || NPC.customerData == null)
         {
+            // record empty item
+            ShopManager.instance.RecordItem(null);
             ShopManager.instance.NextCustomer();
             state = SpeechState.Intro;
         }

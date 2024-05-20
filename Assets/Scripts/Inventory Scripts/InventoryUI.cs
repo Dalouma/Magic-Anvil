@@ -22,6 +22,7 @@ public class InventoryUI : MonoBehaviour
     {
         currentItemIndex = -1;
         ResetDisplay();
+        RefreshIcons();
     }
 
     // Update is called once per frame

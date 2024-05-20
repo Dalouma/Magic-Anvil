@@ -20,14 +20,14 @@ public class NewspaperManager : MonoBehaviour
     private float yMin = 120;
     private float yMax = 520;
 
-    Locale currentLocale;
+    //Locale currentLocale;
 
     // Start is called before the first frame update
     void Start()
     {
         newsCount = 0;
-        currentLocale = LocalizationSettings.SelectedLocale;
-        //GenerateNewspaper();
+        //currentLocale = LocalizationSettings.SelectedLocale;
+        GenerateNewspaper();
     }
 
     private void Update()
@@ -50,63 +50,35 @@ public class NewspaperManager : MonoBehaviour
         }
     }
 
-    // Generates the newspaper according to player's choices
-    //void GenerateNewspaper()
-    //{
-    //    foreach (KeyValuePair<string, string> kvp in Weapon.chosenWeapons)
-    //    {
-    //        string customerName = kvp.Key;
-    //        string chosenWeapon = kvp.Value;
+    // Generates a newspaper according to the list of customers
+    void GenerateNewspaper()
+    {
+        for (int i = 0; i < ShopManager.instance.npcQueue.Count; i++)
+        {
+            CharacterData npc = ShopManager.instance.npcQueue[i];
+            CraftedItem item = ShopManager.instance.itemsSold[i];
 
-    //        if (currentLocale.Identifier == "en")
-    //        {
-    //            if (customerName.Substring(customerName.Length - 2) != "Ch")
-    //            {
-    //                LoadCustomer(customerName);
+            if (item == null) { continue; }
 
-    //                if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
-    //                {
-    //                    // Doesn't add section if customer left
-    //                    continue;
-    //                }
-    //                if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
-    //                {
-    //                    // Customer Good Ending
-    //                    AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
-    //                }
-    //                else
-    //                {
-    //                    // Customer Bad Ending
-    //                    AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
-    //                }
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (customerName.Substring(customerName.Length - 2) == "Ch")
-    //            {
-    //                LoadCustomer(customerName);
+            bool generatedSection = false;
+            CustomerData customer = npc.customerData;
 
-    //                if (customerData.hatedWeapons.Any(item => item == chosenWeapon))
-    //                {
-    //                    // Doesn't add section if customer left
-    //                    continue;
-    //                }
-    //                if (customerData.preferredWeapons.Any(item => item == chosenWeapon))
-    //                {
-    //                    // Customer Good Ending
-    //                    AddSection(newsImages[customerData.newsOutcomes[0]], customerData.headline1, customerData.text1);
-    //                }
-    //                else
-    //                {
-    //                    // Customer Bad Ending
-    //                    AddSection(newsImages[customerData.newsOutcomes[1]], customerData.headline2, customerData.text2);
-    //                }
-    //            }
-    //        }
-    //    }
+            foreach (ItemData preferredItem in npc.customerData.preferredItems)
+            {
+                if (item.data.ID == preferredItem.ID)
+                {
+                    AddSection(customer.storyGraphics[0], customer.headlines[0], customer.storyText[0]);
+                    generatedSection = true;
+                    break;
+                }
+            }
+            if (generatedSection) { continue; }
+            // Section if item sold was not preferred
+            AddSection(customer.storyGraphics[1], customer.headlines[1], customer.storyText[1]);
 
-    //}
+        }
+
+    }
 
     // Adds in a section to the newspaper
     void AddSection(Sprite newsImage, string headline, string details)
@@ -126,17 +98,6 @@ public class NewspaperManager : MonoBehaviour
         newsCount++;
         yMax += sectionHeight;
     }
-
-    // Loads customer data in customerData var
-    //public void LoadCustomer(string customerName)
-    //{
-    //    //string content;
-    //    string filePath = Path.Combine(Application.streamingAssetsPath, "DialogueData/" + customerName + ".json");
-    //    WWW www = new WWW(filePath);
-    //    while (!www.isDone) { }
-
-    //    customerData = JsonUtility.FromJson<CustomerData>(www.text);
-    //}
 
     private void CanvasScrolling()
     {
@@ -158,5 +119,12 @@ public class NewspaperManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void OnEndDay()
+    {
+        ShopManager.instance.ResetQueue();
+        ShopManager.instance.ResetRecords();
+        ShopManager.instance.BasicQueue();
     }
 }

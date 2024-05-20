@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
@@ -36,7 +37,8 @@ public class ShopManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            LoadCustomers();
+            //LoadCustomers();
+            BasicQueue();
             LoadCurrency();
         }
         else if (instance != this)
@@ -62,18 +64,33 @@ public class ShopManager : MonoBehaviour
     // For now it will load the 3 current customers
     private void LoadCustomers()
     {
+        
+    }
+
+    // This function will record the item sold to the current customer and stores the information in the queue
+    public void RecordItem(CraftedItem item) 
+    { 
+        if (item != null)
+        {
+            itemsSold.Add(new CraftedItem(item));
+        }
+        else { itemsSold.Add(null); }
+        
+    }
+
+    public void ResetQueue() { npcQueue.Clear(); }
+    public void ResetRecords() { itemsSold.Clear(); }
+    public void BasicQueue()
+    {
         npcQueue = new List<CharacterData>
         {
+            specialCust[0],
             specialCust[1],
-            specialCust[2],
-            specialCust[0]
+            specialCust[2]
         };
         itemsSold = new List<CraftedItem>();
         npcQueueIndex = 0;
     }
-
-    // This function will record the item sold to the current customer and stores the information in the queue
-    public void RecordItem(CraftedItem item) { itemsSold.Add(new CraftedItem(item)); }
 
     public CharacterData GetCurrentCharacter() { return npcQueue[npcQueueIndex]; }
 
@@ -81,7 +98,11 @@ public class ShopManager : MonoBehaviour
     public void NextCustomer()
     {
         // Move to newspaper scene if queue is ended
-        if (npcQueueIndex == npcQueue.Count - 1) { return; }
+        if (npcQueueIndex == npcQueue.Count - 1)
+        {
+            GameObject.FindGameObjectWithTag("LevelChanger").GetComponent<LevelChanger>().FadeToLevel("NewspaperScene");
+            return;
+        }
 
         npcQueueIndex++;
         Customer customer = GameObject.FindGameObjectWithTag("customer").GetComponent<Customer>();

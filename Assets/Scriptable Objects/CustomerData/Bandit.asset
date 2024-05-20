@@ -44,5 +44,14 @@ MonoBehaviour:
   - <i>The bandit places a handful of coins on the counter and turns to leave. As
     he exits the shop, he mumbles something.</i>
   - Heh... Sucker.
-  headlines: []
-  storyText: []
+  storyGraphics:
+  - {fileID: 21300000, guid: 9fc0022fd84cb4e4c94e1600f0d02bda, type: 3}
+  - {fileID: 21300000, guid: c4201900dde33ef46b3e7e5c33774fa8, type: 3}
+  headlines:
+  - Serial Killer on the Loose
+  - Serial Killer Executed
+  storyText:
+  - Someone poked a lot of holes into a lot of victims. Townfolk claim that they
+    can hear cackling laughter at night along with screams.
+  - Known serial killer publicly executed. The perpetrator was reportedly captured
+    when a witness saw him stumbling with a weapon.

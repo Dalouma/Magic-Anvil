@@ -16,6 +16,8 @@ TagManager:
   - NameBox
   - ShopCanvas
   - InventoryCanvas
+  - Inventory Manager
+  - LevelChanger
   layers:
   - Default
   - TransparentFX

@@ -35,5 +35,14 @@ MonoBehaviour:
   lowPrice:
   - What a steal! Getting prices this good, I'll have more to spend down the road.
     I'll let everyone know about this place.
-  headlines: []
-  storyText: []
+  storyGraphics:
+  - {fileID: 21300000, guid: 66bcdc1ad54a4e848ac9006cf92e633a, type: 3}
+  - {fileID: 21300000, guid: 66bcdc1ad54a4e848ac9006cf92e633a, type: 3}
+  headlines:
+  - Rat Defense
+  - Rat Defense
+  storyText:
+  - Brave adventurer successfully defends village against giant rats. He claims that
+    it was all thanks to solid equipment that the local smith crafted.
+  - Brave adventurer successfully defends village against giant rats. He claims that
+    it was all thanks to solid equipment that the local smith crafted.

@@ -22,6 +22,7 @@ public class CustomerData : ScriptableObject
     [TextArea(3, 5)] public string[] lowPrice;
 
     [Header("Newspaper outcomes")]
+    public Sprite[] storyGraphics;
     public string[] headlines;
     [TextArea(3, 5)] public string[] storyText;
 }
