@@ -84,6 +84,7 @@ public class ForgingV2 : MonoBehaviour
             {
                 gameStart = false;
                 OnShowResults();
+                InventorySystem.instance.AddScore(score);
             }
                 
         }

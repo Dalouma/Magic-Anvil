@@ -46,7 +46,7 @@ public class InventorySystem : MonoBehaviour
     void Start()
     {
         itemScore = 0;
-        itemType = null;
+        itemType = testItems[0];
 
     }
 
