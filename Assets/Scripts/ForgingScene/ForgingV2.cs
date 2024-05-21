@@ -7,12 +7,13 @@ public class ForgingV2 : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] TMP_Text scoreText;
-    [SerializeField] TMP_Text timerText;
+    [SerializeField] TMP_Text strikesText;
     [SerializeField] TMP_Text resultsText;
     [SerializeField] TMP_Text finalScoreText;
     [SerializeField] Canvas resultsCanvas;
     [SerializeField] private Transform leftEnd;
     [SerializeField] private Transform rightEnd;
+    [SerializeField] private Animator hammerAnimator;
 
     // Pointer Data
     private Transform pointerTransform;
@@ -43,6 +44,7 @@ public class ForgingV2 : MonoBehaviour
         score = 0;
         strikes= 0;
         maxStrikes = 5;
+        strikesText.text = $"Strikes: 0/{maxStrikes}";
     }
 
     // Update is called once per frame
@@ -64,6 +66,13 @@ public class ForgingV2 : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             strikes++;
+            strikesText.text = $"Strikes: {strikes}/{maxStrikes}";
+            hammerAnimator.Play("HammerSwing");
+            // CALL AUDIO SFX HERE
+
+
+
+
             if (inGreen)
             {
                 score += 300;
