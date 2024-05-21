@@ -1136,10 +1136,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionSequence: 
+  healthSlider: {fileID: 1418253426}
+  timerSlider: {fileID: 1758903623}
   sequenceText: {fileID: 777604440}
   lifeText: {fileID: 1907403555}
   timerText: {fileID: 696334121}
   sequenceDuration: 10
+  enemies: []
+  numEnemies: 5
 --- !u!4 &1474373165
 Transform:
   m_ObjectHideFlags: 0

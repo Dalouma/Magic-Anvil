@@ -167,6 +167,7 @@ public class CustomerManager : MonoBehaviour
             loadCustomer();
             triggerScript.triggerDialogue();
         }
+        manager.character = customer;
     }
 
     public static CustomerState state = CustomerState.Intro;

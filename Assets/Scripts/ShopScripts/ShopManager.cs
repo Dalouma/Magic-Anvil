@@ -41,6 +41,12 @@ public class ShopManager : MonoBehaviour
 
         moneyText.text = money.ToString();
     }
+
+    public void Update() 
+    {
+        manager.currency = money;
+    }
+
     public void ShowShop()
     {
         if (customerManager.data.hatedWeapons.Contains(customerManager.chosenWeapon))

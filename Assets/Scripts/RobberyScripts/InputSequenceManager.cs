@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class InputSequenceManager : MonoBehaviour
 {
     public List<InputType> actionSequence;
     private int currentAction = 0;
     private Vector2 startPosition;
+
+    public Slider healthSlider;
+    public Slider timerSlider;
 
     public TMP_Text sequenceText;
     public TMP_Text lifeText;
@@ -17,13 +21,23 @@ public class InputSequenceManager : MonoBehaviour
     public float sequenceDuration = 10f;
     private float remainingTime;
 
+    public List<Enemy> enemies;
+    private int currentEnemyIndex = 0;
+
+    public int numEnemies = 5;
+
 
     // Start is called before the first frame update
     void Start()
     {
         CreateRandomSequence();
+        healthSlider.maxValue = lives;
+        healthSlider.value = lives;
+        timerSlider.maxValue = sequenceDuration;
+        timerSlider.value = sequenceDuration;
         lifeText.text = "Lives: 3";
         remainingTime = sequenceDuration;
+        PopulateEnemies(numEnemies);
     }
 
     // Update is called once per frame
@@ -31,14 +45,16 @@ public class InputSequenceManager : MonoBehaviour
     {
         remainingTime -= Time.deltaTime;
         UpdateTimerText();
+        timerSlider.value = remainingTime;
 
         if (remainingTime <= 0f) 
         {
             Debug.Log("You were attacked!");
             UpdateLifeText();
-            ResetSequence();
+            CreateRandomSequence();
             ResetTimer();
             Handheld.Vibrate();
+            EnemyAttack();
         }
 
         if (lives <= 0) 
@@ -59,6 +75,19 @@ public class InputSequenceManager : MonoBehaviour
                     CheckInput(GetSwipeDirection(startPosition, endPosition));
                     break;
             }
+        }
+    }
+
+    void PopulateEnemies(int numEnemies) 
+    {
+        enemies.Clear();
+
+        for (int i = 0; i < numEnemies; i++)
+        {
+            Enemy enemy = new Enemy();
+            enemy.type = Random.Range(0, 2) == 0 ? "small" : "tall";
+            enemy.damage = enemy.type == "small" ? 1 : 2;
+            enemies.Add(enemy);
         }
     }
 
@@ -149,7 +178,6 @@ public class InputSequenceManager : MonoBehaviour
     void UpdateLifeText()
     {
         string lifeString = "Lives: ";
-        lives--;
         lifeString += lives.ToString();
         lifeText.text = lifeString;
     }
@@ -158,6 +186,30 @@ public class InputSequenceManager : MonoBehaviour
     {
         timerText.text = "Time: " + Mathf.CeilToInt(remainingTime).ToString();
     }
+
+    void EnemyAttack() 
+    {
+        Enemy enemy = enemies[currentEnemyIndex];
+        if (enemy != null) 
+        {
+            Debug.Log("Attacked by " + enemy.type + " goblin.");
+            lives -= enemy.damage;
+            healthSlider.value = lives;
+            UpdateLifeText();
+            currentEnemyIndex++;
+            if (currentEnemyIndex >= enemies.Count) 
+            {
+                currentEnemyIndex= 0;
+            }
+        }
+    }
+}
+
+[System.Serializable]
+public class Enemy 
+{
+    public string type;
+    public int damage;
 }
 
 public enum InputType 
