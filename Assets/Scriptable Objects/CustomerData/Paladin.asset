@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d1b4892fce1534792ff6e3a37267a7, type: 3}
+  m_Name: Paladin
+  m_EditorClassIdentifier: 
+  preferredItems:
+  - {fileID: 11400000, guid: 4dc149aeae08712449e0c6a7ba9db12e, type: 2}
+  - {fileID: 11400000, guid: cf3d6693677f9184d8ba9a49c8e5d519, type: 2}
+  rejectedItems:
+  - {fileID: 11400000, guid: a153fd34ab424e0448b7995285bc6124, type: 2}
+  happyText:
+  - Excellent! The goddess shall be pleased. With this in my posession, I will be
+    able to protect the people with minimum bloodshed
+  - What do I owe you?
+  acceptText:
+  - I'm not too confident with what you presented me, but I shall accept this fine
+    weapon.
+  - How much will it cost?
+  disappointText: []
+  rejectText:
+  - Preposterous! You've presented me with a coward's weapon. The church shall hear
+    of this mockery.
+  tooExpensive:
+  - By the gods! I may be a Paladin, but that amount is simply too much! I beseech
+    you to be more considerate in your pricing.
+  highPrice:
+  - You have steep prices, smith. I only hope that it's worth it.
+  midPrice:
+  - A fair price for a fair item.
+  lowPrice:
+  - You are most kind. I will remember this generosity.
+  storyGraphics:
+  - {fileID: 21300000, guid: d0b1bc993a8d60c42a4a1e2dcbae5bb9, type: 3}
+  - {fileID: 21300000, guid: 12a78ddc085e0f749b07087445dc6823, type: 3}
+  headlines:
+  - Rising Paladin
+  - Knight Degraded
+  storyText:
+  - The first knight has been sworn before the goddess at the holy temple.
+  - Onlookers reported that the holy priests of protection rejected his choice of
+    weaponry deeming it too violent.

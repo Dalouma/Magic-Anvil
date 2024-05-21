@@ -1,0 +1,50 @@
+{
+    "preferredWeapons": ["Axe", "Shield", "Dagger", "Hammer", "Sword"],
+    "hatedWeapons": ["Axe", "Shield", "Dagger", "Hammer", "Sword"],
+    "introDialogue": [
+      "Hello smithy, I'm looking to get something to help me with the trees on my farm",
+      "Hey! I need something to help in my next battle!",
+      "It's time for my kid to learn the blade, could you make something fit for him?"
+    ],
+    "secondLine": [
+      "Got anything like that?",
+      "Something for the front lines",
+      "Nothing too fancy, he's still small"
+    ],
+    "payment": [
+      "Neat, how much?",
+      "Alright, name your price",
+      "Hmm lets see, how far will this set me back?"
+    ],
+    "preferred": [
+      "I think this will do",
+      "Alright, I bet I can make this work",
+      "Cool, I'll take it"
+    ],
+    "unpreferred": [
+      "Ah, nah, I think I'll look elsewhere",
+      "You kidding me? No thanks",
+      "Hmm, um, you can keep it"
+    ],
+    "baddeal": [
+      "*Sigh* alright, I'll take it, but man that's steep",
+      "Jeez, alright then.",
+      "You're clearing me out but, alright."
+    ],
+    "neutral": [
+      "That's fine, sure.",
+      "Fair deal, I'll take it. Here's the money",
+      "Acceptable, you got yourself a deal"
+    ],
+    "gooddeal": [
+      "Wow, yeah I'll do that, thanks",
+      "Great deal! I'll have to tell my boys about this place",
+      "Yeah sure, that's a great price yeah."
+    ],
+    "refusal": [
+      "You're funny, what's your actual price?",
+      "I don't have that much money boss",
+      "Uh that's a little much dont you think?"
+    ]
+  }
+  

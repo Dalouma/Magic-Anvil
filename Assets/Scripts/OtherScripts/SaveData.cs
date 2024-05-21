@@ -1,20 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 [System.Serializable]
 public class SaveData
 {
     // make any public variables needed to store data to be saved
     // ...
     public int currency;
-    public int character;
+    //public int character;
+    public itemSaveData[] inventorySaveData;
 
-    public SaveData (GameManager manager) 
+    // Customer queue data
+    public string[] customerQueue;
+    public itemSaveData[] givenItems;
+    public int queueIndex;
+
+
+    public SaveData(GameManager manager)
     {
         // set public variables above to data from the manager
         // ...
         currency = manager.currency;
-        character = manager.character;
+        //character = manager.character;
     }
 }

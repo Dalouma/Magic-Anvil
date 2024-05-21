@@ -12,8 +12,12 @@ TagManager:
   - pointer
   - sparks
   - meter
-  - Inventory Manager
   - SpeechBox
+  - NameBox
+  - ShopCanvas
+  - InventoryCanvas
+  - Inventory Manager
+  - LevelChanger
   layers:
   - Default
   - TransparentFX

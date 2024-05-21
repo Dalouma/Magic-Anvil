@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "Item", menuName = "ScriptableObjects/CraftableItem")]
 public class ItemData : ScriptableObject

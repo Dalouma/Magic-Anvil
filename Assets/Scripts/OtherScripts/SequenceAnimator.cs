@@ -17,7 +17,7 @@ public class SequenceAnimator : MonoBehaviour
     {
         while (true)
         {
-            foreach(var animator in _animators)
+            foreach (var animator in _animators)
             {
                 animator.SetTrigger("DoAnimation");
                 yield return new WaitForSeconds(WaitBetween);
