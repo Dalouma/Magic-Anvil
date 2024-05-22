@@ -9,10 +9,15 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image borderImage;
     [SerializeField] private Image gemEffectImage;
     [SerializeField] private Image itemImage;
+    [SerializeField] private Image gemSocketIndicator;
+    [SerializeField] private GameObject gemPanel;
 
     [Header("Button References")]
     [SerializeField] private GameObject socketButton;
     [SerializeField] private GameObject sellButton;
+
+    [Header("Empty Gem Effect Background")]
+    [SerializeField] private Sprite emptyGemEffect;
 
     [Header("Status")]
     public int currentItemIndex;
@@ -48,12 +53,23 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    // Refreshes the gem amounts in the Gem Selection Panel
+    private void RefreshGems()
+    {
+        for (int i = 0; i < gemPanel.transform.childCount; i++)
+        {
+            GemSlot gem = gemPanel.transform.GetChild(i).gameObject.GetComponent<GemSlot>();
+            if (gem != null)
+                gem.Refresh();
+        }
+    }
+
     // Gives each Item Slot the item data from the inventory
     private void RefreshIcons()
     {
         for (int i = 0; i < 6; i++)
         {
-            ItemSlot currentSlot = transform.GetChild(i + 1).gameObject.GetComponent<ItemSlot>();
+            ItemSlot currentSlot = transform.GetChild(i).gameObject.GetComponent<ItemSlot>();
 
             CraftedItem item;
             if (i < InventorySystem.instance.GetItemCount())
@@ -82,7 +98,15 @@ public class InventoryUI : MonoBehaviour
 
         // change background art
         if (item.gData != null)
+        {
             gemEffectImage.sprite = item.gData.backgroundArt;
+            gemSocketIndicator.enabled = true;
+        }
+        else
+        {
+            gemEffectImage.sprite = emptyGemEffect;
+            gemSocketIndicator.enabled = false;
+        }
 
         // change item image
         itemImage.sprite = item.data.fullArt;
@@ -97,7 +121,9 @@ public class InventoryUI : MonoBehaviour
     public void ResetDisplay()
     {
         itemDisplayName.text = "";
+        gemEffectImage.sprite = emptyGemEffect;
         itemImage.enabled = false;
+        gemSocketIndicator.enabled = false;
 
         socketButton.SetActive(false);
         sellButton.SetActive(false);
@@ -132,7 +158,10 @@ public class InventoryUI : MonoBehaviour
         CraftedItem item = InventorySystem.instance.GetItemAt(currentItemIndex);
         item.Socket(gem);
 
+        InventorySystem.instance.ChangeGemAmount(gem, -1);
+
         ViewItemInfo(item);
         RefreshIcons();
+        RefreshGems();
     }
 }

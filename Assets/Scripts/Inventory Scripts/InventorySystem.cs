@@ -64,8 +64,7 @@ public class InventorySystem : MonoBehaviour
         gemInventory = new Dictionary<string, int>();
         for (int i = 0; i < gemTypes.Count; i++)
         {
-            //Debug.Log("adding " + gemTypes[i].name + " to dictionary");
-            gemInventory.Add(gemTypes[i].name, 0);
+            gemInventory.Add(gemTypes[i].name, 2);
         }
 
     }

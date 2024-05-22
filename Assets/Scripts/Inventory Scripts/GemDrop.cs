@@ -18,7 +18,12 @@ public class GemDrop : MonoBehaviour, IDropHandler
         if (draggedGem != null)
         {
             InventorySystem.instance.selectedGem = draggedGem.GetGemData();
-            //Debug.Log("Opening confirmation window");
+            if (InventorySystem.instance.GetGemAmount(InventorySystem.instance.selectedGem) == 0) 
+            {
+                Debug.Log("not enough gems");
+                return; 
+            }
+
             confirmationWindow.GetComponentInChildren<TMP_Text>().text = $"Socket {InventorySystem.instance.selectedGem.name} Gem?";
             confirmationWindow.SetActive(true);
         }

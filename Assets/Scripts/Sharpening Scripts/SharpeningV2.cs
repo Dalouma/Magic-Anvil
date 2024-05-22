@@ -29,7 +29,7 @@ public class SharpeningV2 : MonoBehaviour
     [SerializeField] private float greatReleaseBonus;
 
     private float score;
-    private int scoreMax;
+    //private int scoreMax;
     private float time;
     private bool sharpening;
     private int goodReleases;
@@ -52,7 +52,7 @@ public class SharpeningV2 : MonoBehaviour
 
         // Set Variables
         score = 0;
-        scoreMax = 1000;
+        //scoreMax = 1000;
         time = 15f;
         goodReleases = 0;
         greatReleases = 0;

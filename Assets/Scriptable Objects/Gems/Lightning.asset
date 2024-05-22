@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Lightning
   affixText: of Sparks
   gemArt: {fileID: 21300000, guid: 294314921180b5b4792a348702b5c54b, type: 3}
-  backgroundArt: {fileID: 21300000, guid: cf9c4d02f728d4648924878a4f532ffc, type: 3}
+  backgroundArt: {fileID: 21300000, guid: 7efc3c5032d2ce94e8b6581f691b9c54, type: 3}
