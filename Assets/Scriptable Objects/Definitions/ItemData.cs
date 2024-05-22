@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,4 +10,6 @@ public class ItemData : ScriptableObject
     public Sprite icon;
     public GameObject prefab;
     public string[] itemGrades;
+    public List<string> materials;
+    public List<int> materialAmount;
 }
