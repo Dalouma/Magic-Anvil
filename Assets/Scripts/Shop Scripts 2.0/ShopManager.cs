@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class ShopManager : MonoBehaviour
 {
@@ -13,8 +14,7 @@ public class ShopManager : MonoBehaviour
     [Header("Status")]
     [SerializeField] private int money;
     [SerializeField] private int reputationValue;
-    [SerializeField] private int wood;
-    [SerializeField] private int iron;
+    [SerializeField] public Dictionary<string, int> materialsInventory = new Dictionary<string, int>();
 
     // List of Special Customers with news stories
     [Header("Special Customers")]
@@ -26,20 +26,33 @@ public class ShopManager : MonoBehaviour
 
     // Record of Items sold
     public List<CraftedItem> itemsSold { get; private set; }
-    
+
+    //materials data
+    public List<string> materialsNames;
+    public List<int> materialsCostInOrder;
+    public Dictionary<string, int> MaterialsData = new Dictionary<string, int>();
+
     // UI objects
     public UnityEngine.UI.Slider bar;
     public TextMeshProUGUI moneyText;
+    public List<TextMeshProUGUI> InventoryTextsInorder;
+    public Dictionary<string,TextMeshProUGUI> inventoryTexts = new Dictionary<string, TextMeshProUGUI>();
 
     // Only one instance
     private void Awake()
     {
+        //moneyText = GameObject.Find("GoldText").GetComponent<TextMeshProUGUI>();
         if (instance == null)
         {
             instance = this;
             //LoadCustomers();
             BasicQueue();
             LoadCurrency();
+            for(int i=0;i<materialsNames.Count;i++)
+            {
+                MaterialsData.Add(materialsNames[i], materialsCostInOrder[i]);
+                inventoryTexts.Add(materialsNames[i], InventoryTextsInorder[i]);
+            }
         }
         else if (instance != this)
         {
@@ -50,7 +63,14 @@ public class ShopManager : MonoBehaviour
     }
 
     public int GetMoney() { return money; }
-    public void UpdateMoney(int money) { this.money += money; }
+    public void UpdateMoney(int nmoney) 
+    { 
+        money += nmoney;
+        if (moneyText != null)
+        {
+            moneyText.text = money.ToString();
+        }
+    }
 
     // This function should load the currency from save data.
     // For now it will set them to 0
@@ -111,6 +131,45 @@ public class ShopManager : MonoBehaviour
     public void SetRep(double rep)
     {
         bar.value = (int)rep;
+    }
+    public void incrementMaterials(string materialName)
+    {
+       if (money >= MaterialsData[materialName]) { 
+        if (!materialsInventory.ContainsKey(materialName))
+        {
+            materialsInventory.Add(materialName, 0);
+        }
+
+        materialsInventory[materialName]++;
+        inventoryTexts[materialName].text = materialsInventory[materialName].ToString();
+        UpdateMoney(-(MaterialsData[materialName]));
+    }
+    }
+    public void decrementMaterials(string materialName)
+    {
+        materialsInventory[materialName]--;
+        inventoryTexts[materialName].text = materialsInventory[materialName].ToString();
+    }
+    public void SellItem(ItemData item)
+    {
+        for (int i = 0; i < item.materials.Count; i++)
+        {
+            materialsInventory[item.materials[i]] -= MaterialsData[item.materials[i]] * item.materialAmount[i];
+        }
+
+    }
+    public void Resetinventory()
+    {
+
+        List<string> keys = new List<string>(materialsInventory.Keys);
+
+        foreach (string name in keys)
+            {
+                UpdateMoney(materialsInventory[name] * MaterialsData[name]);
+                materialsInventory[name] = 0;
+                inventoryTexts[name].text = materialsInventory[name].ToString();
+            }
+        
     }
 
 }

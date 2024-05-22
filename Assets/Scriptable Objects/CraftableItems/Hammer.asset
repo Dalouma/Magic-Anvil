@@ -19,3 +19,7 @@ MonoBehaviour:
   itemGrades:
   - Unbalanced
   - Destructive
+  materials:
+  - Metal
+  - Wood
+  materialAmount: 0200000001000000

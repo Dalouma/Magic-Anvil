@@ -19,3 +19,7 @@ MonoBehaviour:
   itemGrades:
   - Dull
   - Vorpal
+  materials:
+  - Metal
+  - Wood
+  materialAmount: 0100000001000000
