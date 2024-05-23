@@ -13,7 +13,7 @@ public class ShopManager : MonoBehaviour
     // Player Resources
     [Header("Status")]
     [SerializeField] private int money;
-    [SerializeField] private double reputationValue;
+    [SerializeField] public double reputationValue;
     [SerializeField] public Dictionary<string, int> materialsInventory = new Dictionary<string, int>();
     [SerializeField] public ItemData HoveredItem;
 
@@ -131,12 +131,10 @@ public class ShopManager : MonoBehaviour
     public void SetRep(double rep)
     {
         reputationValue = rep;
-        bar.value = (int)reputationValue;
     }
     public void changeRep(double rep)
     {
         reputationValue += +rep;
-        bar.value = (int)reputationValue;
     }
     public void incrementMaterials(string materialName)
     {

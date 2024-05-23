@@ -1236,6 +1236,7 @@ MonoBehaviour:
   InventoryTextsInorder:
   - {fileID: 1378169027}
   - {fileID: 1372272852}
+  bar: {fileID: 707258365}
 --- !u!114 &370745429 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6829760223552577607, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
