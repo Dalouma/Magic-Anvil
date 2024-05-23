@@ -168,7 +168,7 @@ public class Customer : MonoBehaviour, IDropHandler
         {
             presentedItem = eventData.pointerDrag.GetComponent<CounterItem>().GetItem();
             ReceiveItem(presentedItem);
-            CalculatePriceThreshold();
+            CalculatePriceThreshold(presentedItem);
         }
     }
     
@@ -181,6 +181,7 @@ public class Customer : MonoBehaviour, IDropHandler
             if (item.data.ID == rejectedItem.ID)
             {
                 state = SpeechState.Reject;
+                ShopManager.instance.changeRep(-10.0);
                 TurnOnSpeechBox();
                 return;
             }
@@ -203,10 +204,10 @@ public class Customer : MonoBehaviour, IDropHandler
     // This function calculates the pricing thresholds that the customer tolerates
     // It is currently set to arbitrary numbers for testing
     // This should take into account customer's stinginess
-    private void CalculatePriceThreshold()
+    private void CalculatePriceThreshold(CraftedItem item)
     {
-        maxPrice = 60;
         idealPrice = 40;
+        maxPrice = 60;
         goodPrice = 20;
     }
 
@@ -218,13 +219,24 @@ public class Customer : MonoBehaviour, IDropHandler
         offeredPrice = int.Parse(input);
 
         if (offeredPrice > maxPrice)
+        {
             state = SpeechState.TooExpensive;
+        }
         else if (offeredPrice > idealPrice)
+        {
             state = SpeechState.HighPrice;
+            //ShopManager.instance.changeRep(-5.0);
+        }
         else if (offeredPrice > goodPrice)
+        {
+            //ShopManager.instance.changeRep(5.0);
             state = SpeechState.MidPrice;
+        }
         else
+        {
             state = SpeechState.LowPrice;
+            //ShopManager.instance.changeRep(goodPrice-offeredPrice);
+        }
 
         TurnOnSpeechBox();
     }
