@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using System;
+using System.Diagnostics;
 
 public class Customer : MonoBehaviour, IDropHandler
 {
@@ -182,6 +184,7 @@ public class Customer : MonoBehaviour, IDropHandler
             {
                 state = SpeechState.Reject;
                 ShopManager.instance.changeRep(-10.0);
+                shopUI.SetRep();
                 TurnOnSpeechBox();
                 return;
             }
@@ -206,9 +209,11 @@ public class Customer : MonoBehaviour, IDropHandler
     // This should take into account customer's stinginess
     private void CalculatePriceThreshold(CraftedItem item)
     {
-        idealPrice = 40;
-        maxPrice = 60;
-        goodPrice = 20;
+        double calculatedprice = ((item.Cost) * (item.scoreVal / 1000)) / (ShopManager.instance.reputationValue / 100);
+        idealPrice = (int)Math.Round(calculatedprice);
+        maxPrice = (int)Math.Round(1.25 *calculatedprice);
+        goodPrice = (int)Math.Round(0.8 *calculatedprice);
+        UnityEngine.Debug.Log(calculatedprice);
     }
 
     // This function is called after the player offers a price by finishing the input field
@@ -225,17 +230,20 @@ public class Customer : MonoBehaviour, IDropHandler
         else if (offeredPrice > idealPrice)
         {
             state = SpeechState.HighPrice;
-            //ShopManager.instance.changeRep(-5.0);
+            ShopManager.instance.changeRep(-5.0);
+            shopUI.SetRep();
         }
         else if (offeredPrice > goodPrice)
         {
-            //ShopManager.instance.changeRep(5.0);
+            ShopManager.instance.changeRep(5.0);
             state = SpeechState.MidPrice;
+            shopUI.SetRep();
         }
         else
         {
             state = SpeechState.LowPrice;
-            //ShopManager.instance.changeRep(goodPrice-offeredPrice);
+            ShopManager.instance.changeRep(goodPrice-offeredPrice);
+            shopUI.SetRep();
         }
 
         TurnOnSpeechBox();

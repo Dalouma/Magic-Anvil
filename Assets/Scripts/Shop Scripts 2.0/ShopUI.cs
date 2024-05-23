@@ -26,6 +26,8 @@ public class ShopUI : MonoBehaviour
     public List<TextMeshProUGUI> InventoryTextsInorder;
     public Dictionary<string, TextMeshProUGUI> inventoryTexts = new Dictionary<string, TextMeshProUGUI>();
 
+    public UnityEngine.UI.Slider bar;
+
 
 
     // Start is called before the first frame update
@@ -41,6 +43,7 @@ public class ShopUI : MonoBehaviour
 
               }
         RefreshMoney();
+        SetRep();
     }
 
     public void RefreshMoney() { nMoneyText.text = ShopManager.instance.GetMoney().ToString(); }
@@ -96,5 +99,9 @@ public class ShopUI : MonoBehaviour
     public void ShowPriceInputField()
     {
         priceInputField.SetActive(true);
+    }
+    public void SetRep()
+    {
+        bar.value = (int)ShopManager.instance.reputationValue;
     }
 }
