@@ -13,8 +13,9 @@ public class ShopManager : MonoBehaviour
     // Player Resources
     [Header("Status")]
     [SerializeField] private int money;
-    [SerializeField] private int reputationValue;
+    [SerializeField] private double reputationValue;
     [SerializeField] public Dictionary<string, int> materialsInventory = new Dictionary<string, int>();
+    [SerializeField] public ItemData HoveredItem;
 
     // List of Special Customers with news stories
     [Header("Special Customers")]
@@ -35,8 +36,6 @@ public class ShopManager : MonoBehaviour
     // UI objects
     public UnityEngine.UI.Slider bar;
     public TextMeshProUGUI moneyText;
-    public List<TextMeshProUGUI> InventoryTextsInorder;
-    public Dictionary<string,TextMeshProUGUI> inventoryTexts = new Dictionary<string, TextMeshProUGUI>();
 
     // Only one instance
     private void Awake()
@@ -51,8 +50,9 @@ public class ShopManager : MonoBehaviour
             for(int i=0;i<materialsNames.Count;i++)
             {
                 MaterialsData.Add(materialsNames[i], materialsCostInOrder[i]);
-                inventoryTexts.Add(materialsNames[i], InventoryTextsInorder[i]);
+                
             }
+            SetRep(reputationValue);
         }
         else if (instance != this)
         {
@@ -66,10 +66,10 @@ public class ShopManager : MonoBehaviour
     public void UpdateMoney(int nmoney) 
     { 
         money += nmoney;
-        if (moneyText != null)
+       /* if (moneyText != null)
         {
             moneyText.text = money.ToString();
-        }
+        }*/
     }
 
     // This function should load the currency from save data.
@@ -130,7 +130,13 @@ public class ShopManager : MonoBehaviour
     }
     public void SetRep(double rep)
     {
-        bar.value = (int)rep;
+        reputationValue = rep;
+        bar.value = (int)reputationValue;
+    }
+    public void changeRep(double rep)
+    {
+        reputationValue += +rep;
+        bar.value = (int)reputationValue;
     }
     public void incrementMaterials(string materialName)
     {
@@ -141,24 +147,23 @@ public class ShopManager : MonoBehaviour
         }
 
         materialsInventory[materialName]++;
-        inventoryTexts[materialName].text = materialsInventory[materialName].ToString();
         UpdateMoney(-(MaterialsData[materialName]));
     }
     }
     public void decrementMaterials(string materialName)
     {
         materialsInventory[materialName]--;
-        inventoryTexts[materialName].text = materialsInventory[materialName].ToString();
+        //inventoryTexts[materialName].text = materialsInventory[materialName].ToString();
     }
-    public void SellItem(ItemData item)
+    public void makeItem()
     {
-        for (int i = 0; i < item.materials.Count; i++)
+        for (int i = 0; i < HoveredItem.materials.Count; i++)
         {
-            materialsInventory[item.materials[i]] -= MaterialsData[item.materials[i]] * item.materialAmount[i];
+            materialsInventory[HoveredItem.materials[i]] -= HoveredItem.materialAmount[i];
         }
 
     }
-    public void Resetinventory()
+    public void ResetInventory()
     {
 
         List<string> keys = new List<string>(materialsInventory.Keys);
@@ -167,7 +172,7 @@ public class ShopManager : MonoBehaviour
             {
                 UpdateMoney(materialsInventory[name] * MaterialsData[name]);
                 materialsInventory[name] = 0;
-                inventoryTexts[name].text = materialsInventory[name].ToString();
+                //inventoryTexts[name].text = materialsInventory[name].ToString();
             }
         
     }
