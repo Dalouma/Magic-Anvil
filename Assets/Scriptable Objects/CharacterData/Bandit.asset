@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98c54948be500cf40afb898cae2eacdb, type: 3}
+  m_Name: Bandit
+  m_EditorClassIdentifier: 
+  name: Bandit
+  characterSprite: {fileID: -931454921, guid: a804d73cd5f28704ebbba2cce888de14, type: 3}
+  customerData: {fileID: 11400000, guid: b7035ef1e79e72b48b716c2887c13d75, type: 2}
+  introText:
+  - Hey, uh... I need a weapon. It needs to be something I can use quickly and conceal
+    easily.
+  - It would be better if you didn't ask any questions.

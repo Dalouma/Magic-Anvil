@@ -1,22 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    private void Awake() 
+    private void Awake()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(this);
         }
-        else 
+        else
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
     }
 
@@ -25,24 +22,41 @@ public class GameManager : MonoBehaviour
     public int currency = 450;
     public int character = 0;
 
+    // Customer Queue save data
+    public string[] customerQueue;
+    public itemSaveData[] givenItems;
+    public int queueIndex;
+    public int dayCount;
+
+    // Inventory save data
+    public itemSaveData[] inventorySaveData;
+
+    // Gem Inventory save data
+    public (string, int)[] gemInventory;
+
+    // Analytics save data
+    public bool tracking;
+    public bool consent;
+
+
     public bool pullFromSave = false;
 
-    public void SaveGame() 
+    public void SaveGame()
     {
         SaveSystem.SaveGame(this);
     }
 
-    public void LoadGame() 
+    public void LoadGame()
     {
         SaveData data = SaveSystem.LoadGame();
 
         // set all variables back to loaded data
         // ...
-        currency = data.currency;
-        character = data.character;
+        //currency = data.currency;
+        //character = data.character;
     }
 
-    public void FromSave() 
+    public void FromSave()
     {
         pullFromSave = true;
     }

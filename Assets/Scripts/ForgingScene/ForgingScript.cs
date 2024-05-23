@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ForgingScript : MonoBehaviour
 {
@@ -61,7 +59,7 @@ public class ForgingScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       // finishScene.gameObject.SetActive(false);
+        // finishScene.gameObject.SetActive(false);
         totalhits = 5;
         FinishCanvas.GetComponent<Canvas>().enabled = false;
         activeScene = true;
@@ -69,17 +67,17 @@ public class ForgingScript : MonoBehaviour
         clangAudio = GetComponent<AudioSource>();
         clicks = 0;
         currentSpeed = 0;
-        speedLevel= 0;
+        speedLevel = 0;
         direction = 1f;
         gameStart = false;
         greatTiming = 0;
-        goodTiming = 0; 
+        goodTiming = 0;
         badTiming = 0;
         StartGame();
-        weapon = Weapon.weapon;
+        //weapon = Weapon.weapon;
         Debug.Log(weapon);
-        onCooldown = false; 
-        nextScene.onClick.AddListener(EndGame);     
+        onCooldown = false;
+        nextScene.onClick.AddListener(EndGame);
         finishtimer = 2f;
         score = 0;
         // Change Music to appropriate track
@@ -87,7 +85,7 @@ public class ForgingScript : MonoBehaviour
         {
             AudioManager.instance.ChangeMusic("forge");
         }
-       
+
     }
 
     // Update is called once per frame
@@ -95,7 +93,8 @@ public class ForgingScript : MonoBehaviour
     {
         CheatKeys();
 
-        if(activeScene){
+        if (activeScene)
+        {
             // Valid Inputs
             bool LMB = Input.GetMouseButtonDown(0);
             bool RMB = Input.GetMouseButtonDown(1);
@@ -173,7 +172,7 @@ public class ForgingScript : MonoBehaviour
                 }
 
                 SetScoreText();
-            
+
 
                 // end check
                 if (clicks == totalhits)
@@ -181,6 +180,7 @@ public class ForgingScript : MonoBehaviour
                     StartCoroutine(showFinishButton());
                     //ShowForgingResults();
                     //EndGame();
+                    InventorySystem.instance.AddScore(score * 15);
                 }
             }
         }
@@ -225,32 +225,38 @@ public class ForgingScript : MonoBehaviour
         Debug.Log("button clicked for end game");
         gameStart = false;
         currentSpeed = 0;
-        if(weapon == "Shield" || weapon == "Hammer"){
+        if (weapon == "Shield" || weapon == "Hammer")
+        {
             AudioManager.instance.ChangeMusic("menu");
             Debug.Log("loading customer scene");
             SceneManager.LoadScene("TestScene");
         }
-        if(weapon == "Dagger" || weapon == "Sword" || weapon == "Axe"){
+        if (weapon == "Dagger" || weapon == "Sword" || weapon == "Axe")
+        {
             Debug.Log("loading sharpening scene");
             SceneManager.LoadScene(sharpeninglevel);
             //levelChangerScript.FadeToLevel(sharpeninglevel);
         }
     }
 
-    public void SetScoreText(){
+    public void SetScoreText()
+    {
         scoreText.text = score.ToString();
     }
 
-    public void SetHitsText(){
+    public void SetHitsText()
+    {
         hitsText.text = clicks.ToString() + "/" + totalhits;
     }
 
-    public void ShowForgingResults(){
+    public void ShowForgingResults()
+    {
         //forgingscore = CalculateForgingScore(greatTiming, goodTiming, badTiming); 
         resultText.text = $"{table.GetLocalizedString("forging")}\n\n\n{table.GetLocalizedString("score")} {score} /100";
         ResultsCanvas.GetComponent<Canvas>().enabled = true;
     }
-    IEnumerator showFinishButton(){
+    IEnumerator showFinishButton()
+    {
         activeScene = false;
         FinishCanvas.GetComponent<Canvas>().enabled = true;
         yield return new WaitForSeconds(finishtimer);

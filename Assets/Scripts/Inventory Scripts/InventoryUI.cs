@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,20 +9,25 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image borderImage;
     [SerializeField] private Image gemEffectImage;
     [SerializeField] private Image itemImage;
+    [SerializeField] private Image gemSocketIndicator;
+    [SerializeField] private GameObject gemPanel;
 
     [Header("Button References")]
     [SerializeField] private GameObject socketButton;
     [SerializeField] private GameObject sellButton;
 
-    [Header("Variables")]
+    [Header("Empty Gem Effect Background")]
+    [SerializeField] private Sprite emptyGemEffect;
+
+    [Header("Status")]
     public int currentItemIndex;
 
     // Start is called before the first frame update
     void Start()
     {
-        //SetupIcons();
         currentItemIndex = -1;
         ResetDisplay();
+        RefreshIcons();
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class InventoryUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Space pressed");
+            InventorySystem.instance.GenerateFullSet();
             RefreshIcons();
         }
 
@@ -50,16 +53,27 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    // Refreshes the gem amounts in the Gem Selection Panel
+    private void RefreshGems()
+    {
+        for (int i = 0; i < gemPanel.transform.childCount; i++)
+        {
+            GemSlot gem = gemPanel.transform.GetChild(i).gameObject.GetComponent<GemSlot>();
+            if (gem != null)
+                gem.Refresh();
+        }
+    }
+
     // Gives each Item Slot the item data from the inventory
     private void RefreshIcons()
     {
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
-            ItemSlot currentSlot = transform.GetChild(i + 1).gameObject.GetComponent<ItemSlot>();
+            ItemSlot currentSlot = transform.GetChild(i).gameObject.GetComponent<ItemSlot>();
 
             CraftedItem item;
             if (i < InventorySystem.instance.GetItemCount())
-                item = InventorySystem.instance.GetItem(i);
+                item = InventorySystem.instance.GetItemAt(i);
             else
                 item = null;
             currentSlot.Set(item);
@@ -72,28 +86,61 @@ public class InventoryUI : MonoBehaviour
         // determine item grade prefix (weak, strong)
         string itemPrefix = "";
         if (item.scoreVal >= 2000)
-            itemPrefix = item.data.itemGrades[1] + " ";
+            itemPrefix = item.data.itemGrades[1];
         if (item.scoreVal < 1000)
-            itemPrefix = item.data.itemGrades[0] + " ";
-        
-        itemDisplayName.text = itemPrefix + item.data.ID;
+            itemPrefix = item.data.itemGrades[0];
+
+        itemDisplayName.text = $"{itemPrefix} {item.data.ID}";
+
+        // set item gem affix text
+        if (item.gData != null)
+            itemDisplayName.text += $" {item.gData.affixText}";
+
+        // change background art
+        if (item.gData != null)
+        {
+            gemEffectImage.sprite = item.gData.backgroundArt;
+            gemSocketIndicator.enabled = true;
+        }
+        else
+        {
+            gemEffectImage.sprite = emptyGemEffect;
+            gemSocketIndicator.enabled = false;
+        }
 
         // change item image
         itemImage.sprite = item.data.fullArt;
+        itemImage.enabled = true;
 
         // turn on buttons
         socketButton.SetActive(true);
         sellButton.SetActive(true);
     }
 
-    // Updates display 
+    // Resets display 
     public void ResetDisplay()
     {
         itemDisplayName.text = "";
-        itemImage.sprite = null;
-        
+        gemEffectImage.sprite = emptyGemEffect;
+        itemImage.enabled = false;
+        gemSocketIndicator.enabled = false;
+
         socketButton.SetActive(false);
         sellButton.SetActive(false);
+    }
+
+    // Place item on counter
+    // Called when player presses Sell button in inventory
+    public void PlaceItem()
+    {
+        CraftedItem toPlace = InventorySystem.instance.GetItemAt(currentItemIndex);
+        CounterItem itemOnCounter = GameObject.FindGameObjectWithTag("item").GetComponent<CounterItem>();
+        if (itemOnCounter == null)
+        {
+            Debug.Log("item on counter not found");
+            return;
+        }
+        itemOnCounter.SetItem(toPlace);
     }
 
     // Removes item from inventory and refreshes display
@@ -102,5 +149,19 @@ public class InventoryUI : MonoBehaviour
         InventorySystem.instance.RemoveItem(currentItemIndex);
         RefreshIcons();
         ResetDisplay();
+    }
+
+    // Attaches currently selected item with gem that was dragged in.
+    public void SocketItem()
+    {
+        GemData gem = InventorySystem.instance.selectedGem;
+        CraftedItem item = InventorySystem.instance.GetItemAt(currentItemIndex);
+        item.Socket(gem);
+
+        InventorySystem.instance.ChangeGemAmount(gem, -1);
+
+        ViewItemInfo(item);
+        RefreshIcons();
+        RefreshGems();
     }
 }
