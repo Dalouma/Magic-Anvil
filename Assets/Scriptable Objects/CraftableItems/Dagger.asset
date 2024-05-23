@@ -19,3 +19,6 @@ MonoBehaviour:
   itemGrades:
   - Tiny
   - Razor Sharp
+  materials:
+  - Metal
+  materialAmount: 01000000

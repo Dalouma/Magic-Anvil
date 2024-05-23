@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +5,7 @@ public class ItemSlot : MonoBehaviour
 {
     [SerializeField] private Image backgroundArt;
     [SerializeField] private Image icon;
+    [SerializeField] private Image gemSocketIndicator;
     [SerializeField] private int index;
 
     private CraftedItem m_item;
@@ -16,16 +15,19 @@ public class ItemSlot : MonoBehaviour
     {
         if (item == null)
         {
-            Debug.Log("no item found while setting itemSlot data");
             m_item = null;
-            icon.sprite = null;
+            icon.enabled = false;
+            gemSocketIndicator.enabled = false;
             return;
         }
 
+        icon.enabled = true;
         m_item = item;
         icon.sprite = item.data.icon;
+        if (m_item.gData!= null )
+            gemSocketIndicator.enabled = true;
+        else gemSocketIndicator.enabled = false;
 
-        // set background
     }
 
     // The function the button calls in order to set the Item Info Window

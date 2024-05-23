@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveMenu : MonoBehaviour
@@ -9,17 +7,17 @@ public class SaveMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (menuPanel != null) 
+            if (menuPanel != null)
             {
                 menuPanel.SetActive(!menuPanel.activeSelf);
 
-                if (menuPanel.activeSelf ) 
+                if (menuPanel.activeSelf)
                 {
                     PauseGame();
                 }
-                else 
+                else
                 {
                     UnpauseGame();
                 }
@@ -27,21 +25,21 @@ public class SaveMenu : MonoBehaviour
         }
     }
 
-    public void QuitGame() 
+    public void QuitGame()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
-        #endif
+#endif
     }
 
-    void PauseGame() 
+    void PauseGame()
     {
         Time.timeScale = 0;
     }
 
-    void UnpauseGame() 
+    void UnpauseGame()
     {
         Time.timeScale = 1f;
     }

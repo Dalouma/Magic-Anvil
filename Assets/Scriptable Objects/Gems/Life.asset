@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Life
   affixText: of Vitality
   gemArt: {fileID: 21300000, guid: 7bc209ff10bad7247875d86ed2e7083e, type: 3}
-  slotArt: {fileID: 0}
+  backgroundArt: {fileID: 21300000, guid: bf4ea124f5300a84e9d9017857810e33, type: 3}

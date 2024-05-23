@@ -1,4 +1,3 @@
-using UnityEngine;
 using System.IO;
 using System;
 
@@ -21,7 +20,7 @@ public static class SaveSystem
         }
     }
 
-    public static SaveData LoadGame() 
+    public static SaveData LoadGame()
     {
         if (File.Exists(SavePath))
         {

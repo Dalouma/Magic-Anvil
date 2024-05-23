@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 398260077314030814}
   m_Layer: 5
   m_Name: Name Text
-  m_TagString: Untagged
+  m_TagString: NameBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 6355863187597805315}
   - component: {fileID: 5784148250143448210}
   - component: {fileID: 7874749449266855827}
-  - component: {fileID: 1810212957086285674}
   - component: {fileID: 6546250733266773236}
   m_Layer: 5
   m_Name: Speech Box Canvas
@@ -164,7 +163,7 @@ RectTransform:
   m_GameObject: {fileID: 3963527825934147968}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5753519575288033434}
@@ -182,7 +181,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3963527825934147968}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -196,7 +195,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &5784148250143448210
 MonoBehaviour:
@@ -238,19 +237,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1810212957086285674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3963527825934147968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cf214d97c55ed44689b4cb88c825534, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speechBox: {fileID: 6514558142049445036}
 --- !u!114 &6546250733266773236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b679fbd73786a44490d58fa9f4fb512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charsPerSecond: 50
+  charsPerSecond: 20
   punctuationDelay: 0.5
   punctuations: 
   quickSkip: 0
@@ -334,9 +320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non
-    dolor eget turpis mattis cursus. Nullam congue nulla ac metus pharetra molestie.
-    Morbi vel arcu id neque semper molestie. '
+  m_text: ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c3a31d31adb50e344892c90991349103, type: 2}
   m_sharedMaterial: {fileID: -3039077922445122848, guid: c3a31d31adb50e344892c90991349103, type: 2}

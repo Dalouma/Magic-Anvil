@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Ice
   affixText: of Frost
   gemArt: {fileID: 21300000, guid: d6e5365c35e17054a9fa9cd0c9ca8b0d, type: 3}
-  slotArt: {fileID: 0}
+  backgroundArt: {fileID: 21300000, guid: afe4136c5f4841f4fb6e361aade7aa53, type: 3}

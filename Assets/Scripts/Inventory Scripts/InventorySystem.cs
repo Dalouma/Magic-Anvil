@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -17,6 +17,9 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private ItemData itemType;
     [SerializeField] private int itemScore;
 
+    [Header("Selected Gem for Socket")]
+    public GemData selectedGem;
+
     [Header("For Testing")]
     [SerializeField] private List<ItemData> testItems;
 
@@ -29,6 +32,9 @@ public class InventorySystem : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
+            // Initialize Item Inventory
+            LoadInventory();
+
             // Initialize Gem Inventory
             LoadGems();
         }
@@ -40,13 +46,15 @@ public class InventorySystem : MonoBehaviour
     void Start()
     {
         itemScore = 0;
-        itemType = null;
+        itemType = testItems[0];
 
-        // Initialize Inventory 
+    }
+
+    // Currently initializes an empty item inventory as an empty list of type CraftedItem
+    // This should load items from save data in the future
+    private void LoadInventory()
+    {
         inventory = new List<CraftedItem>();
-        
-        
-
     }
 
     // Currently this initializes an empty gem inventory using a dictionary with (gemData, int) kvp
@@ -56,21 +64,9 @@ public class InventorySystem : MonoBehaviour
         gemInventory = new Dictionary<string, int>();
         for (int i = 0; i < gemTypes.Count; i++)
         {
-            Debug.Log("adding " + gemTypes[i].name + " to dictionary");
-            gemInventory.Add(gemTypes[i].name, 0);
+            gemInventory.Add(gemTypes[i].name, 2);
         }
-            
-    }
 
-    private void Update()
-    {
-        //TestKeys();
-    }
-
-    // Test Keys (DELETE OUT OF UPDATE FUNCTION LATER)
-    private void TestKeys()
-    {
-        
     }
 
     // Generates a random item for testing purposes
@@ -87,12 +83,24 @@ public class InventorySystem : MonoBehaviour
         Debug.Log("Created " + itemType.ID + " with grade " + itemScore);
     }
 
-    // sets chosen weapon and sets item score to 0
-    public void StartCrafting(ItemData itemData)
+    public void GenerateFullSet()
     {
-        itemScore = 0;
-        itemType = itemData;
+        if (inventory.Count > 1)
+        {
+            Debug.Log("Too many items in inventory!!!");
+            return;
+        }
+        foreach (ItemData item in testItems)
+        {
+            itemType = item;
+            itemScore = 3000;
+            FinishCrafting();
+        }
+        Debug.Log("generated perfect set of items");
     }
+
+    public void SelectItem(ItemData item) { itemType = item; }
+    public void AddScore(int score) { itemScore += score; }
 
     // Adds Finished item stats to inventory
     public void FinishCrafting()
@@ -101,18 +109,10 @@ public class InventorySystem : MonoBehaviour
     }
 
     // Returns CraftedItem by index from inventory
-    public CraftedItem GetItem(int index)
-    {
-        if (index > inventory.Count - 1)
-            return null;
-        return inventory[index];
-    }
+    public CraftedItem GetItemAt(int index) { return inventory[index]; }
 
     // Removes Crafted Item by index from inventory
-    public void RemoveItem(int index)
-    {
-        inventory.RemoveAt(index);
-    }
+    public void RemoveItem(int index) { inventory.RemoveAt(index); }
 
     // Get number of gems currently possessed by player by accessing dictionary
     public int GetGemAmount(GemData type)
@@ -126,7 +126,9 @@ public class InventorySystem : MonoBehaviour
         gemInventory[type.name] = gemInventory[type.name] + amount;
     }
 
-    // Gets number of items currently in inventory
-    public int GetItemCount() { return inventory.Count;}
+    // Returns list of all crafted items in inventory
+    public List<CraftedItem> GetInventory() { return inventory; }
     public bool FullInventory() { return inventory.Count >= maxSize; }
+    // Gets number of items currently in inventory
+    public int GetItemCount() { return inventory.Count; }
 }

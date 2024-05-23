@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine;
 
 public class InputSequenceManager : MonoBehaviour
 {
@@ -70,7 +69,7 @@ public class InputSequenceManager : MonoBehaviour
         remainingTime -= Time.deltaTime;
         timerSlider.value = remainingTime;
 
-        if (remainingTime <= 0f) 
+        if (remainingTime <= 0f)
         {
             Debug.Log("You were attacked!");
             CreateRandomSequence();
@@ -79,16 +78,16 @@ public class InputSequenceManager : MonoBehaviour
             EnemyAttack();
         }
 
-        if (lives <= 0) 
+        if (lives <= 0)
         {
             Debug.Log("Robbery Minigame Failed!");
             lose = true;
         }
 
-        if (Input.touchCount > 0) 
+        if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            switch (touch.phase) 
+            switch (touch.phase)
             {
                 case TouchPhase.Began:
                     startPosition = touch.position;
@@ -121,7 +120,7 @@ public class InputSequenceManager : MonoBehaviour
         actionSequence.Clear();
         currentAction = 0;
 
-        for (int i = 0; i < 5; i++) 
+        for (int i = 0; i < 5; i++)
         {
             actionSequence.Add((InputType)Random.Range(0, System.Enum.GetValues(typeof(InputType)).Length));
         }
@@ -130,13 +129,13 @@ public class InputSequenceManager : MonoBehaviour
         UpdateSequenceImages();
     }
 
-    void CheckInput(InputType input) 
+    void CheckInput(InputType input)
     {
-        if (input == actionSequence[currentAction]) 
+        if (input == actionSequence[currentAction])
         {
             ClearCurrentActionImage();
             currentAction++;
-            if (currentAction >= actionSequence.Count) 
+            if (currentAction >= actionSequence.Count)
             {
                 Debug.Log("Sequence Completed!");
 
@@ -151,7 +150,7 @@ public class InputSequenceManager : MonoBehaviour
                 StartCoroutine(EnemyDefeated());
             }
         }
-        else 
+        else
         {
             Debug.Log("Sequence Failed!");
             ResetSequence();
@@ -159,10 +158,10 @@ public class InputSequenceManager : MonoBehaviour
         }
     }
 
-    InputType GetSwipeDirection(Vector2 start, Vector2 end) 
+    InputType GetSwipeDirection(Vector2 start, Vector2 end)
     {
         float swipeMagnitude = (end - start).magnitude;
-        if (swipeMagnitude < 20f) 
+        if (swipeMagnitude < 20f)
         {
             return InputType.Tap;
         }
@@ -170,32 +169,32 @@ public class InputSequenceManager : MonoBehaviour
         Vector2 swipeDirection = end - start;
         float angle = Vector2.SignedAngle(swipeDirection, Vector2.right);
 
-        if (angle > -45f && angle <= 45f) 
+        if (angle > -45f && angle <= 45f)
         {
             return InputType.SwipeRight;
         }
-        else if (angle > 45f && angle <= 135f) 
+        else if (angle > 45f && angle <= 135f)
         {
             return InputType.SwipeDown;
         }
-        else if (angle > -135f && angle <= -45f) 
+        else if (angle > -135f && angle <= -45f)
         {
             return InputType.SwipeUp;
         }
-        else 
+        else
         {
             return InputType.SwipeLeft;
         }
     }
 
-    void ResetSequence() 
+    void ResetSequence()
     {
         Debug.Log("Sequence Reset!");
         currentAction = 0;
         UpdateSequenceImages();
     }
 
-    void ResetTimer() 
+    void ResetTimer()
     {
         remainingTime = sequenceDuration;
     }
@@ -372,7 +371,7 @@ public class Enemy
     public int damage;
 }
 
-public enum InputType 
+public enum InputType
 {
     Tap,
     SwipeUp,

@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Power
   affixText: of Power
   gemArt: {fileID: 21300000, guid: bb7d83b62e824674697f5d2794e1b1e6, type: 3}
-  slotArt: {fileID: 0}
+  backgroundArt: {fileID: 21300000, guid: 35eeb916885500b44beb71a113c5e6f6, type: 3}
