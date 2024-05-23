@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections;
 
 public class InputSequenceManager : MonoBehaviour
 {
