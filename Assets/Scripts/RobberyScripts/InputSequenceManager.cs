@@ -13,11 +13,8 @@ public class InputSequenceManager : MonoBehaviour
     public Slider healthSlider;
     public Slider timerSlider;
 
-    public TMP_Text sequenceText;
-    public TMP_Text lifeText;
     private int lives = 3;
 
-    public TMP_Text timerText;
     public float sequenceDuration = 10f;
     private float remainingTime;
 
@@ -26,6 +23,34 @@ public class InputSequenceManager : MonoBehaviour
 
     public int numEnemies = 5;
 
+    public Sprite tallGoblinSprite;
+    public Sprite shortGoblinSprite;
+    public Image enemyImage;
+
+    private bool won = false;
+    private bool lose = false;
+
+    public Vector2 tallGoblinScale = new Vector2(1.5f, 2f);
+    public Vector2 shortGoblinScale = new Vector2(1f, 1f);
+
+    public Sprite tapSprite;
+    public Sprite swipeUpSprite;
+    public Sprite swipeDownSprite;
+    public Sprite swipeLeftSprite;
+    public Sprite swipeRightSprite;
+
+    public Image actionImageOne;
+    public Image actionImageTwo;
+    public Image actionImageThree;
+    public Image actionImageFour;
+    public Image actionImageFive;
+
+    public Image redTintImage;
+
+    public Animator enemyAnimator;
+
+    public RuntimeAnimatorController tallGoblinAnimator;
+    public RuntimeAnimatorController shortGoblinAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +60,6 @@ public class InputSequenceManager : MonoBehaviour
         healthSlider.value = lives;
         timerSlider.maxValue = sequenceDuration;
         timerSlider.value = sequenceDuration;
-        lifeText.text = "Lives: 3";
         remainingTime = sequenceDuration;
         PopulateEnemies(numEnemies);
     }
@@ -44,13 +68,11 @@ public class InputSequenceManager : MonoBehaviour
     void Update()
     {
         remainingTime -= Time.deltaTime;
-        UpdateTimerText();
         timerSlider.value = remainingTime;
 
         if (remainingTime <= 0f) 
         {
             Debug.Log("You were attacked!");
-            UpdateLifeText();
             CreateRandomSequence();
             ResetTimer();
             Handheld.Vibrate();
@@ -60,6 +82,7 @@ public class InputSequenceManager : MonoBehaviour
         if (lives <= 0) 
         {
             Debug.Log("Robbery Minigame Failed!");
+            lose = true;
         }
 
         if (Input.touchCount > 0) 
@@ -89,6 +112,8 @@ public class InputSequenceManager : MonoBehaviour
             enemy.damage = enemy.type == "small" ? 1 : 2;
             enemies.Add(enemy);
         }
+
+        UpdateEnemySprite();
     }
 
     void CreateRandomSequence() 
@@ -101,19 +126,29 @@ public class InputSequenceManager : MonoBehaviour
             actionSequence.Add((InputType)Random.Range(0, System.Enum.GetValues(typeof(InputType)).Length));
         }
 
-        UpdateSequenceText();
+        ResetActionImages();
+        UpdateSequenceImages();
     }
 
     void CheckInput(InputType input) 
     {
         if (input == actionSequence[currentAction]) 
         {
+            ClearCurrentActionImage();
             currentAction++;
             if (currentAction >= actionSequence.Count) 
             {
                 Debug.Log("Sequence Completed!");
+
+                currentEnemyIndex++;
+                if (currentEnemyIndex >= enemies.Count)
+                {
+                    won = true;
+                }
+
                 CreateRandomSequence();
                 ResetTimer();
+                StartCoroutine(EnemyDefeated());
             }
         }
         else 
@@ -157,7 +192,7 @@ public class InputSequenceManager : MonoBehaviour
     {
         Debug.Log("Sequence Reset!");
         currentAction = 0;
-        UpdateSequenceText();
+        UpdateSequenceImages();
     }
 
     void ResetTimer() 
@@ -165,26 +200,156 @@ public class InputSequenceManager : MonoBehaviour
         remainingTime = sequenceDuration;
     }
 
-    void UpdateSequenceText() 
+    Sprite GetSpriteForInputType(InputType inputType) 
     {
-        string sequenceString = "Sequence: ";
-        foreach (var action in actionSequence) 
+        switch (inputType) 
         {
-            sequenceString += action.ToString() + " ";
+            case InputType.Tap:
+                return tapSprite;
+            case InputType.SwipeRight:
+                return swipeRightSprite;
+            case InputType.SwipeDown:
+                return swipeDownSprite;
+            case InputType.SwipeUp:
+                return swipeUpSprite;
+            case InputType.SwipeLeft:
+                return swipeLeftSprite;
+            default:
+                return null;
         }
-        sequenceText.text = sequenceString;
     }
 
-    void UpdateLifeText()
+    void UpdateSequenceImages() 
     {
-        string lifeString = "Lives: ";
-        lifeString += lives.ToString();
-        lifeText.text = lifeString;
+        if (actionSequence.Count > 0) actionImageOne.sprite = GetSpriteForInputType(actionSequence[0]);
+        if (actionSequence.Count > 1) actionImageTwo.sprite = GetSpriteForInputType(actionSequence[1]);
+        if (actionSequence.Count > 2) actionImageThree.sprite = GetSpriteForInputType(actionSequence[2]);
+        if (actionSequence.Count > 3) actionImageFour.sprite = GetSpriteForInputType(actionSequence[3]);
+        if (actionSequence.Count > 4) actionImageFive.sprite = GetSpriteForInputType(actionSequence[4]);
     }
 
-    void UpdateTimerText() 
+    void ClearCurrentActionImage()
     {
-        timerText.text = "Time: " + Mathf.CeilToInt(remainingTime).ToString();
+        switch (currentAction)
+        {
+            case 0:
+                SetImageAlpha(actionImageOne, 0);
+                break;
+            case 1:
+                SetImageAlpha(actionImageTwo, 0);
+                break;
+            case 2:
+                SetImageAlpha(actionImageThree, 0);
+                break;
+            case 3:
+                SetImageAlpha(actionImageFour, 0);
+                break;
+            case 4:
+                SetImageAlpha(actionImageFive, 0);
+                break;
+        }
+    }
+
+    void ResetActionImages()
+    {
+        SetImageAlpha(actionImageOne, 1);
+        SetImageAlpha(actionImageTwo, 1);
+        SetImageAlpha(actionImageThree, 1);
+        SetImageAlpha(actionImageFour, 1);
+        SetImageAlpha(actionImageFive, 1);
+    }
+
+    void SetImageAlpha(Image image, float alpha)
+    {
+        if (image != null)
+        {
+            Color color = image.color;
+            color.a = alpha;
+            image.color = color;
+        }
+    }
+
+    void UpdateEnemySprite() 
+    {
+        Enemy currentEnemy = enemies[currentEnemyIndex];
+        if (currentEnemy.type == "tall") 
+        {
+            enemyImage.sprite = tallGoblinSprite;
+            enemyImage.rectTransform.localScale = tallGoblinScale;
+            enemyAnimator.runtimeAnimatorController = tallGoblinAnimator;
+        }
+        else
+        {
+            enemyImage.sprite = shortGoblinSprite;
+            enemyImage.rectTransform.localScale = shortGoblinScale;
+            enemyAnimator.runtimeAnimatorController = shortGoblinAnimator;
+        }
+    }
+
+    IEnumerator EnemyDefeated() 
+    {
+        if (enemyImage == null)
+        {
+            yield break;
+        }
+
+        for (float i = 1; i >= 0; i -= Time.deltaTime)
+        {
+            Color color = enemyImage.color;
+            color.a = i;
+            enemyImage.color = color;
+            yield return null;
+        }
+
+        if (currentEnemyIndex >= enemies.Count)
+        {
+            Color color = enemyImage.color;
+            color.a = 0;
+            enemyImage.color = color;
+        }
+        else
+        {
+            UpdateEnemySprite();
+
+            for (float i = 0; i <= 1; i += Time.deltaTime)
+            {
+                Color color = enemyImage.color;
+                color.a = i;
+                enemyImage.color = color;
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator TintScreenRed()
+    {
+        Color originalColor = redTintImage.color;
+        Color targetColor = new Color(1, 0, 0, 0.5f);
+
+        float duration = 0.5f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            redTintImage.color = Color.Lerp(originalColor, targetColor, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        redTintImage.color = targetColor;
+
+        yield return new WaitForSeconds(0.2f);
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            redTintImage.color = Color.Lerp(targetColor, originalColor, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        redTintImage.color = originalColor;
     }
 
     void EnemyAttack() 
@@ -192,15 +357,10 @@ public class InputSequenceManager : MonoBehaviour
         Enemy enemy = enemies[currentEnemyIndex];
         if (enemy != null) 
         {
+            StartCoroutine(TintScreenRed());
             Debug.Log("Attacked by " + enemy.type + " goblin.");
             lives -= enemy.damage;
             healthSlider.value = lives;
-            UpdateLifeText();
-            currentEnemyIndex++;
-            if (currentEnemyIndex >= enemies.Count) 
-            {
-                currentEnemyIndex= 0;
-            }
         }
     }
 }
