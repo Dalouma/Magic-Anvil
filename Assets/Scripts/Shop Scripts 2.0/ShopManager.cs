@@ -112,6 +112,14 @@ public class ShopManager : MonoBehaviour
         npcQueueIndex = 0;
     }
 
+    public void RobberyCheck()
+    {
+        if(Random.Range(0,10) <= 10)
+        {
+            GameObject.FindGameObjectWithTag("LevelChanger").GetComponent<LevelChanger>().FadeToLevel("RobberyScene");
+        }
+    }
+
     public CharacterData GetCurrentCharacter() { return npcQueue[npcQueueIndex]; }
 
     // This function makes the next customer in the queue appear

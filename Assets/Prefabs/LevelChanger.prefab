@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 6829760223552577607}
   m_Layer: 0
   m_Name: LevelChanger
-  m_TagString: Untagged
+  m_TagString: LevelChanger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,6 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dfd1d0fd4423841a7cc37153e40ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Maxdays: 7
+  daycount: 0
   animator: {fileID: 2276709414417991756}
 --- !u!1 &5478944550257880111
 GameObject:

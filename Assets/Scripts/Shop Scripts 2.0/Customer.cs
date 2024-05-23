@@ -158,6 +158,8 @@ public class Customer : MonoBehaviour, IDropHandler
             // customer leave
             ShopManager.instance.NextCustomer();
             state = SpeechState.Intro;
+            // Chance for Robbery
+            ShopManager.instance.RobberyCheck();
         }
 
     }
@@ -219,7 +221,7 @@ public class Customer : MonoBehaviour, IDropHandler
     // This function is called after the player offers a price by finishing the input field
     public void OfferPrice(string input)
     {
-        if (input == null) { return; }
+        if (input == "" || input == null) { return; }
 
         offeredPrice = int.Parse(input);
 

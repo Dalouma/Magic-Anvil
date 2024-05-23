@@ -85,6 +85,7 @@ public class InputSequenceManager : MonoBehaviour
                 loseScreen.SetActive(false);
 
                 // USE LEVEL CHANGER HERE TO MOVE SCENES
+                GameObject.FindGameObjectWithTag("LevelChanger").GetComponent<LevelChanger>().FadeToLevel("ShopScene");
             }
         }
 

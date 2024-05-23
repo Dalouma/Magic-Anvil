@@ -2534,14 +2534,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelChanger
       objectReference: {fileID: 0}
-    - target: {fileID: 5109663084787812377, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5109663084787812377, guid: 863781ea11f79b448918bdfa58bca39f, type: 3}
-      propertyPath: m_TagString
-      value: LevelChanger
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
