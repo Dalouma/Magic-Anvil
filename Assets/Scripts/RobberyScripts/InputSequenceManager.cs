@@ -57,6 +57,10 @@ public class InputSequenceManager : MonoBehaviour
 
     bool endGame = false;
 
+    public GameObject tutorialScreen;
+
+    public bool tutorialActive = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,9 +93,17 @@ public class InputSequenceManager : MonoBehaviour
             }
         }
 
-        UpdateText();
-        remainingTime -= Time.deltaTime;
-        timerSlider.value = remainingTime;
+        if (!tutorialScreen.activeSelf) 
+        {
+            tutorialActive = false;
+        }
+
+        if (!tutorialActive)
+        {
+            UpdateText();
+            remainingTime -= Time.deltaTime;
+            timerSlider.value = remainingTime;
+        }
 
         if (remainingTime <= 0f)
         {

@@ -8,11 +8,12 @@ public class togglePanels : MonoBehaviour
 
     void Start() 
     {
-        UIpanel.SetActive(false);
+        //UIpanel.SetActive(false);
     }
 
     public void TogglePanel() 
     {
         UIpanel.SetActive(!UIpanel.activeSelf);
+        Debug.Log("Panel activated");
     }
 }

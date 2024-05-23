@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 
 public class Initialize : MonoBehaviour, IUnityAdsInitializationListener
 {
@@ -12,7 +13,21 @@ public class Initialize : MonoBehaviour, IUnityAdsInitializationListener
 
     void Awake()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         InitializeAds();
+    }
+
+    void OnDestroy() 
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
+    {
+        if (!Advertisement.isInitialized)
+        {
+            InitializeAds();
+        }
     }
 
     public void InitializeAds()
@@ -27,6 +42,11 @@ public class Initialize : MonoBehaviour, IUnityAdsInitializationListener
         if (!Advertisement.isInitialized && Advertisement.isSupported)
         {
             Advertisement.Initialize(_gameId, _testMode, this);
+        }
+                else
+        {
+            Debug.LogWarning("Advertisement is already initialized or not supported.");
+            ads.LoadAd();
         }
     }
 

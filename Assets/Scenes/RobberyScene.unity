@@ -200,6 +200,8 @@ MonoBehaviour:
   gemsGained: {fileID: 866963391}
   winScreen: {fileID: 1970648944}
   loseScreen: {fileID: 1165025517}
+  tutorialScreen: {fileID: 311367380}
+  tutorialActive: 1
 --- !u!114 &18363593
 MonoBehaviour:
   m_ObjectHideFlags: 0

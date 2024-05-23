@@ -9,6 +9,10 @@ public class Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
 
+    GameObject shop;
+    ShopUI shopScript;
+    
+
     void Awake()
     {
         // Get the Ad Unit ID for the current platform:
@@ -22,11 +26,27 @@ public class Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 
         // Disable the button until the ad is ready to show:
         _showAdButton.interactable = false;
+        _showAdButton.onClick.AddListener(ShowAd);
+    }
+
+    void OnEnable()
+    {
+        if (Advertisement.isInitialized)
+        {
+            LoadAd();
+        }
     }
 
     // Call this public method when you want to get an ad ready to show.
     public void LoadAd()
     {
+#if UNITY_IOS
+        _adUnitId = _iOSAdUnitId;
+#elif UNITY_ANDROID
+        _adUnitId = _androidAdUnitId;
+#elif UNITY_EDITOR
+        _adUnitId = _androidAdUnitId;
+#endif
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
         Debug.Log("Loading Ad: " + _adUnitId);
         Advertisement.Load(_adUnitId, this);
@@ -39,9 +59,9 @@ public class Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 
         if (adUnitId.Equals(_adUnitId))
         {
-            _showAdButton.onClick.RemoveListener(ShowAd);
+            //_showAdButton.onClick.RemoveListener(ShowAd);
             // Configure the button to call the ShowAd() method when clicked:
-            _showAdButton.onClick.AddListener(ShowAd);
+            //_showAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
             _showAdButton.interactable = true;
         }
@@ -63,7 +83,15 @@ public class Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
-            ShopManager.instance.UpdateMoney(25);
+            shop = GameObject.FindWithTag("ShopCanvas");
+
+            if (shop != null) 
+            {
+                shopScript = shop.GetComponent<ShopUI>();
+                ShopManager.instance.UpdateMoney(25);
+                shopScript.RefreshMoney();
+            }
+
             LoadAd();
         }
     }

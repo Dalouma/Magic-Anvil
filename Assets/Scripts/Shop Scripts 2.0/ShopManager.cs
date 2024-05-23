@@ -53,23 +53,24 @@ public class ShopManager : MonoBehaviour
                 
             }
             SetRep(reputationValue);
+            DontDestroyOnLoad(this);
         }
         else if (instance != this)
         {
             Destroy(this);
         }
 
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     public int GetMoney() { return money; }
     public void UpdateMoney(int nmoney) 
     { 
         money += nmoney;
-       /* if (moneyText != null)
+       if (moneyText != null)
         {
             moneyText.text = money.ToString();
-        }*/
+        }
     }
 
     // This function should load the currency from save data.
