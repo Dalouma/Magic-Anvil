@@ -11,7 +11,7 @@ public class InventorySystem : MonoBehaviour
     private int maxSize = 6;
 
     private Dictionary<string, int> gemInventory;
-    [SerializeField] private List<GemData> gemTypes;
+    public List<GemData> gemTypes;
 
     [Header("Current item being crafted")]
     [SerializeField] private ItemData itemType;

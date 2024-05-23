@@ -27,9 +27,6 @@ public class InputSequenceManager : MonoBehaviour
     public Sprite shortGoblinSprite;
     public Image enemyImage;
 
-    private bool won = false;
-    private bool lose = false;
-
     public Vector2 tallGoblinScale = new Vector2(1.5f, 2f);
     public Vector2 shortGoblinScale = new Vector2(1f, 1f);
 
@@ -47,14 +44,25 @@ public class InputSequenceManager : MonoBehaviour
 
     public Image redTintImage;
 
-    public Animator enemyAnimator;
+    private int totalGoldLost = 0;
+    private int totalGoldGained = 0;
+    private int numGemsGained = 0;
 
-    public RuntimeAnimatorController tallGoblinAnimator;
-    public RuntimeAnimatorController shortGoblinAnimator;
+    public TMP_Text goldGained;
+    public TMP_Text goldLost;
+    public TMP_Text gemsGained;
+
+    public GameObject winScreen;
+    public GameObject loseScreen;
+
+    bool endGame = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        winScreen.SetActive(false);
+        loseScreen.SetActive(false);
+
         CreateRandomSequence();
         healthSlider.maxValue = lives;
         healthSlider.value = lives;
@@ -67,6 +75,20 @@ public class InputSequenceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (endGame) 
+        {
+            if (Input.GetMouseButton(0) || Input.touchCount > 0)
+            {
+                Time.timeScale = 1f;
+
+                winScreen.SetActive(false);
+                loseScreen.SetActive(false);
+
+                // USE LEVEL CHANGER HERE TO MOVE SCENES
+            }
+        }
+
+        UpdateText();
         remainingTime -= Time.deltaTime;
         timerSlider.value = remainingTime;
 
@@ -82,7 +104,7 @@ public class InputSequenceManager : MonoBehaviour
         if (lives <= 0)
         {
             Debug.Log("Robbery Minigame Failed!");
-            lose = true;
+            LoseGame();
         }
 
         if (Input.touchCount > 0)
@@ -99,6 +121,34 @@ public class InputSequenceManager : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void WinGame() 
+    {
+        //GiveGold();
+        //GiveGems();
+
+        winScreen.SetActive(true);
+        Time.timeScale = 0f;
+
+        endGame = true;
+    }
+
+    public void LoseGame()
+    {
+        //RemoveGold();
+
+        loseScreen.SetActive(true);
+        Time.timeScale = 0f;
+
+        endGame = true;
+    }
+
+    void UpdateText() 
+    {
+        goldGained.text = totalGoldGained.ToString();
+        goldLost.text = totalGoldLost.ToString();
+        gemsGained.text = numGemsGained.ToString();
     }
 
     void PopulateEnemies(int numEnemies) 
@@ -140,10 +190,13 @@ public class InputSequenceManager : MonoBehaviour
             {
                 Debug.Log("Sequence Completed!");
 
+                AddGold();
+                ChanceForGem();
+
                 currentEnemyIndex++;
                 if (currentEnemyIndex >= enemies.Count)
                 {
-                    won = true;
+                    WinGame();
                 }
 
                 CreateRandomSequence();
@@ -154,8 +207,58 @@ public class InputSequenceManager : MonoBehaviour
         else
         {
             Debug.Log("Sequence Failed!");
-            ResetSequence();
+            CreateRandomSequence();
             Handheld.Vibrate();
+        }
+    }
+
+    void AddGold() 
+    {
+        float randomValue = Random.value;
+
+        int goldAmount = (randomValue < 0.5f) ? 5 : 10;
+
+        totalGoldGained += goldAmount;
+    }
+
+    void GiveGold() 
+    {
+        ShopManager.instance.UpdateMoney(totalGoldGained);
+    }
+
+    void RemoveGold() 
+    {
+        int playerGold = ShopManager.instance.GetMoney();
+        int goldAmount = Mathf.CeilToInt(playerGold * 0.2f);
+
+        totalGoldLost += goldAmount;
+
+        if (playerGold - goldAmount < 0) 
+        {
+            ShopManager.instance.UpdateMoney(playerGold * -1);
+        }
+        else 
+        {
+            ShopManager.instance.UpdateMoney(goldAmount * -1);
+        }
+    }
+
+    void ChanceForGem() 
+    {
+        float randomValue = Random.value;
+
+        if (randomValue < 0.1f)
+        {
+            numGemsGained += 1;
+        }
+    }
+
+    void GiveGems() 
+    {
+        for (int i = 0; i < numGemsGained; i++) 
+        {
+            int randomIndex = Random.Range(0, InventorySystem.instance.gemTypes.Count);
+            InventorySystem.instance.ChangeGemAmount(InventorySystem.instance.gemTypes[randomIndex], 1);
         }
     }
 
@@ -276,13 +379,11 @@ public class InputSequenceManager : MonoBehaviour
         {
             enemyImage.sprite = tallGoblinSprite;
             enemyImage.rectTransform.localScale = tallGoblinScale;
-            enemyAnimator.runtimeAnimatorController = tallGoblinAnimator;
         }
         else
         {
             enemyImage.sprite = shortGoblinSprite;
             enemyImage.rectTransform.localScale = shortGoblinScale;
-            enemyAnimator.runtimeAnimatorController = shortGoblinAnimator;
         }
     }
 

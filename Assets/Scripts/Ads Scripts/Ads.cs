@@ -39,6 +39,7 @@ public class Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 
         if (adUnitId.Equals(_adUnitId))
         {
+            _showAdButton.onClick.RemoveListener(ShowAd);
             // Configure the button to call the ShowAd() method when clicked:
             _showAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
@@ -62,6 +63,7 @@ public class Ads : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
+            ShopManager.instance.UpdateMoney(25);
             LoadAd();
         }
     }
