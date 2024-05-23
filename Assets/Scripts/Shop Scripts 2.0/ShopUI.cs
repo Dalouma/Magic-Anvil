@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
-using UnityEditor.UIElements;
-using System.ComponentModel;
 
 public class ShopUI : MonoBehaviour
 {
