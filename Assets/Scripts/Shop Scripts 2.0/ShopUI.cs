@@ -39,7 +39,7 @@ public class ShopUI : MonoBehaviour
         for(int i = 0;i<item.materials.Count;i++)
         {
             tempText = tempText + item.materials[i]+" x" + item.materialAmount[i].ToString()+", ";
-            if (!ShopManager.instance.materialsInventory.ContainsKey(item.materials[i]) || ShopManager.instance.materialsInventory[item.materials[i]] != item.materialAmount[i])
+            if (!ShopManager.instance.materialsInventory.ContainsKey(item.materials[i]) || ShopManager.instance.materialsInventory[item.materials[i]] < item.materialAmount[i])
             {
                 sellable = false;
             }
