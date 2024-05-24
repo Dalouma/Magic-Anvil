@@ -115,7 +115,7 @@ public class ShopManager : MonoBehaviour
 
     public void RobberyCheck()
     {
-        if(Random.Range(0,10) <= 10)
+        if(npcQueueIndex < npcQueue.Count - 1 && Random.Range(0,10) <= 10)
         {
             GameObject.FindGameObjectWithTag("LevelChanger").GetComponent<LevelChanger>().FadeToLevel("RobberyScene");
         }
