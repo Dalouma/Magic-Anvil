@@ -60,6 +60,9 @@ public class ShopManager : MonoBehaviour
             Destroy(this);
         }
 
+        // Set the song for the shop
+        AudioManager.instance.ChangeMusic("menu");
+
         //DontDestroyOnLoad(this);
     }
 

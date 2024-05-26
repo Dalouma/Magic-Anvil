@@ -76,6 +76,12 @@ public class InputSequenceManager : MonoBehaviour
         PopulateEnemies(numEnemies);
     }
 
+    void Awake()
+    {
+        // Begin playing the robbery music
+        AudioManager.instance.ChangeMusic("robbery");
+    }
+
     // Update is called once per frame
     void Update()
     {

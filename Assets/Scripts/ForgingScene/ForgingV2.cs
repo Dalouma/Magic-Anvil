@@ -32,6 +32,9 @@ public class ForgingV2 : MonoBehaviour
         pointerTransform = GameObject.FindGameObjectWithTag("pointer").transform;
         inGreen = inYellow = inOrange = false;
         good = great = perfect = 0;
+
+        // Switch to the song for this scene
+        AudioManager.instance.ChangeMusic("forge");
     }
 
     // Start is called before the first frame update
