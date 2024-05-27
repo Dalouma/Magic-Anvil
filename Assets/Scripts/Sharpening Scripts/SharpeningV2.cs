@@ -76,6 +76,7 @@ public class SharpeningV2 : MonoBehaviour
     public void StartGame()
     {
         gameActive = true;
+        AudioManager.instance.playSound("stone");
     }
 
     private void SpawnItem()
@@ -159,6 +160,7 @@ public class SharpeningV2 : MonoBehaviour
     public void EndGame()
     {
         gameActive = false;
+        AudioManager.instance.stopSound("stone");
 
         resultsWindow.GetComponentInChildren<TMP_Text>().text =
             "Final Score\n" +

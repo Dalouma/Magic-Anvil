@@ -71,9 +71,9 @@ public class ForgingV2 : MonoBehaviour
             strikes++;
             strikesText.text = $"Strikes: {strikes}/{maxStrikes}";
             hammerAnimator.Play("HammerSwing");
+
             // CALL AUDIO SFX HERE
-
-
+            AudioManager.instance.playSound("anvil");
 
 
             if (inGreen)
