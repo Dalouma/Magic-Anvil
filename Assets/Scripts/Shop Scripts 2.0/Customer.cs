@@ -196,6 +196,8 @@ public class Customer : MonoBehaviour, IDropHandler
         {
             if (item.data.ID == preferredItem.ID)
             {
+                //play coin sound 
+                //AudioManager.instance.PlaySFX("Coin");
                 state = SpeechState.Happy;
                 TurnOnSpeechBox();
                 return;

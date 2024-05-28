@@ -123,10 +123,8 @@ public class ForgingScript : MonoBehaviour
                 StartCoroutine(SlowMo());
                 StartCoroutine(Cooldown());
                 //clangAudio.Play();
-                if (AudioManager.instance != null)
-                {
-                        AudioManager.instance.PlaySFX("Anvil");
-                }
+               
+                
                 hammerAnimator.Play("HammerSwing");
                 clicks++;
                 SetHitsText();
@@ -176,7 +174,7 @@ public class ForgingScript : MonoBehaviour
                     // reset speed
                     speedLevel = 0;
                 }
-
+                
                 SetScoreText();
 
 

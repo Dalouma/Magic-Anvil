@@ -73,7 +73,7 @@ public class ForgingV2 : MonoBehaviour
             hammerAnimator.Play("HammerSwing");
 
             // CALL AUDIO SFX HERE
-            AudioManager.instance.playSound("anvil");
+            AudioManager.instance.PlaySFX("Anvil");
 
 
             if (inGreen)

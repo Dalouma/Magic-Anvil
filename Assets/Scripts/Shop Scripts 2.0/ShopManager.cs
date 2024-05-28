@@ -62,13 +62,13 @@ public class ShopManager : MonoBehaviour
 
         // Set the song for the shop
         AudioManager.instance.ChangeMusic("menu");
-
         //DontDestroyOnLoad(this);
     }
 
     public int GetMoney() { return money; }
     public void UpdateMoney(int nmoney) 
     { 
+
         money += nmoney;
        if (moneyText != null)
         {
