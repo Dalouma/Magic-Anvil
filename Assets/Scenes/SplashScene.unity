@@ -7633,6 +7633,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currency: 0
   character: 0
+  customerQueue: []
+  givenItems: []
+  queueIndex: 0
+  dayCount: 0
+  inventorySaveData: []
+  tracking: 0
+  consent: 0
   pullFromSave: 0
 --- !u!4 &1346607294
 Transform:
@@ -10680,7 +10687,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: TestScene
+          m_StringArgument: ShopScene
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1476167681}
