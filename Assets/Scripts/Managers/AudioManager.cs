@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixer mixer;
     public List<AudioSource> musicSources;
     public List<AudioSource> sfxSources;
-    private string currPlaying;
+    private string currMusicPlaying;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
     {
         Menu,
         Forge,
-        Robbery
+        Robbery,
     }
 
     private void StopAllMusic()
@@ -44,14 +44,14 @@ public class AudioManager : MonoBehaviour
     public void ChangeMusic(string trackName, bool restart = false)
     {
         // If the music to change to is the same as the music currently playing, only change if specified
-        if(!restart && trackName == currPlaying) {
+        if(!restart && trackName == currMusicPlaying) {
             Debug.Log("Already Playing");
             return;
         }
 
         // Track is different or restart was specified. Stop music and start a new track
         StopAllMusic();
-        currPlaying = trackName;
+        currMusicPlaying = trackName;
         Debug.Log($"Now Playing {trackName}");
         switch (trackName) {
             case "menu":
@@ -78,6 +78,8 @@ public class AudioManager : MonoBehaviour
         SwordGrind,
         Newspaper,
         Coin,
+        Stone,
+        Click,
     }
 
     private AudioSource GetSound(string soundName) {
@@ -92,6 +94,10 @@ public class AudioManager : MonoBehaviour
                 return sfxSources[3];
             case "Coin":
                 return sfxSources[4];
+            case "Stone":
+                return sfxSources[5];
+            case "Click":
+                return sfxSources[6];
             default:
                 Debug.LogError($"Error: Invalid SFX name {soundName}");
                 return null;
@@ -109,12 +115,12 @@ public class AudioManager : MonoBehaviour
     }
 
     // Stop the specified sound
-    public void stopSound(string soundName) {
+    public void StopSFX(string soundName) {
         GetSound(soundName).Stop();
     }
 
     // Stop all sounds
-    public void stopAllSounds() {
+    public void StopAllSFX() {
         for (int i = 0; i < sfxSources.Count; i++)
         {
             sfxSources[i].Stop();
@@ -122,7 +128,7 @@ public class AudioManager : MonoBehaviour
     }
     
     // Handle the button click sound
-    public static void click() {
+    public static void Click() {
         instance.PlaySFX("click");
     }
 
