@@ -11,7 +11,7 @@ public class InventorySystem : MonoBehaviour
     private int maxSize = 6;
 
     private Dictionary<string, int> gemInventory;
-    [SerializeField] private List<GemData> gemTypes;
+    public List<GemData> gemTypes;
 
     [Header("Current item being crafted")]
     [SerializeField] private ItemData itemType;
@@ -64,8 +64,7 @@ public class InventorySystem : MonoBehaviour
         gemInventory = new Dictionary<string, int>();
         for (int i = 0; i < gemTypes.Count; i++)
         {
-            //Debug.Log("adding " + gemTypes[i].name + " to dictionary");
-            gemInventory.Add(gemTypes[i].name, 0);
+            gemInventory.Add(gemTypes[i].name, 2);
         }
 
     }

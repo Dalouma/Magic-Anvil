@@ -29,7 +29,7 @@ public class SharpeningV2 : MonoBehaviour
     [SerializeField] private float greatReleaseBonus;
 
     private float score;
-    private int scoreMax;
+    //private int scoreMax;
     private float time;
     private bool sharpening;
     private int goodReleases;
@@ -52,7 +52,7 @@ public class SharpeningV2 : MonoBehaviour
 
         // Set Variables
         score = 0;
-        scoreMax = 1000;
+        //scoreMax = 1000;
         time = 15f;
         goodReleases = 0;
         greatReleases = 0;
@@ -76,6 +76,7 @@ public class SharpeningV2 : MonoBehaviour
     public void StartGame()
     {
         gameActive = true;
+        AudioManager.instance.playSound("stone");
     }
 
     private void SpawnItem()
@@ -159,6 +160,7 @@ public class SharpeningV2 : MonoBehaviour
     public void EndGame()
     {
         gameActive = false;
+        AudioManager.instance.stopSound("stone");
 
         resultsWindow.GetComponentInChildren<TMP_Text>().text =
             "Final Score\n" +

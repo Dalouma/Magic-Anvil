@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // Music Handling
 
     private void StopAllMusic()
     {
@@ -89,5 +92,51 @@ public class AudioManager : MonoBehaviour
         else{
             mixer.SetFloat("SFX", -40);
         }
+    }
+
+    // SFX handling
+    // Get the audio source corresponding to the provided string
+    private AudioSource getSound(string soundName) {
+        switch (soundName) {
+            case "click":
+                return sfxSources[0];
+            case "anvil":
+                return sfxSources[1];
+            case "stone":
+                return sfxSources[2];
+            case "grind":
+                return sfxSources[3];
+            default:
+                Debug.LogError($"Error: Invalid SFX name {soundName}");
+                return null;
+        }
+    }
+
+    // Play the specified sound
+    public void playSound(string soundName, bool repeat = false) {
+        // Determine which AudioSource to play
+        AudioSource src = getSound(soundName);
+
+        // Play the sound
+        Debug.Log($"Now Playing sound {soundName}");
+        src.Play();
+    }
+
+    // Stop the specified sound
+    public void stopSound(string soundName) {
+        getSound(soundName).Stop();
+    }
+
+    // Stop all sounds
+    public void stopAllSounds() {
+        for (int i = 0; i < sfxSources.Count; i++)
+        {
+            sfxSources[i].Stop();
+        }
+    }
+    
+    // Handle the button click sound
+    public static void click() {
+        instance.playSound("click");
     }
 }

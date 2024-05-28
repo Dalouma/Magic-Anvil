@@ -19,3 +19,7 @@ MonoBehaviour:
   itemGrades:
   - Flimsy
   - Sturdy
+  materials:
+  - Metal
+  - Wood
+  materialAmount: 0100000002000000

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using System;
+using System.Diagnostics;
 
 public class Customer : MonoBehaviour, IDropHandler
 {
@@ -156,6 +158,8 @@ public class Customer : MonoBehaviour, IDropHandler
             // customer leave
             ShopManager.instance.NextCustomer();
             state = SpeechState.Intro;
+            // Chance for Robbery
+            ShopManager.instance.RobberyCheck();
         }
 
     }
@@ -168,7 +172,7 @@ public class Customer : MonoBehaviour, IDropHandler
         {
             presentedItem = eventData.pointerDrag.GetComponent<CounterItem>().GetItem();
             ReceiveItem(presentedItem);
-            CalculatePriceThreshold();
+            CalculatePriceThreshold(presentedItem);
         }
     }
     
@@ -181,6 +185,8 @@ public class Customer : MonoBehaviour, IDropHandler
             if (item.data.ID == rejectedItem.ID)
             {
                 state = SpeechState.Reject;
+                ShopManager.instance.changeRep(-10.0);
+                shopUI.SetRep();
                 TurnOnSpeechBox();
                 return;
             }
@@ -203,28 +209,44 @@ public class Customer : MonoBehaviour, IDropHandler
     // This function calculates the pricing thresholds that the customer tolerates
     // It is currently set to arbitrary numbers for testing
     // This should take into account customer's stinginess
-    private void CalculatePriceThreshold()
+    private void CalculatePriceThreshold(CraftedItem item)
     {
-        maxPrice = 60;
-        idealPrice = 40;
-        goodPrice = 20;
+        double calculatedprice = ((item.Cost) * (item.scoreVal / 1000)) / (ShopManager.instance.reputationValue / 100);
+        idealPrice = (int)Math.Round(calculatedprice);
+        maxPrice = (int)Math.Round(1.25 *calculatedprice);
+        goodPrice = (int)Math.Round(0.8 *calculatedprice);
+        UnityEngine.Debug.Log(calculatedprice);
     }
 
     // This function is called after the player offers a price by finishing the input field
     public void OfferPrice(string input)
     {
-        if (input == null) { return; }
+        if (input == "" || input == null) { return; }
 
         offeredPrice = int.Parse(input);
 
         if (offeredPrice > maxPrice)
+        {
             state = SpeechState.TooExpensive;
+        }
         else if (offeredPrice > idealPrice)
+        {
             state = SpeechState.HighPrice;
+            ShopManager.instance.changeRep(-5.0);
+            shopUI.SetRep();
+        }
         else if (offeredPrice > goodPrice)
+        {
+            ShopManager.instance.changeRep(5.0);
             state = SpeechState.MidPrice;
+            shopUI.SetRep();
+        }
         else
+        {
             state = SpeechState.LowPrice;
+            ShopManager.instance.changeRep(goodPrice-offeredPrice);
+            shopUI.SetRep();
+        }
 
         TurnOnSpeechBox();
     }

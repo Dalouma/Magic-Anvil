@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class ShopManager : MonoBehaviour
 {
@@ -12,9 +13,9 @@ public class ShopManager : MonoBehaviour
     // Player Resources
     [Header("Status")]
     [SerializeField] private int money;
-    [SerializeField] private int reputationValue;
-    [SerializeField] private int wood;
-    [SerializeField] private int iron;
+    [SerializeField] public double reputationValue;
+    [SerializeField] public Dictionary<string, int> materialsInventory = new Dictionary<string, int>();
+    [SerializeField] public ItemData HoveredItem;
 
     // List of Special Customers with news stories
     [Header("Special Customers")]
@@ -26,7 +27,12 @@ public class ShopManager : MonoBehaviour
 
     // Record of Items sold
     public List<CraftedItem> itemsSold { get; private set; }
-    
+
+    //materials data
+    public List<string> materialsNames;
+    public List<int> materialsCostInOrder;
+    public Dictionary<string, int> MaterialsData = new Dictionary<string, int>();
+
     // UI objects
     public UnityEngine.UI.Slider bar;
     public TextMeshProUGUI moneyText;
@@ -34,23 +40,41 @@ public class ShopManager : MonoBehaviour
     // Only one instance
     private void Awake()
     {
+        //moneyText = GameObject.Find("GoldText").GetComponent<TextMeshProUGUI>();
         if (instance == null)
         {
             instance = this;
             //LoadCustomers();
             BasicQueue();
             LoadCurrency();
+            for(int i=0;i<materialsNames.Count;i++)
+            {
+                MaterialsData.Add(materialsNames[i], materialsCostInOrder[i]);
+                
+            }
+            SetRep(reputationValue);
+            DontDestroyOnLoad(this);
         }
         else if (instance != this)
         {
             Destroy(this);
         }
 
-        DontDestroyOnLoad(this);
+        // Set the song for the shop
+        AudioManager.instance.ChangeMusic("menu");
+
+        //DontDestroyOnLoad(this);
     }
 
     public int GetMoney() { return money; }
-    public void UpdateMoney(int money) { this.money += money; }
+    public void UpdateMoney(int nmoney) 
+    { 
+        money += nmoney;
+       if (moneyText != null)
+        {
+            moneyText.text = money.ToString();
+        }
+    }
 
     // This function should load the currency from save data.
     // For now it will set them to 0
@@ -92,6 +116,14 @@ public class ShopManager : MonoBehaviour
         npcQueueIndex = 0;
     }
 
+    public void RobberyCheck()
+    {
+        if(npcQueueIndex < npcQueue.Count - 1 && Random.Range(0,10) <= 10)
+        {
+            GameObject.FindGameObjectWithTag("LevelChanger").GetComponent<LevelChanger>().FadeToLevel("RobberyScene");
+        }
+    }
+
     public CharacterData GetCurrentCharacter() { return npcQueue[npcQueueIndex]; }
 
     // This function makes the next customer in the queue appear
@@ -110,7 +142,49 @@ public class ShopManager : MonoBehaviour
     }
     public void SetRep(double rep)
     {
-        bar.value = (int)rep;
+        reputationValue = rep;
+    }
+    public void changeRep(double rep)
+    {
+        reputationValue += +rep;
+    }
+    public void incrementMaterials(string materialName)
+    {
+       if (money >= MaterialsData[materialName]) { 
+        if (!materialsInventory.ContainsKey(materialName))
+        {
+            materialsInventory.Add(materialName, 0);
+        }
+
+        materialsInventory[materialName]++;
+        UpdateMoney(-(MaterialsData[materialName]));
+    }
+    }
+    public void decrementMaterials(string materialName)
+    {
+        materialsInventory[materialName]--;
+        //inventoryTexts[materialName].text = materialsInventory[materialName].ToString();
+    }
+    public void makeItem()
+    {
+        for (int i = 0; i < HoveredItem.materials.Count; i++)
+        {
+            materialsInventory[HoveredItem.materials[i]] -= HoveredItem.materialAmount[i];
+        }
+
+    }
+    public void ResetInventory()
+    {
+
+        List<string> keys = new List<string>(materialsInventory.Keys);
+
+        foreach (string name in keys)
+            {
+                UpdateMoney(materialsInventory[name] * MaterialsData[name]);
+                materialsInventory[name] = 0;
+                //inventoryTexts[name].text = materialsInventory[name].ToString();
+            }
+        
     }
 
 }

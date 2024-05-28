@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ShopScene.unity
     guid: dcba3f693cf5e0e49844e78f4fc99e0e
   - enabled: 1
+    path: Assets/Scenes/RobberyScene.unity
+    guid: cef90e79980183e43833fb73251575c9
+  - enabled: 1
     path: Assets/Scenes/ForgingScene.unity
     guid: 016236bfbce483540aedfbc6c7145095
   - enabled: 1

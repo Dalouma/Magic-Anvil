@@ -1,37 +1,45 @@
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using System.IO;
+using System;
 
 public static class SaveSystem
 {
-    public static void SaveGame(GameManager manager)
+    private static readonly string SavePath = Application.persistentDataPath + "/manager.json";
+
+    public static void SaveGame(GameManager manager) 
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/manager.save";
-        FileStream stream = new FileStream(path, FileMode.Create);
-
-        SaveData data = new SaveData(manager);
-
-        formatter.Serialize(stream, data);
-        stream.Close();
+        try
+        {
+            SaveData data = new SaveData(manager);
+            string json = JsonUtility.ToJson(data);
+            File.WriteAllText(SavePath, json);
+            Debug.Log("Game saved successfully to " + SavePath);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to save game: " + e.Message);
+        }
     }
 
     public static SaveData LoadGame()
     {
-        string path = Application.persistentDataPath + "/manager.save";
-        if (File.Exists(path))
+        if (File.Exists(SavePath))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-
-            SaveData data = formatter.Deserialize(stream) as SaveData;
-            stream.Close();
-
-            return data;
+            try
+            {
+                string json = File.ReadAllText(SavePath);
+                SaveData data = JsonUtility.FromJson<SaveData>(json);
+                return data;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Failed to load game: " + e.Message);
+                return null;
+            }
         }
         else
         {
-            Debug.LogError("Save file not found in " + path);
+            Debug.LogError("Save file not found in " + SavePath);
             return null;
         }
     }
