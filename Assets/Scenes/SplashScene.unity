@@ -3330,7 +3330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: c937e0d6fb0290b9e882c742b7db4f4a, type: 2}
-  bgmusicSources:
+  musicSources:
   - {fileID: 531489214}
   - {fileID: 23883563}
   - {fileID: 276466182}
