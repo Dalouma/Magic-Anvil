@@ -1,8 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 public class ResultScene : MonoBehaviour
 {
+    /*
     // Start is called before the first frame update
     [SerializeField] private TextMeshProUGUI resultText;
     private float score;
@@ -17,13 +21,14 @@ public class ResultScene : MonoBehaviour
         string sharpeningText = "\nSharpening Hits: " + sharpeningHits;
         string forgingText = "\nGreat Timing: " + greatTiming + "\nGood Timing: "
          + goodTiming + "\nBad Timing: " + badTiming;
-        calculateScore();
-        resultText.text = weaponText + forgingText + sharpeningText + "\n Score: " + score;
+        CalculateScore();
+        resultText.text = weaponText + forgingText + sharpeningText + "\n Score: " + score; 
+        AnalyticsCustomEvent();
     }
 
-    void calculateScore()
-    {
-        score = (((greatTiming * 2) + goodTiming + badTiming / 2) / 20 + sharpeningHits / 4) * 100;
+    void CalculateScore(){
+        score = (((greatTiming * 2) + goodTiming + badTiming/2)/20 + sharpeningHits/4)*100;
 
     }
+   */
 }

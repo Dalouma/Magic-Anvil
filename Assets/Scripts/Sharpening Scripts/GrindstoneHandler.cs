@@ -21,15 +21,19 @@ public class GrindstoneHandler : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         sparksParticles.Play();
+        if (AudioManager.instance != null)
+            {
+                    AudioManager.instance.PlaySFX("SwordGrind");
+            }
         sharpeningManager.SetSharpening(true);
-        AudioManager.instance.playSound("grind");
+        //AudioManager.instance.playSound("grind");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         sparksParticles.Stop();
         sharpeningManager.SetSharpening(false);
-        AudioManager.instance.stopSound("grind");
+        //AudioManager.instance.stopSound("grind");
         sharpeningManager.ReleaseSharpening();
     }
 

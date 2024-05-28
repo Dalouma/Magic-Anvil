@@ -101,6 +101,9 @@ public class NewspaperManager : MonoBehaviour
 
     private void CanvasScrolling()
     {
+        if(AudioManager.instance != null){
+            AudioManager.instance.PlaySFX("Newspaper");
+        }
         RectTransform rectTransform = GetComponent<RectTransform>();
         if (Input.touchCount == 1)
         {

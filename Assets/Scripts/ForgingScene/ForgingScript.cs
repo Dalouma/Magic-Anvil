@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -37,7 +39,7 @@ public class ForgingScript : MonoBehaviour
 
     public LocalizedStringDatabase table;
 
-    private AudioSource clangAudio;
+   // private AudioSource clangAudio;
     //private GameObject ResultCanvas;
     private int clicks;
     private int totalhits;
@@ -64,7 +66,7 @@ public class ForgingScript : MonoBehaviour
         FinishCanvas.GetComponent<Canvas>().enabled = false;
         activeScene = true;
         ResultsCanvas.GetComponent<Canvas>().enabled = false;
-        clangAudio = GetComponent<AudioSource>();
+        //clangAudio = GetComponent<AudioSource>();
         clicks = 0;
         currentSpeed = 0;
         speedLevel = 0;
@@ -120,7 +122,9 @@ public class ForgingScript : MonoBehaviour
                 onCooldown = true;
                 StartCoroutine(SlowMo());
                 StartCoroutine(Cooldown());
-                clangAudio.Play();
+                //clangAudio.Play();
+               
+                
                 hammerAnimator.Play("HammerSwing");
                 clicks++;
                 SetHitsText();
@@ -170,14 +174,14 @@ public class ForgingScript : MonoBehaviour
                     // reset speed
                     speedLevel = 0;
                 }
-
+                
                 SetScoreText();
 
 
                 // end check
                 if (clicks == totalhits)
                 {
-                    StartCoroutine(showFinishButton());
+                    StartCoroutine(ShowFinishButton());
                     //ShowForgingResults();
                     //EndGame();
                     InventorySystem.instance.AddScore(score * 15);
@@ -194,7 +198,7 @@ public class ForgingScript : MonoBehaviour
             greatTiming = 10;
             goodTiming = 0;
             badTiming = 0;
-            StartCoroutine(showFinishButton());
+            StartCoroutine(ShowFinishButton());
         }
     }
 
@@ -222,6 +226,7 @@ public class ForgingScript : MonoBehaviour
 
     public void EndGame()
     {
+        
         Debug.Log("button clicked for end game");
         gameStart = false;
         currentSpeed = 0;
@@ -254,10 +259,34 @@ public class ForgingScript : MonoBehaviour
         //forgingscore = CalculateForgingScore(greatTiming, goodTiming, badTiming); 
         resultText.text = $"{table.GetLocalizedString("forging")}\n\n\n{table.GetLocalizedString("score")} {score} /100";
         ResultsCanvas.GetComponent<Canvas>().enabled = true;
+        AnalyticsForging();
     }
-    IEnumerator showFinishButton()
-    {
+    public void AnalyticsForging(){
+        CustomEvent ForgingScore = new CustomEvent("ForgingScore")
+        {
+            { "score", score },
+            { "great", greatTiming },
+            { "good", goodTiming },
+            { "bad", badTiming },
+            //{ "weapon", Weapon.weapon} 
+        };
+        AnalyticsService.Instance.RecordEvent(ForgingScore);
+        Debug.Log("ForgingScoreResults" + ForgingScore);
+        foreach (KeyValuePair<string, object> kvp in ForgingScore)
+        {
+            Debug.Log($"Key: {kvp.Key}, Value: {kvp.Value}");
+        }
+
+        Debug.Log("ForgingScoreResults recorded");
+        
+    }
+
+    IEnumerator ShowFinishButton(){
         activeScene = false;
+        if (AudioManager.instance != null)
+        {
+                AudioManager.instance.PlaySFX("Victory");
+        }
         FinishCanvas.GetComponent<Canvas>().enabled = true;
         yield return new WaitForSeconds(finishtimer);
         FinishCanvas.GetComponent<Canvas>().enabled = false;

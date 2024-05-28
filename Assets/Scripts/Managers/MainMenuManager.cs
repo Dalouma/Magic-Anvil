@@ -1,48 +1,64 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Unity.Services.Core;
+using Unity.Services.Analytics;
+using Unity.Services.Core.Environments;				
 
 public class MainMenuManager : MonoBehaviour
 {
-
+    public Canvas startMenu;
+    public Canvas consentMenu;
     public AudioSource musicSource;
-    // Start is called before the first frame update
+    private bool isInitialized = false;
     void Start()
     {
-        PlayMusic();
+        StartAnalytics();
+        AudioManager.instance.ChangeMusic("menu");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+    async void StartAnalytics(){
+        var options = new InitializationOptions();
+        options.SetEnvironmentName("testing");
+        await UnityServices.InitializeAsync(options);
+        Debug.Log("UnityServicesState:   " +UnityServices.State);
+        AnalyticsService.Instance.Flush();
+        isInitialized = true;
     }
-
-    public void GoToShopScene()
-    {
-        musicSource.Stop();
-        SceneManager.LoadScene("TestScene");
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    public void PlayMusic()
-    {
-        musicSource.Play();
-    }
-
-    public void FullScreen(bool state)
-    {
-
-        if (state)
+    public void ConsentGiven()
+	{
+        if (!isInitialized)
         {
-            Screen.SetResolution(1920, 1080, state);
+            Debug.LogWarning("Initialization is not complete. Please wait.");
+            return;
         }
-        else
+		AnalyticsService.Instance.StartDataCollection();
+        consentMenu.gameObject.SetActive(false);
+        ToggleNewGamePopup();
+	}
+    public void ConsentNotGiven()
+	{
+        if (!isInitialized)
         {
-            Screen.SetResolution(1280, 720, state);
+            Debug.LogWarning("Initialization is not complete. Please wait.");
+            return;
         }
+		//AnalyticsService.Instance.StopDataCollection();
+        consentMenu.gameObject.SetActive(false);
+        ToggleNewGamePopup();
+	}
+
+    public void DeleteData(){
+        AnalyticsService.Instance.StopDataCollection();
+        AnalyticsService.Instance.RequestDataDeletion();
+    }
+
+    public void ToggleNewGamePopup()
+    {
+        startMenu.gameObject.SetActive(true);
+    }
+    public void ExitNewGamePopup()
+    {
+        startMenu.gameObject.SetActive(false);
     }
 }
