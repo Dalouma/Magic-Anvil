@@ -111,7 +111,13 @@ public class AudioManager : MonoBehaviour
 
         // Play the sound
         Debug.Log($"Now Playing sound {soundName}");
-        src.Play();
+
+        // AudioSources can only "play" one sound at a time, so if we want to overlap a different method is needed
+        if (src.isPlaying) {
+            src.PlayOneShot(src.clip);
+        } else {
+            src.Play();
+        }
     }
 
     // Stop the specified sound
