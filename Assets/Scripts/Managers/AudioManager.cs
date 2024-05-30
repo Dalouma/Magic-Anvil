@@ -137,7 +137,7 @@ public class AudioManager : MonoBehaviour
     
     // Handle the button click sound
     public static void Click() {
-        instance.PlaySFX("click");
+        instance.PlaySFX("Click");
     }
 
     // Volume Handling
@@ -152,7 +152,7 @@ public class AudioManager : MonoBehaviour
     }
 
     public void SetSFXVolume(){
-        mixer.GetFloat("BGM", out float currVolume);
+        mixer.GetFloat("SFX", out float currVolume);
         if(currVolume == -40){
             mixer.SetFloat("SFX", 0);
         }
