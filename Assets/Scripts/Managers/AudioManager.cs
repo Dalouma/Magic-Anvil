@@ -105,18 +105,20 @@ public class AudioManager : MonoBehaviour
     }
 
     // Play the specified sound
-    public void PlaySFX(string soundName) {
+    public void PlaySFX(string soundName, bool allowOverlap = true) {
         // Determine which AudioSource to play
         AudioSource src = GetSound(soundName);
 
         // Play the sound
-        Debug.Log($"Now Playing sound {soundName}");
-
         // AudioSources can only "play" one sound at a time, so if we want to overlap a different method is needed
-        if (src.isPlaying) {
-            src.PlayOneShot(src.clip);
-        } else {
+        if(!src.isPlaying) {
+            // Audio source is not playing. Play it
+            Debug.Log($"Now Playing sound {soundName}");
             src.Play();
+        } else if (allowOverlap) {
+            // Audio source is playing but overlap is allowed
+            Debug.Log($"Now Playing sound {soundName} (OneShot)");
+            src.PlayOneShot(src.clip);
         }
     }
 

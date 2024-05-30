@@ -101,9 +101,6 @@ public class NewspaperManager : MonoBehaviour
 
     private void CanvasScrolling()
     {
-        if(AudioManager.instance != null){
-            AudioManager.instance.PlaySFX("Newspaper");
-        }
         RectTransform rectTransform = GetComponent<RectTransform>();
         if (Input.touchCount == 1)
         {
@@ -111,6 +108,7 @@ public class NewspaperManager : MonoBehaviour
             print(touch.deltaPosition.y);
             if (touch.phase == TouchPhase.Moved)
             {
+                AudioManager.instance.PlaySFX("Newspaper", allowOverlap: false);
                 float scrollValue = touch.deltaPosition.y * (scrollSensitivity);
                 if (scrollValue != 0)
                 {
