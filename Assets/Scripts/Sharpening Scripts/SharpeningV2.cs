@@ -21,6 +21,7 @@ public class SharpeningV2 : MonoBehaviour
     [SerializeField] private GameObject startWindow;
     [SerializeField] private GameObject resultsWindow;
     [SerializeField] private Transform itemStartPos;
+    [SerializeField] private GameObject swordDefault;
 
     [Header("Settings")]
     [SerializeField] private float pointerSpeed;
@@ -59,6 +60,7 @@ public class SharpeningV2 : MonoBehaviour
         gameActive = false;
 
         ChangeScoreText();
+        //SetWeapon();
 
         // Pull up tutorial window
         startWindow.GetComponent<Canvas>().enabled = true;
@@ -71,6 +73,15 @@ public class SharpeningV2 : MonoBehaviour
             CountDown();
             SharpenItem();
         }
+    }
+
+    private void SetWeapon()
+    {
+        GameObject itemToSpawn = InventorySystem.instance.GetCurrentItem().prefab;
+        if (itemToSpawn != null)
+            Instantiate(itemToSpawn, itemStartPos);
+        else
+            swordDefault.SetActive(true);
     }
 
     public void StartGame()

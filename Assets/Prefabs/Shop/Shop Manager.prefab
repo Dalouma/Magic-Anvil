@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7379577847926566963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5975686764102445276}
+  - component: {fileID: 2675140259948477915}
+  m_Layer: 0
+  m_Name: Shop Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5975686764102445276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7379577847926566963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1155.0364, y: 649.94653, z: 4.900014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2675140259948477915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7379577847926566963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacb14ef7bf1ef643aa8732897c81b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
+  reputationValue: 0
+  HoveredItem: {fileID: 0}
+  specialCust:
+  - {fileID: 11400000, guid: 0b7fbbc0cab90024f9943f6880376f08, type: 2}
+  - {fileID: 11400000, guid: b888ac58623850f4f88c608b10ff81d0, type: 2}
+  - {fileID: 11400000, guid: eb0521b03473b7f4180235b8f135533e, type: 2}
+  materialsNames:
+  - Metal
+  - Wood
+  materialsCostInOrder: 0a00000005000000
+  bar: {fileID: 0}
+  moneyText: {fileID: 0}

@@ -120,7 +120,7 @@ public class InputSequenceManager : MonoBehaviour
             EnemyAttack();
         }
 
-        if (lives <= 0)
+        if (lives <= 0 && !endGame)
         {
             Debug.Log("Robbery Minigame Failed!");
             LoseGame();
@@ -144,8 +144,8 @@ public class InputSequenceManager : MonoBehaviour
 
     public void WinGame() 
     {
-        //GiveGold();
-        //GiveGems();
+        GiveGold();
+        GiveGems();
 
         winScreen.SetActive(true);
         Time.timeScale = 0f;
@@ -155,7 +155,7 @@ public class InputSequenceManager : MonoBehaviour
 
     public void LoseGame()
     {
-        //RemoveGold();
+        RemoveGold();
 
         loseScreen.SetActive(true);
         Time.timeScale = 0f;

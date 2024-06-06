@@ -102,6 +102,12 @@ public class InventorySystem : MonoBehaviour
     public void SelectItem(ItemData item) { itemType = item; }
     public void AddScore(int score) { itemScore += score; }
 
+    // Returns the itemData of the item currently being crafted
+    public ItemData GetCurrentItem()
+    {
+        return itemType;
+    }
+
     // Adds Finished item stats to inventory
     public void FinishCrafting()
     {
@@ -128,6 +134,7 @@ public class InventorySystem : MonoBehaviour
 
     // Returns list of all crafted items in inventory
     public List<CraftedItem> GetInventory() { return inventory; }
+    // Return true if the inventory is full
     public bool FullInventory() { return inventory.Count >= maxSize; }
     // Gets number of items currently in inventory
     public int GetItemCount() { return inventory.Count; }
