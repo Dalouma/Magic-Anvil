@@ -83,27 +83,27 @@ public class AudioManager : MonoBehaviour
     }
 
     private AudioSource GetSound(string soundName) {
-        switch (soundName) {
-            case "Anvil":
-                return sfxSources[0];
-            case "Victory":
-                return sfxSources[1];
-            case "SwordGrind":
-                return sfxSources[2];
-            case "Newspaper":
-                return sfxSources[3];
-            case "Coin":
-                return sfxSources[4];
-            case "Stone":
-                return sfxSources[5];
-            case "Click":
-                return sfxSources[6];
-            case "Gem":
-                return sfxSources[7];
-            default:
-                Debug.LogError($"Error: Invalid SFX name {soundName}");
-                return null;
+        // Lambda function for if the switch misses
+        AudioSource OnFail() {
+            Debug.LogError($"Error: Invalid SFX name {soundName}");
+            return null;
         }
+
+        // Return the appropriate AudioSource based on the name
+        return soundName switch
+        {
+            "Anvil" =>      sfxSources[0],
+            "Victory" =>    sfxSources[1],
+            "SwordGrind" => sfxSources[2],
+            "Newspaper" =>  sfxSources[3],
+            "Coin" =>       sfxSources[4],
+            "Stone" =>      sfxSources[5],
+            "Click" =>      sfxSources[6],
+            "Gem" =>        sfxSources[7],
+            "Attack" =>     sfxSources[UnityEngine.Random.Range(8, 11)],
+            "Defeat" =>     sfxSources[12],
+            _ => OnFail(),
+        };
     }
 
     // Play the specified sound
