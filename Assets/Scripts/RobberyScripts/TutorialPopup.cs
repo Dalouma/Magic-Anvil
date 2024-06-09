@@ -15,8 +15,9 @@ public class TutorialPopup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))) 
+        if (tutorialScreen.activeInHierarchy && (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))) 
         {
+            AudioManager.Click();
             HideTutorial();
         }
     }

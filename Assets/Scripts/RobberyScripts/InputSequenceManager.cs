@@ -220,7 +220,10 @@ public class InputSequenceManager : MonoBehaviour
 
                 CreateRandomSequence();
                 ResetTimer();
+                AudioManager.instance.PlaySFX("Defeat");
                 StartCoroutine(EnemyDefeated());
+            } else {
+                AudioManager.instance.PlaySFX("Attack");
             }
         }
         else
@@ -324,21 +327,15 @@ public class InputSequenceManager : MonoBehaviour
 
     Sprite GetSpriteForInputType(InputType inputType) 
     {
-        switch (inputType) 
+        return inputType switch
         {
-            case InputType.Tap:
-                return tapSprite;
-            case InputType.SwipeRight:
-                return swipeRightSprite;
-            case InputType.SwipeDown:
-                return swipeDownSprite;
-            case InputType.SwipeUp:
-                return swipeUpSprite;
-            case InputType.SwipeLeft:
-                return swipeLeftSprite;
-            default:
-                return null;
-        }
+            InputType.Tap => tapSprite,
+            InputType.SwipeRight => swipeRightSprite,
+            InputType.SwipeDown => swipeDownSprite,
+            InputType.SwipeUp => swipeUpSprite,
+            InputType.SwipeLeft => swipeLeftSprite,
+            _ => null,
+        };
     }
 
     void UpdateSequenceImages() 
@@ -477,6 +474,7 @@ public class InputSequenceManager : MonoBehaviour
         Enemy enemy = enemies[currentEnemyIndex];
         if (enemy != null) 
         {
+            // AudioManager.instance.PlaySFX("Hurt");
             StartCoroutine(TintScreenRed());
             Debug.Log("Attacked by " + enemy.type + " goblin.");
             lives -= enemy.damage;
