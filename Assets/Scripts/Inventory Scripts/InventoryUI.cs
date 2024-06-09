@@ -160,6 +160,8 @@ public class InventoryUI : MonoBehaviour
 
         InventorySystem.instance.ChangeGemAmount(gem, -1);
 
+        AudioManager.instance.PlaySFX("Gem");
+
         ViewItemInfo(item);
         RefreshIcons();
         RefreshGems();

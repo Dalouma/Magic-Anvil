@@ -98,6 +98,8 @@ public class AudioManager : MonoBehaviour
                 return sfxSources[5];
             case "Click":
                 return sfxSources[6];
+            case "Gem":
+                return sfxSources[7];
             default:
                 Debug.LogError($"Error: Invalid SFX name {soundName}");
                 return null;
