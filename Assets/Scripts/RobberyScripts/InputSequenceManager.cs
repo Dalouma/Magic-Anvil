@@ -94,6 +94,8 @@ public class InputSequenceManager : MonoBehaviour
                 winScreen.SetActive(false);
                 loseScreen.SetActive(false);
 
+                AudioManager.instance.PlaySFX("Click", allowOverlap: false);
+
                 // USE LEVEL CHANGER HERE TO MOVE SCENES
                 GameObject.FindGameObjectWithTag("LevelChanger").GetComponent<LevelChanger>().FadeToLevel("ShopScene");
             }
@@ -231,6 +233,8 @@ public class InputSequenceManager : MonoBehaviour
             Debug.Log("Sequence Failed!");
             CreateRandomSequence();
             Handheld.Vibrate();
+
+            // AudioManager.instance.PlaySFX("Taunt");
         }
     }
 
